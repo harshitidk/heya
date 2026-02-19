@@ -3,6 +3,8 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
+import { NavBar } from "@/components/NavBar";
+
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
@@ -20,13 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={bricolage.variable}>
       <body
         className={cn(
-          bricolage.variable,
-          "antialiased bg-background text-foreground font-sans"
+          "antialiased bg-background text-foreground font-sans relative"
         )}
       >
+        <NavBar />
         {children}
       </body>
     </html>

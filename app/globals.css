@@ -8,6 +8,16 @@
 
   --color-text-secondary: #c0c0c0;
   --color-text-tertiary: #c7c7c7;
+
+  /* Navigation Colors (Placeholder) */
+  --color-nav-home-bg: #151515;
+  --color-nav-home-text: #f8f8f8;
+  --color-nav-phil-bg: #e0e0e0;
+  --color-nav-phil-text: #151515;
+  --color-nav-vis-bg: #e0e0e0;
+  --color-nav-vis-text: #151515;
+  --color-nav-work-bg: #e0e0e0;
+  --color-nav-work-text: #151515;
 }
 
 :root {
