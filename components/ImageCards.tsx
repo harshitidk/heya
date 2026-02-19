@@ -18,9 +18,9 @@ export function ImageCards({
     className,
     variant = "frame19",
     images = {
-        left: "/card-left.png",
-        right: "/card-right.png",
-        center: "/card-center.png",
+        left: "/assets/card-left.png",
+        right: "/assets/card-right.png",
+        center: "/assets/card-center.png",
     },
 }: ImageCardsProps) {
     const [isHovered, setIsHovered] = useState(false);

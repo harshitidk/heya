@@ -6,7 +6,7 @@ export default function Home() {
     <main className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-start gap-12 pt-24">
       <div className="fixed inset-0 w-full h-full -z-10">
         <Image
-          src="/background.svg"
+          src="/assets/background.svg"
           alt="Background"
           fill
           className="object-cover object-center"
@@ -17,9 +17,9 @@ export default function Home() {
         variant="frame19"
         className="scale-[0.96]"
         images={{
-          left: "/card-left.png",
-          right: "/card-right.png",
-          center: "/card-center.png",
+          left: "/assets/card-left.png",
+          right: "/assets/card-right.png",
+          center: "/assets/card-center.png",
         }}
       />
 
