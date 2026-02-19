@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import profilePic from "@/public/assets/card-center.png";
 
 export function NavBar() {
     return (
@@ -24,7 +25,7 @@ export function NavBar() {
                 <div className="flex gap-[15px] items-center shrink-0">
                     <Link href="/" className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
                         <div className="bg-[#f5f5f5] border-2 border-black border-solid overflow-hidden relative rounded-[23px] shrink-0 size-[42px]">
-                            <Image src="/assets/card-center.png" alt="Profile" fill className="object-cover" />
+                            <Image src={profilePic} alt="Profile" fill className="object-cover" />
                         </div>
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[20px] tracking-[-0.4px]">
                             harshit heya
@@ -89,7 +90,7 @@ export function NavBar() {
                     {/* Profile */}
                     <div className="flex items-center gap-[10px]">
                         <div className="bg-[#f5f5f5] border border-black border-solid overflow-hidden relative rounded-[18px] shrink-0 size-[34px]">
-                            <Image src="/assets/card-center.png" alt="Profile" fill className="object-cover" />
+                            <Image src={profilePic} alt="Profile" fill className="object-cover" />
                         </div>
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[16px] tracking-[-0.32px]">
                             harshit heya

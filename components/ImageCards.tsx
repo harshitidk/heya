@@ -1,16 +1,19 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import cardLeftImg from "@/public/assets/card-left.png";
+import cardRightImg from "@/public/assets/card-right.png";
+import cardCenterImg from "@/public/assets/card-center.png";
 
 interface ImageCardsProps {
     className?: string;
     variant?: "frame19" | "frame20";
     images?: {
-        left: string;
-        right: string;
-        center: string;
+        left: string | StaticImageData;
+        right: string | StaticImageData;
+        center: string | StaticImageData;
     };
 }
 
@@ -18,9 +21,9 @@ export function ImageCards({
     className,
     variant = "frame19",
     images = {
-        left: "/assets/card-left.png",
-        right: "/assets/card-right.png",
-        center: "/assets/card-center.png",
+        left: cardLeftImg,
+        right: cardRightImg,
+        center: cardCenterImg,
     },
 }: ImageCardsProps) {
     const [isHovered, setIsHovered] = useState(false);
