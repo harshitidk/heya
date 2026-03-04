@@ -9,7 +9,7 @@ import cardCenter from "@/public/assets/card-center.png";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-start gap-12 pt-24">
+    <main className="relative min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start gap-12 pt-24">
       <div className="fixed inset-0 w-full h-full -z-10">
         <Image
           src={backgroundSvg}

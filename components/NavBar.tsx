@@ -49,21 +49,24 @@ export function NavBar() {
                 </div>
 
                 {/* Right Section: Work & CTA */}
-                <div className="flex items-center justify-between shrink-0 w-[258px]">
-                    <Link href="#work" className="flex items-center justify-center shrink-0 hover:text-black/70 transition-colors">
+                <div className="flex items-center gap-6 shrink-0">
+                    <button
+                        onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="flex items-center justify-center shrink-0 hover:text-black/70 transition-colors cursor-pointer"
+                    >
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[20px] tracking-[-0.4px]">
                             work
                         </p>
-                    </Link>
+                    </button>
 
-                    <Link href="mailto:contact@example.com">
+                    <Link href="mailto:iamharshit.idk@gmail.com">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
-                            className="bg-[#ffc739] border-b-4 border-black border-l border-r border-t border-solid flex h-[46px] items-center justify-center px-[24px] py-[4px] relative rounded-[16px] shrink-0 w-[164px] cursor-pointer"
+                            className="bg-[#ffc739] border-b-4 border-black border-l border-r border-t border-solid flex h-[46px] items-center justify-center px-[24px] py-[4px] relative rounded-[16px] shrink-0 cursor-pointer"
                         >
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[20px] text-black tracking-[-0.4px]">
-                                hire him
+                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[20px] text-black tracking-[-0.4px] whitespace-nowrap">
+                                say hi 👋
                             </p>
                         </motion.div>
                     </Link>
@@ -112,13 +115,13 @@ export function NavBar() {
                 <div className="w-full h-[1px] bg-black/10 shrink-0" />
 
                 {/* Bottom: Hire Him CTA */}
-                <Link href="mailto:contact@example.com" className="w-full">
+                <Link href="mailto:iamharshit.idk@gmail.com" className="w-full">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
                         className="bg-[#ffc739] border-b-4 border-black border-l border-r border-t border-solid flex h-[48px] items-center justify-center px-[24px] py-[4px] relative rounded-[16px] shrink-0 w-full cursor-pointer"
                     >
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[16px] text-black tracking-[-0.32px]">
-                            hire him
+                            say hi 👋
                         </p>
                     </motion.div>
                 </Link>

@@ -168,7 +168,7 @@ function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
 
 function RabbitCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
     return (
-        <div className="flex flex-col md:flex-row gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
+        <div className="flex flex-col md:flex-row `gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
             {/* Left Card */}
             <div className="bg-white p-6 md:p-[35px] rounded-[16px] flex items-center justify-start w-full max-w-[300px] md:max-w-none md:w-[330px] md:h-[544px] shrink-0 overflow-hidden">
                 <MockupImage src={rabbitP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-[250%] max-w-none md:w-[887px] aspect-[887/473] md:aspect-auto md:h-[473px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0 origin-left" />
@@ -212,7 +212,7 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section className="w-full flex flex-col items-center gap-12 sm:gap-24 mb-32 px-4 md:px-8 mt-12 md:mt-24">
+        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-24 mb-32 px-4 md:px-8 mt-12 md:mt-24">
             {/* Title */}
             <div className="flex flex-col gap-2 items-center text-center w-full max-w-2xl px-4">
                 <h2 className="font-bold text-[#353535] text-[24px] uppercase tracking-[-0.48px]">
@@ -252,8 +252,6 @@ export function WorkSection() {
                     </div>
                 </div>
 
-                {/* Wavy Divider Placeholder - the wavy svg could be inserted dynamically later */}
-                <div className="hidden" />
 
                 {/* Zoffers */}
                 <div className="w-full flex flex-col gap-[38px] items-center">
@@ -276,26 +274,20 @@ export function WorkSection() {
                     </div>
                 </div>
 
-                {/* Wavy Divider Placeholder */}
-                <div className="w-full max-w-[1000px] h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent relative opacity-50 my-4" />
-
                 {/* Rabbit Invest Section */}
-                <div className="w-full flex justify-center text-left py-12 md:py-24 relative z-[20]">
-                    <div className="flex flex-col gap-8 md:gap-[65px] items-center text-left max-w-[884px] w-full">
-                        <RabbitCollage onZoom={setZoomedImage} />
+                <div className="w-full flex flex-col gap-[38px] items-center relative z-[20]">
+                    <RabbitCollage onZoom={setZoomedImage} />
 
-                        <div className="flex flex-col gap-6 md:gap-[16px] w-full px-4 md:px-0">
-                            <h2 style={{ fontVariationSettings: "'opsz' 14, 'wdth' 100" }} className="font-semibold text-[#2e2e2e] text-[26px] md:text-[30px] tracking-[-0.6px] leading-[1.64] w-full text-center md:text-left">
-                                Rabbit Invest
-                            </h2>
-                            <p className="font-medium text-[#656565] text-[15px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
-                                Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
-                            </p>
-                        </div>
-
-                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-[13px] w-full px-4 md:px-0 pb-16">
-                            <CaseStudyButton text="View Work" primary />
-                            <CaseStudyButton text="Read documentation" />
+                    <div className="w-full max-w-[884px] flex flex-col gap-4 md:gap-[24px] items-center md:items-start text-center md:text-left px-4">
+                        <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
+                            Rabbit Invest
+                        </h3>
+                        <p className="font-medium text-[#656565] text-[15px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
+                            Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
+                        </p>
+                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-[13px] w-full mt-2 pb-16">
+                            <CaseStudyButton text="View Work" primary href="https://drive.google.com/file/d/1OzrCVp-937ZCp__33DdNR-8JCS55zlRR/view?usp=sharing" />
+                            <CaseStudyButton text="Read documentation" href="https://rabbitinvest.com/how-to-initiate-purchase-with-rabbit-invest/" />
                         </div>
                     </div>
                 </div>
