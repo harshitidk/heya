@@ -20,6 +20,13 @@ import zoffersP5 from "@/public/assets/zoffers-p5.png";
 import zoffersP6 from "@/public/assets/zoffers-p6.png";
 import zoffersP7 from "@/public/assets/zoffers-p7.png";
 import zoffersP8 from "@/public/assets/zoffers-p8.png";
+import rabbitP1 from "@/public/assets/rabbit-p1.png";
+import rabbitP2 from "@/public/assets/rabbit-p2.png";
+import rabbitP3 from "@/public/assets/rabbit-p3.png";
+import rabbitP4 from "@/public/assets/rabbit-p4.png";
+import rabbitP5 from "@/public/assets/rabbit-p5.png";
+import rabbitP6 from "@/public/assets/rabbit-p6.png";
+import rabbitP7 from "@/public/assets/rabbit-p7.png";
 
 function MockupImage({
     className = "",
@@ -159,6 +166,41 @@ function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
     );
 }
 
+function RabbitCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
+    return (
+        <div className="flex flex-col md:flex-row gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
+            {/* Left Card */}
+            <div className="bg-white p-6 md:p-[35px] rounded-[16px] flex items-center justify-start w-full max-w-[300px] md:max-w-none md:w-[330px] md:h-[544px] shrink-0 overflow-hidden">
+                <MockupImage src={rabbitP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-[250%] max-w-none md:w-[887px] aspect-[887/473] md:aspect-auto md:h-[473px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0 origin-left" />
+            </div>
+
+            {/* Center Cards */}
+            <div className="flex flex-col gap-4 md:gap-[12px] w-full max-w-[300px] md:max-w-none md:w-[269px] shrink-0">
+                <div className="bg-white overflow-hidden p-6 md:p-[20px] rounded-[16px] flex flex-col items-center justify-center w-full shrink-0">
+                    <MockupImage src={rabbitP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[148px] aspect-[148/143] md:aspect-auto md:h-[143px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+                <div className="bg-white overflow-hidden p-6 md:p-[20px] rounded-[16px] flex items-start justify-center w-full md:h-[349px] shrink-0">
+                    <MockupImage src={rabbitP3} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[206px] aspect-[206/317] md:aspect-auto md:h-[317px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+            </div>
+
+            {/* Right Cards */}
+            <div className="flex flex-col gap-4 md:gap-[11px] w-full max-w-[300px] md:max-w-none md:w-[274px] shrink-0">
+                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex gap-3 md:gap-[9px] items-center justify-center w-full md:h-[174px] shrink-0">
+                    <MockupImage src={rabbitP4} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[103px] aspect-[103/144] md:aspect-auto md:h-[144px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                    <MockupImage src={rabbitP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[120px] aspect-[120/144] md:aspect-auto md:h-[144px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0">
+                    <MockupImage src={rabbitP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full aspect-[1374/892] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0">
+                    <MockupImage src={rabbitP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[247px] aspect-[247/126] md:aspect-auto md:h-[126px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // Rabbit Invest mapping removed.
 
 export function WorkSection() {
@@ -189,7 +231,7 @@ export function WorkSection() {
                         <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px] lowercase">
                             shoppin’ 🍓
                         </h3>
-                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px]">
+                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
                             <p>
                                 Shoppin’ was my first product design internship, where I worked
                                 across multiple problem spaces - from improving core interactions
@@ -220,7 +262,7 @@ export function WorkSection() {
                         <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
                             Zoffers
                         </h3>
-                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px]">
+                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
                             <p>
                                 Zoffers is like UNiDAYS for Indian students — a platform
                                 connecting brands with students through exclusive offers and
@@ -236,6 +278,27 @@ export function WorkSection() {
 
                 {/* Wavy Divider Placeholder */}
                 <div className="w-full max-w-[1000px] h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent relative opacity-50 my-4" />
+
+                {/* Rabbit Invest Section */}
+                <div className="w-full flex justify-center text-left py-12 md:py-24 relative z-[20]">
+                    <div className="flex flex-col gap-8 md:gap-[65px] items-center text-left max-w-[884px] w-full">
+                        <RabbitCollage onZoom={setZoomedImage} />
+
+                        <div className="flex flex-col gap-6 md:gap-[16px] w-full px-4 md:px-0">
+                            <h2 style={{ fontVariationSettings: "'opsz' 14, 'wdth' 100" }} className="font-semibold text-[#2e2e2e] text-[26px] md:text-[30px] tracking-[-0.6px] leading-[1.64] w-full text-center md:text-left">
+                                Rabbit Invest
+                            </h2>
+                            <p className="font-medium text-[#656565] text-[15px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
+                                Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-[13px] w-full px-4 md:px-0 pb-16">
+                            <CaseStudyButton text="View Work" primary />
+                            <CaseStudyButton text="Read documentation" />
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
