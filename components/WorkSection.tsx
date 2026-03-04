@@ -69,7 +69,7 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
 
     if (primary) {
         return (
-            <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#dca500] bg-white hover:bg-zinc-50 transition-colors h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
+            <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#dca500] bg-white hover:bg-[#fffef7] hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(220,165,0,0.2)] active:scale-95 active:translate-y-0 active:shadow-none transition-all duration-200 h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
                 <span className="font-semibold text-[#b38900] text-[16px] tracking-[-0.32px] whitespace-nowrap">
                     {text}
                 </span>
@@ -78,7 +78,7 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
         );
     }
     return (
-        <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#969696] bg-white hover:bg-zinc-50 transition-colors h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
+        <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#969696] bg-white hover:bg-zinc-50 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(150,150,150,0.15)] active:scale-95 active:translate-y-0 active:shadow-none transition-all duration-200 h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
             <span className="font-semibold text-[#747474] text-[16px] tracking-[-0.32px] whitespace-nowrap">
                 {text}
             </span>
@@ -89,33 +89,33 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
 
 function ShoppinCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
     return (
-        <div className="flex flex-col md:flex-row gap-6 md:gap-[12.6px] items-center justify-center w-full px-4">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-[12.6px] items-center justify-center w-full px-4 md:px-0">
             {/* Left Card */}
-            <div className="bg-white p-6 md:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] md:max-w-none md:w-auto shrink-0 md:shrink">
+            <div className="bg-white p-6 md:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] md:max-w-none md:w-auto shrink-0">
                 <MockupImage
                     src={shoppinP1}
                     onZoom={onZoom}
                     tiltDirection="left"
-                    containerClassName="w-full max-w-[218.6px] aspect-[218.6/473.8] rounded-[16px] shadow-[0_2px_19px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white"
+                    containerClassName="w-full md:w-[218.6px] aspect-[218.6/473.8] md:aspect-auto md:h-[473.8px] rounded-[16px] shadow-[0_2px_19px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0"
                 />
             </div>
 
             {/* Center Cards */}
-            <div className="flex flex-col gap-4 md:gap-[18.9px] w-full max-w-[380px] md:w-[379.3px] shrink-0 md:shrink">
+            <div className="flex flex-col gap-4 md:gap-[18.9px] w-full max-w-[380px] md:max-w-none md:w-[379.3px] shrink-0">
                 <div className="bg-white p-5 md:p-[25.2px] flex gap-4 md:gap-[22.4px] rounded-[19.3px] items-center justify-center w-full">
-                    <MockupImage src={shoppinP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full aspect-[153.2/341] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white" />
-                    <MockupImage src={shoppinP3} onZoom={onZoom} tiltDirection="right" containerClassName="w-full aspect-[153.2/341] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white" />
+                    <MockupImage src={shoppinP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-1/2 md:w-[153.2px] aspect-[153.2/341] md:aspect-auto md:h-[341px] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white shrink-0" />
+                    <MockupImage src={shoppinP3} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[153.2px] aspect-[153.2/341] md:aspect-auto md:h-[341px] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white shrink-0" />
                 </div>
                 <div className="bg-white p-4 md:p-[18.4px] flex gap-4 md:gap-[18.4px] rounded-[13.8px] items-center justify-center w-full">
-                    <MockupImage src={shoppinP4} onZoom={onZoom} tiltDirection="left" containerClassName="w-[58%] aspect-[190.8/96.6] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white" />
-                    <MockupImage src={shoppinP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-[42%] aspect-[133.2/96.6] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white" />
+                    <MockupImage src={shoppinP4} onZoom={onZoom} tiltDirection="left" containerClassName="w-[58%] md:w-[190.8px] aspect-[190.8/96.6] md:aspect-auto md:h-[96.6px] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white shrink-0" />
+                    <MockupImage src={shoppinP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-[42%] md:w-[133.2px] aspect-[133.2/96.6] md:aspect-auto md:h-[96.6px] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white shrink-0" />
                 </div>
             </div>
 
             {/* Right Cards */}
-            <div className="bg-white px-6 md:px-[35px] py-8 md:py-[32px] flex flex-col gap-4 md:gap-[16px] rounded-[24px] items-center justify-center w-full max-w-[280px] md:max-w-none md:w-auto shrink-0 md:shrink">
-                <MockupImage src={shoppinP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full max-w-[145.7px] aspect-[145.7/252.6] rounded-[6.4px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-2 border-white" />
-                <MockupImage src={shoppinP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full max-w-[145.6px] aspect-[145.6/210] rounded-[12.1px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-[2.1px] border-white" />
+            <div className="bg-white px-6 md:px-[35px] py-8 md:py-[32px] flex flex-col gap-4 md:gap-[16px] rounded-[24px] items-center justify-center w-full max-w-[280px] md:max-w-none md:w-auto shrink-0">
+                <MockupImage src={shoppinP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[145.7px] aspect-[145.7/252.6] md:aspect-auto md:h-[252.6px] rounded-[6.4px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-2 border-white shrink-0" />
+                <MockupImage src={shoppinP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[145.6px] aspect-[145.6/210] md:aspect-auto md:h-[210px] rounded-[12.1px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-[2.1px] border-white shrink-0" />
             </div>
         </div>
     );
@@ -123,29 +123,37 @@ function ShoppinCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
 
 function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
     return (
-        <div className="flex flex-col md:flex-row gap-6 md:gap-[10px] items-center md:items-start justify-center w-full px-4">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-[10px] items-center md:items-start justify-center w-full px-4 md:px-0">
             {/* Left Card */}
-            <div className="bg-white overflow-hidden p-6 md:px-[28px] md:py-[35px] rounded-[26.7px] w-full max-w-[300px] md:max-w-none md:w-auto flex items-center justify-center shrink-0 md:shrink">
-                <MockupImage src={zoffersP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-full max-w-[218.6px] aspect-[218.6/473.8] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white" />
+            <div className="bg-white overflow-hidden p-6 md:px-[28px] md:py-[35px] rounded-[26.7px] w-full max-w-[300px] md:max-w-none md:w-auto flex items-center justify-center shrink-0">
+                <MockupImage src={zoffersP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[218.6px] aspect-[218.6/473.8] md:aspect-auto md:h-[473.8px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0" />
             </div>
 
-            {/* Center Container */}
-            <div className="flex flex-col gap-4 md:gap-[9px] w-full max-w-[420px] md:w-[412px] shrink-0 md:shrink">
-                <div className="bg-white overflow-hidden p-5 md:px-[36px] md:py-[17px] rounded-[26px] flex items-center md:items-start justify-center w-full">
-                    <MockupImage src={zoffersP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full aspect-[360/586] rounded-[12px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0" />
+            {/* Center Container  */}
+            <div className="flex flex-col gap-4 md:gap-[9px] w-full max-w-[460px] md:max-w-none md:w-[448px] md:h-[544px] shrink-0">
+                <div className="bg-white overflow-hidden p-5 md:px-[36px] md:py-[22px] rounded-[26px] flex items-center md:items-start justify-center w-full md:h-[235px]">
+                    <MockupImage src={zoffersP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[385px] aspect-[385/628] md:aspect-auto md:h-[628px] rounded-[12px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0" />
                 </div>
-                <div className="bg-white overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex gap-3 md:gap-[11px] rounded-[24.6px] items-center justify-center w-full">
-                    <MockupImage src={zoffersP3} onZoom={onZoom} tiltDirection="left" containerClassName="w-1/3 aspect-[114.7/255.3] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white" />
-                    <MockupImage src={zoffersP4} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/3 aspect-[114.7/255.3] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white" />
-                    <MockupImage src={zoffersP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/3 aspect-[114.7/255.3] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white" />
+                <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full md:h-[300px] gap-4 md:gap-0">
+                    <div className="bg-white overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex gap-3 md:gap-[11px] rounded-[24.6px] md:rounded-[20px] items-center justify-center w-full md:w-[288px] md:h-full shrink-0">
+                        <MockupImage src={zoffersP3} onZoom={onZoom} tiltDirection="left" containerClassName="w-1/2 md:w-[114.7px] aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
+                        <MockupImage src={zoffersP4} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[114.7px] aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
+                    </div>
+                    <div className="bg-white overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex items-center justify-center w-full md:w-auto md:h-full rounded-[24.6px] md:rounded-[20px] shrink-0">
+                        <MockupImage src={zoffersP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[114.7px] max-w-[150px] md:max-w-none aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
+                    </div>
                 </div>
             </div>
 
             {/* Right Container */}
-            <div className="bg-white flex flex-col gap-4 md:gap-[7px] overflow-hidden p-6 md:px-[12px] md:py-[19px] rounded-[24px] items-center justify-center w-full max-w-[300px] md:max-w-none md:w-[201px] shrink-0 md:shrink">
-                <MockupImage src={zoffersP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full max-w-[168px] aspect-[168/171] rounded-[12px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)]" />
-                <MockupImage src={zoffersP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full max-w-[168px] aspect-[168/196] rounded-[12px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)]" />
-                <MockupImage src={zoffersP8} onZoom={onZoom} tiltDirection="right" containerClassName="w-full max-w-[169px] aspect-[169/118] rounded-[12px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)]" />
+            <div className="flex flex-col gap-4 md:gap-0 justify-between items-center w-full max-w-[300px] md:max-w-none md:w-[164px] md:h-[544px] shrink-0">
+                <div className="bg-white overflow-hidden p-6 md:px-[12px] md:py-[19px] rounded-[24px] flex items-center justify-center w-full shrink-0">
+                    <MockupImage src={zoffersP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-[139.4px] aspect-[139.4/141.8] md:aspect-auto md:h-[141.8px] rounded-[12px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
+                <div className="bg-white overflow-hidden p-6 md:px-[12px] md:py-[25px] flex flex-col gap-4 md:gap-[22px] rounded-[24px] items-center justify-center w-full md:h-[351px] shrink-0">
+                    <MockupImage src={zoffersP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-full aspect-[173/202] rounded-[10px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
+                    <MockupImage src={zoffersP8} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-full aspect-[702/490] rounded-[12px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
+                </div>
             </div>
         </div>
     );
