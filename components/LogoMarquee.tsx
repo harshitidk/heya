@@ -20,7 +20,7 @@ const logos = [
 
 export function LogoMarquee() {
     return (
-        <div className="w-full overflow-hidden py-2">
+        <div className="w-full overflow-hidden py-2 logo-marquee-wrapper">
             <div className="flex animate-marquee w-max items-center gap-16">
                 {/* Render logos twice for seamless loop */}
                 {[...logos, ...logos].map((logo, i) => (

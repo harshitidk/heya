@@ -49,3 +49,10 @@ body {
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
+@media (max-width: 767px) {
+  .logo-marquee-wrapper {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+}
