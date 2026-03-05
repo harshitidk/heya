@@ -54,7 +54,7 @@ export default function Home() {
         <div className="relative inline-block mx-auto mt-2">
           {/* Desktop Version */}
           <Image
-            src="/assets/Frame%2090.svg"
+            src="/assets/frame90.svg"
             alt="and i am a product designer who vibe codes for fun."
             width={541}
             height={92}
