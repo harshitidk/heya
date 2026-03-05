@@ -168,7 +168,7 @@ function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
 
 function RabbitCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
     return (
-        <div className="flex flex-col md:flex-row `gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
             {/* Left Card */}
             <div className="bg-white p-6 md:p-[35px] rounded-[16px] flex items-center justify-start w-full max-w-[300px] md:max-w-none md:w-[330px] md:h-[544px] shrink-0 overflow-hidden">
                 <MockupImage src={rabbitP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-[250%] max-w-none md:w-[887px] aspect-[887/473] md:aspect-auto md:h-[473px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0 origin-left" />
@@ -212,7 +212,7 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-24 mb-32 px-4 md:px-8 mt-12 md:mt-24">
+        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-24 mb-32 px-4 md:px-8 pt-16 md:pt-32">
             {/* Title */}
             <div className="flex flex-col gap-2 items-center text-center w-full max-w-2xl px-4">
                 <h2 className="font-bold text-[#353535] text-[24px] uppercase tracking-[-0.48px]">

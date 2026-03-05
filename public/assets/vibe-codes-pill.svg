@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="126" height="42" viewBox="0 0 126 42" fill="none">
+  <defs>
+    <linearGradient id="fillGrad-vc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fbd3d3"/>
+      <stop offset="100%" stop-color="#ffdada"/>
+    </linearGradient>
+    <linearGradient id="strokeGrad-vc" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e07070"/>
+      <stop offset="50%" stop-color="#d46060"/>
+      <stop offset="100%" stop-color="#e07070"/>
+    </linearGradient>
+    <filter id="shadow-vc" x="-15%" y="-50%" width="130%" height="220%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="7"/>
+      <feFlood flood-color="rgba(255,1,1,0.2)"/>
+      <feComposite in2="SourceAlpha" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="124" height="40" rx="20" ry="20"
+    fill="url(#fillGrad-vc)"
+    stroke="url(#strokeGrad-vc)"
+    stroke-width="2"
+    filter="url(#shadow-vc)"
+  />
+  <text x="63" y="21"
+    font-family="Poppins, sans-serif"
+    font-weight="600"
+    font-size="18"
+    fill="#7e2e00"
+    letter-spacing="-0.36"
+    dominant-baseline="middle"
+    text-anchor="middle"
+  >vibe codes</text>
+</svg>

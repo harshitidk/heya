@@ -59,17 +59,18 @@ export function NavBar() {
                         </p>
                     </button>
 
-                    <Link href="mailto:iamharshit.idk@gmail.com">
+                    <a href="mailto:iamharshit.idk@gmail.com">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
-                            className="bg-[#ffc739] border-b-4 border-black border-l border-r border-t border-solid flex h-[46px] items-center justify-center px-[24px] py-[4px] relative rounded-[16px] shrink-0 cursor-pointer"
+                            className="bg-[#6d3ef3] border-[2px] border-[#9c7aff] border-solid flex h-[46px] items-center justify-center px-[24px] relative rounded-[16px] shrink-0 cursor-pointer shadow-[0px_6px_34.9px_0px_rgba(72,11,196,0.42)] overflow-hidden"
                         >
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[20px] text-black tracking-[-0.4px] whitespace-nowrap">
-                                say hi 👋
+                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[20px] text-[#f8f8fa] tracking-[-0.4px] whitespace-nowrap relative z-10">
+                                let’s talk
                             </p>
+                            <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_0px_20.8px_0px_#3000b5]" />
                         </motion.div>
-                    </Link>
+                    </a>
                 </div>
             </motion.div>
 
@@ -115,16 +116,17 @@ export function NavBar() {
                 <div className="w-full h-[1px] bg-black/10 shrink-0" />
 
                 {/* Bottom: Hire Him CTA */}
-                <Link href="mailto:iamharshit.idk@gmail.com" className="w-full">
+                <a href="mailto:iamharshit.idk@gmail.com" className="w-full relative z-20">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
-                        className="bg-[#ffc739] border-b-4 border-black border-l border-r border-t border-solid flex h-[48px] items-center justify-center px-[24px] py-[4px] relative rounded-[16px] shrink-0 w-full cursor-pointer"
+                        className="bg-[#6d3ef3] border-[3px] border-[#9c7aff] border-solid flex h-[48px] items-center justify-center px-[24px] relative rounded-[16px] shrink-0 w-full cursor-pointer shadow-[0px_6px_34.9px_0px_rgba(72,11,196,0.42)] overflow-hidden"
                     >
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[16px] text-black tracking-[-0.32px]">
-                            say hi 👋
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[16px] text-[#f8f8fa] tracking-[-0.32px] relative z-10">
+                            let’s talk
                         </p>
+                        <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_0px_20.8px_0px_#3000b5]" />
                     </motion.div>
-                </Link>
+                </a>
             </motion.div>
 
         </div>

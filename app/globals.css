@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-bricolage);
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-bowlby: var(--font-bowlby), cursive;
+  --font-poppins: var(--font-poppins), sans-serif;
+  --font-nanum: var(--font-nanum), cursive;
 
   --color-background: #f8f8f8;
   --color-foreground: #151515;
