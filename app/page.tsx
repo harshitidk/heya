@@ -7,6 +7,8 @@ import backgroundSvg from "@/public/assets/background.svg";
 import cardLeft from "@/public/assets/card-left.png";
 import cardRight from "@/public/assets/card-right.png";
 import cardCenter from "@/public/assets/card-center.png";
+import frame90Desktop from "@/public/assets/frame90.svg";
+import frame90Mobile from "@/public/assets/frame90-md.svg";
 
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
@@ -54,7 +56,7 @@ export default function Home() {
         <div className="relative inline-block mx-auto mt-2">
           {/* Desktop Version */}
           <img
-            src="/assets/frame90.svg"
+            src={frame90Desktop.src}
             alt="and i am a product designer who vibe codes for fun."
             width={541}
             height={92}
@@ -62,7 +64,7 @@ export default function Home() {
           />
           {/* Mobile Version */}
           <img
-            src="/assets/frame90-md.svg"
+            src={frame90Mobile.src}
             alt="and i am a product designer who vibe codes for fun."
             width={541}
             height={92}
