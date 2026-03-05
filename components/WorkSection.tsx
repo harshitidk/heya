@@ -231,7 +231,7 @@ export function WorkSection() {
                         <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px] lowercase">
                             shoppin’ 🍓
                         </h3>
-                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
+                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
                             <p>
                                 Shoppin’ was my first product design internship, where I worked
                                 across multiple problem spaces - from improving core interactions
@@ -260,7 +260,7 @@ export function WorkSection() {
                         <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
                             Zoffers
                         </h3>
-                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[15px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
+                        <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
                             <p>
                                 Zoffers is like UNiDAYS for Indian students — a platform
                                 connecting brands with students through exclusive offers and
@@ -282,7 +282,7 @@ export function WorkSection() {
                         <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
                             Rabbit Invest
                         </h3>
-                        <p className="font-medium text-[#656565] text-[15px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
+                        <p className="font-medium text-[#656565] text-[12px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
                             Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
                         </p>
                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-[13px] w-full mt-2 pb-16">
