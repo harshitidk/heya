@@ -53,22 +53,20 @@ export default function Home() {
         </h1>
         <div className="relative inline-block mx-auto mt-2">
           {/* Desktop Version */}
-          <Image
+          <img
             src="/assets/frame90.svg"
             alt="and i am a product designer who vibe codes for fun."
             width={541}
             height={92}
             className="w-full hidden md:inline-block w-[541px] h-auto"
-            priority
           />
           {/* Mobile Version */}
-          <Image
+          <img
             src="/assets/frame90-md.svg"
             alt="and i am a product designer who vibe codes for fun."
             width={541}
             height={92}
             className="w-full max-w-[340px] inline-block md:hidden h-auto"
-            priority
           />
 
 
