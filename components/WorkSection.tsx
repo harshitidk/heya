@@ -4,29 +4,29 @@ import { createPortal } from "react-dom";
 import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import shoppinP1 from "@/public/assets/shoppin-p1.png";
-import shoppinP2 from "@/public/assets/shoppin-p2.png";
-import shoppinP3 from "@/public/assets/shoppin-p3.png";
-import shoppinP4 from "@/public/assets/shoppin-p4.png";
-import shoppinP5 from "@/public/assets/shoppin-p5.png";
-import shoppinP6 from "@/public/assets/shoppin-p6.png";
-import shoppinP7 from "@/public/assets/shoppin-p7.png";
+import shoppinP1 from "@/public/assets/shoppin-p1.webp";
+import shoppinP2 from "@/public/assets/shoppin-p2.webp";
+import shoppinP3 from "@/public/assets/shoppin-p3.webp";
+import shoppinP4 from "@/public/assets/shoppin-p4.webp";
+import shoppinP5 from "@/public/assets/shoppin-p5.webp";
+import shoppinP6 from "@/public/assets/shoppin-p6.webp";
+import shoppinP7 from "@/public/assets/shoppin-p7.webp";
 
-import zoffersP1 from "@/public/assets/zoffers-p1.png";
-import zoffersP2 from "@/public/assets/zoffers-p2.png";
-import zoffersP3 from "@/public/assets/zoffers-p3.png";
-import zoffersP4 from "@/public/assets/zoffers-p4.png";
-import zoffersP5 from "@/public/assets/zoffers-p5.png";
-import zoffersP6 from "@/public/assets/zoffers-p6.png";
-import zoffersP7 from "@/public/assets/zoffers-p7.png";
-import zoffersP8 from "@/public/assets/zoffers-p8.png";
-import rabbitP1 from "@/public/assets/rabbit-p1.png";
-import rabbitP2 from "@/public/assets/rabbit-p2.png";
-import rabbitP3 from "@/public/assets/rabbit-p3.png";
-import rabbitP4 from "@/public/assets/rabbit-p4.png";
-import rabbitP5 from "@/public/assets/rabbit-p5.png";
-import rabbitP6 from "@/public/assets/rabbit-p6.png";
-import rabbitP7 from "@/public/assets/rabbit-p7.png";
+import zoffersP1 from "@/public/assets/zoffers-p1.webp";
+import zoffersP2 from "@/public/assets/zoffers-p2.webp";
+import zoffersP3 from "@/public/assets/zoffers-p3.webp";
+import zoffersP4 from "@/public/assets/zoffers-p4.webp";
+import zoffersP5 from "@/public/assets/zoffers-p5.webp";
+import zoffersP6 from "@/public/assets/zoffers-p6.webp";
+import zoffersP7 from "@/public/assets/zoffers-p7.webp";
+import zoffersP8 from "@/public/assets/zoffers-p8.webp";
+import rabbitP1 from "@/public/assets/rabbit-p1.webp";
+import rabbitP2 from "@/public/assets/rabbit-p2.webp";
+import rabbitP3 from "@/public/assets/rabbit-p3.webp";
+import rabbitP4 from "@/public/assets/rabbit-p4.webp";
+import rabbitP5 from "@/public/assets/rabbit-p5.webp";
+import rabbitP6 from "@/public/assets/rabbit-p6.webp";
+import rabbitP7 from "@/public/assets/rabbit-p7.webp";
 
 function MockupImage({
     className = "",
