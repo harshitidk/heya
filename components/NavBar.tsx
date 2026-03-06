@@ -106,7 +106,7 @@ export function NavBar() {
                                 <path d="M4 16H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         </div>
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[16px] tracking-[-0.32px]">
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[12px] tracking-[-0.32px]">
                             menu
                         </p>
                     </button>
@@ -121,7 +121,7 @@ export function NavBar() {
                         whileTap={{ scale: 0.98 }}
                         className="bg-[#6d3ef3] border-[3px] border-[#9c7aff] border-solid flex h-[48px] items-center justify-center px-[24px] relative rounded-[16px] shrink-0 w-full cursor-pointer shadow-[0px_6px_34.9px_0px_rgba(72,11,196,0.42)] overflow-hidden"
                     >
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[16px] text-[#f8f8fa] tracking-[-0.32px] relative z-10">
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[12px] text-[#f8f8fa] tracking-[-0.32px] relative z-10">
                             let’s talk
                         </p>
                         <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_0px_20.8px_0px_#3000b5]" />

@@ -40,10 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${bowlby.variable} ${poppins.variable} ${nanum.variable}`}>
+    <html lang="en" className={`${bricolage.variable} ${bowlby.variable} ${poppins.variable} ${nanum.variable} bg-[#FDFDFD]`}>
       <body
         className={cn(
-          "antialiased bg-background text-foreground font-sans relative"
+          "antialiased bg-[#FDFDFD] text-foreground font-sans relative"
         )}
       >
         <NavBar />

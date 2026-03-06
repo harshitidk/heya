@@ -58,7 +58,8 @@ export function ImageCards({
             >
                 <div
                     className={cn(
-                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black shadow-[0_8px_24px_-4px_rgba(0,0,0,0.15),0_3px_8px_-3px_rgba(0,0,0,0.1)]",
+                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                        isFrame20 ? "shadow-[0px_4px_45.3px_0px_rgba(0,0,0,0.53)]" : "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.35)]",
                         isFrame20 ? "-rotate-[34.08deg]" : "-rotate-[19deg]",
                         "w-[112px] h-[132px]"
                     )}
@@ -85,7 +86,8 @@ export function ImageCards({
             >
                 <div
                     className={cn(
-                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black shadow-[0_8px_24px_-4px_rgba(0,0,0,0.15),0_3px_8px_-3px_rgba(0,0,0,0.1)]",
+                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                        isFrame20 ? "shadow-[0px_4px_45.3px_0px_rgba(0,0,0,0.53)]" : "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.35)]",
                         isFrame20 ? "-rotate-[145.92deg]" : "-rotate-[161deg]",
                         "w-[112px] h-[132px]"
                     )}
@@ -104,7 +106,8 @@ export function ImageCards({
             {/* Center Card */}
             <div
                 className={cn(
-                    "absolute top-0 w-[112px] h-[132px] overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black shadow-[0_8px_24px_-4px_rgba(0,0,0,0.15),0_3px_8px_-3px_rgba(0,0,0,0.1)]",
+                    "absolute top-0 w-[112px] h-[132px] overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                    isFrame20 ? "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.22)]" : "",
                     isFrame20 ? "left-[108px]" : "left-[53px]" // Shifted -42px and -95px
                 )}
             >
@@ -117,6 +120,6 @@ export function ImageCards({
                     />
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

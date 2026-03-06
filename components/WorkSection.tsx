@@ -212,14 +212,18 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-24 mb-32 px-4 md:px-8 pt-16 md:pt-32">
+        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-16 mb-32 px-4 md:px-8 pt-16 md:pt-32">
             {/* Title */}
-            <div className="flex flex-col gap-2 items-center text-center w-full max-w-2xl px-4">
-                <h2 className="font-bold text-[#353535] text-[24px] uppercase tracking-[-0.48px]">
-                    Selected Work
-                </h2>
-                <p className="font-medium text-[#b0b0b0] text-[16px] tracking-[0.32px] sm:max-w-md max-w-sm">
-                    Interfaces built, tested, questioned, and occasionally rebuilt from scratch.
+            <div className="flex flex-col gap-0 items-center text-center w-full max-w-2xl px-4">
+                <Image
+                    src="/assets/SelectedWork.svg"
+                    alt="Selected Work"
+                    width={289}
+                    height={92}
+                    className="w-[220px] md:w-[289px] h-auto -ml-2"
+                />
+                <p className="font-semibold text-[#6B6B6B] text-[16px] tracking-[0.32px] -mt-2 md:-mt-4">
+                    A selection of work from my internships and freelance projects.
                 </p>
             </div>
 

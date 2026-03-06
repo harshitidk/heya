@@ -3,7 +3,6 @@ import { Bowlby_One_SC, Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ImageCards } from "@/components/ImageCards";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { WorkSection } from "@/components/WorkSection";
-import backgroundSvg from "@/public/assets/background.svg";
 import cardLeft from "@/public/assets/card-left.png";
 import cardRight from "@/public/assets/card-right.png";
 import cardCenter from "@/public/assets/card-center.png";
@@ -16,16 +15,7 @@ const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start gap-12 pt-24">
-      <div className="fixed inset-0 w-full h-full -z-10">
-        <Image
-          src={backgroundSvg}
-          alt="Background"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-      </div>
+    <main className="relative min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start gap-12 pt-24 bg-[#FDFDFD]">
       <div className="relative">
         <ImageCards
           variant="frame19"
@@ -43,9 +33,9 @@ export default function Home() {
       <div className="flex flex-col items-center -gap-[0px] text-center -mt-8 z-10 px-4 w-full relative">
         <h1
           data-text="HII, I’M HARSHIT SAIDANIYA"
-          className={`${bowlby.className} relative leading-[1.02] text-[40px] md:text-[48px] text-center -tracking-[0px] drop-shadow-[0px_5px_11.8px_rgba(255,102,102,0.52)] uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:z-[-1] before:text-transparent before:[-webkit-text-stroke:2px_white]`}
+          className={`${bowlby.className} relative leading-[1.02] text-[40px] md:text-[48px] text-center -tracking-[0.5px] uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white before:[-webkit-text-stroke:6px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)]`}
           style={{
-            backgroundImage: "linear-gradient(100.496deg, rgb(255, 199, 57) 8.3744%, rgba(235, 20, 20, 1) 49.999%, rgb(255, 195, 16) 107.26%)",
+            backgroundImage: "linear-gradient(100.496deg, rgb(255, 199, 57) 8.3744%, rgb(235, 59, 20) 49.999%, rgb(255, 195, 16) 107.26%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
@@ -76,7 +66,6 @@ export default function Home() {
       </div>
       <div
         className="w-full relative z-10"
-        style={{ background: 'linear-gradient(to bottom, transparent 0%, #f9f9f9 150px, #f9f9f9 100%)' }}
       >
         {/* Company Logos
         <div className="w-full flex flex-col items-center gap-0 pt-16 md:pt-32 pb-4 md:pb-8">
