@@ -4,19 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import profilePic from "@/public/assets/card-center.png";
 
 export function NavBar() {
-    const [isMenuLoading, setIsMenuLoading] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isWorkLoading, setIsWorkLoading] = useState(false);
 
     const handleMenuClick = () => {
-        setIsMenuLoading(true);
-        setTimeout(() => {
-            setIsMenuLoading(false);
-        }, 1500);
+        setIsMenuOpen(!isMenuOpen);
     };
 
     const handleWorkClick = () => {
@@ -111,25 +108,26 @@ export function NavBar() {
                 {/* Top Row: Profile & Menu Button */}
                 <div className="flex items-center justify-between w-full">
                     {/* Profile */}
-                    <div className="flex items-center gap-[10px]">
+                    <Link href="/" className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
                         <div className="bg-white/50 border border-white/80 overflow-hidden relative rounded-[18px] shrink-0 size-[34px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <Image src={profilePic} alt="Profile" fill className="object-cover" />
                         </div>
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[16px] tracking-[-0.32px]">
                             harshit heya
                         </p>
-                    </div>
+                    </Link>
 
                     {/* Menu Button */}
                     <button
                         onClick={handleMenuClick}
-                        disabled={isMenuLoading}
                         className="flex items-center gap-[4px] px-2 py-1 hover:bg-black/5 rounded-lg transition-colors cursor-pointer group active:scale-95 transition-all duration-200"
                     >
                         {/* Menu Icon */}
                         <div className="relative shrink-0 size-[24px] flex items-center justify-center">
-                            {isMenuLoading ? (
-                                <Loader2 className="w-5 h-5 text-black animate-spin" />
+                            {isMenuOpen ? (
+                                <svg className="group-hover:scale-110 transition-transform duration-200" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 6L18 18M6 18L18 6" stroke="black" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
                             ) : (
                                 <svg className="group-hover:scale-110 transition-transform duration-200" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 8H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
@@ -138,13 +136,43 @@ export function NavBar() {
                             )}
                         </div>
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[12px] tracking-[-0.32px] group-hover:opacity-80 transition-opacity">
-                            {isMenuLoading ? "loading..." : "menu"}
+                            {isMenuOpen ? "close" : "menu"}
                         </p>
                     </button>
                 </div>
 
                 {/* Separator */}
                 <div className="w-full h-[1px] bg-black/10 shrink-0" />
+
+                {/* Expandable Menu Area */}
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: "auto", opacity: 1, marginTop: 4 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            className="flex flex-col gap-[8px] overflow-hidden w-full mb-1"
+                        >
+                            <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full bg-[#f4f4f4] hover:bg-[#ebebeb] border border-black/5 flex items-center justify-center h-[46px] rounded-[16px] transition-colors active:scale-95">
+                                <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[#1a1a1a] text-[15px] tracking-[-0.32px]">work</span>
+                            </Link>
+                            <div className="flex gap-[8px] w-full">
+                                <Link href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className="w-1/2 bg-[#f4f4f4] hover:bg-[#ebebeb] border border-black/5 flex gap-2 items-center justify-center h-[46px] rounded-[16px] transition-colors active:scale-95 text-black">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                    </svg>
+                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[#1a1a1a] text-[14px] tracking-[-0.32px]">x</span>
+                                </Link>
+                                <Link href="https://www.linkedin.com/in/harshitheya/" target="_blank" rel="noopener noreferrer" className="w-1/2 bg-[#f4f4f4] hover:bg-[#ebebeb] border border-black/5 flex gap-2 items-center justify-center h-[46px] rounded-[16px] transition-colors active:scale-95 text-black">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[#1a1a1a] text-[14px] tracking-[-0.32px]">linkedin</span>
+                                </Link>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Bottom: Hire Him CTA */}
                 <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer" className="w-full relative z-20">
