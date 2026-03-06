@@ -19,7 +19,7 @@ export default function Home() {
     <main className="relative min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start gap-12 pt-24 bg-[#FDFDFD]">
       <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none">
         <h1
-          className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 md:pt-0"
+          className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 md:pt-0 transform translate-y-[32%] md:translate-y-0"
           style={{
             WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)",
             maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)"
