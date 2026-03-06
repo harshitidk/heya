@@ -76,20 +76,21 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
 
     if (primary) {
         return (
-            <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#dca500] bg-white hover:bg-[#fffef7] hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(220,165,0,0.2)] active:scale-95 active:translate-y-0 active:shadow-none transition-all duration-200 h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
-                <span className="font-semibold text-[#b38900] text-[16px] tracking-[-0.32px] whitespace-nowrap">
+            <Component {...componentProps} className="relative overflow-hidden bg-gradient-to-r from-[#FFB800] to-[#FF8A00] text-white shadow-[0_4px_14px_0_rgba(255,138,0,0.25)] hover:shadow-[0_6px_20px_rgba(255,138,0,0.4)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex border border-white/20">
+                <span className="font-semibold text-[15px] tracking-[0.2px] whitespace-nowrap relative z-10">
                     {text}
                 </span>
-                <ArrowUpRight className="w-5 h-5 text-[#b38900] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-[18px] h-[18px] text-white/90 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 relative z-10" />
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Component>
         );
     }
     return (
-        <Component {...componentProps} className="border-t border-b-4 border-l border-r border-[#969696] bg-white hover:bg-zinc-50 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(150,150,150,0.15)] active:scale-95 active:translate-y-0 active:shadow-none transition-all duration-200 h-[46px] px-[16px] rounded-[16px] flex items-center justify-center gap-2 group cursor-pointer inline-flex">
-            <span className="font-semibold text-[#747474] text-[16px] tracking-[-0.32px] whitespace-nowrap">
+        <Component {...componentProps} className="relative bg-white border border-[#E5E5E5] text-[#555] shadow-sm hover:shadow-[0_4px_14px_0_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:border-[#D0D0D0] hover:text-[#222] active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex">
+            <span className="font-medium text-[15px] tracking-[0.2px] whitespace-nowrap">
                 {text}
             </span>
-            <ArrowUpRight className="w-5 h-5 text-[#747474] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-[18px] h-[18px] text-[#888] group-hover:text-[#444] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
         </Component>
     );
 }
@@ -212,7 +213,7 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-16 mb-32 px-4 md:px-8 pt-16 md:pt-32">
+        <section id="work" className="w-full flex flex-col items-center gap-12 sm:gap-16 mb-32 px-4 md:px-8 pt-20 md:pt-20 pb-8 md:pb-8">
             {/* Title */}
             <div className="flex flex-col gap-0 items-center text-center w-full max-w-2xl px-4">
                 <svg className="w-[220px] md:w-[289px] h-auto -ml-2" width="289" height="92" viewBox="0 0 289 92" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Selected Work">

@@ -58,7 +58,7 @@ export function ImageCards({
             >
                 <div
                     className={cn(
-                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-white",
                         isFrame20 ? "shadow-[0px_4px_45.3px_0px_rgba(0,0,0,0.53)]" : "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.35)]",
                         isFrame20 ? "-rotate-[34.08deg]" : "-rotate-[19deg]",
                         "w-[134px] h-[158px]"
@@ -86,7 +86,7 @@ export function ImageCards({
             >
                 <div
                     className={cn(
-                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                        "flex-none relative overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-white",
                         isFrame20 ? "shadow-[0px_4px_45.3px_0px_rgba(0,0,0,0.53)]" : "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.35)]",
                         isFrame20 ? "-rotate-[145.92deg]" : "-rotate-[161deg]",
                         "w-[134px] h-[158px]"
@@ -106,7 +106,7 @@ export function ImageCards({
             {/* Center Card */}
             <div
                 className={cn(
-                    "absolute top-0 w-[134px] h-[158px] overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-black",
+                    "absolute top-0 w-[134px] h-[158px] overflow-clip rounded-[16px] bg-[#ebebeb] transition-all duration-500 ease-in-out border-[2px] border-white",
                     isFrame20 ? "shadow-[0px_4px_28px_0px_rgba(0,0,0,0.22)]" : "",
                     isFrame20 ? "left-[130px]" : "left-[64px]"
                 )}
@@ -116,7 +116,7 @@ export function ImageCards({
                         src={images.center}
                         alt="Card Center"
                         fill
-                        className="object-cover"
+                        className="object-cover scale-[1.15] translate-y-[8%]"
                     />
                 </div>
             </div>

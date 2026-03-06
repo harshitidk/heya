@@ -2,13 +2,12 @@ import Image from "next/image";
 import { Bowlby_One_SC, Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ImageCards } from "@/components/ImageCards";
 import { LogoMarquee } from "@/components/LogoMarquee";
-import { WorkSection } from "@/components/WorkSection";
-import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import cardLeft from "@/public/assets/photo-left.jpg";
 import cardRight from "@/public/assets/photo-right.jpg";
 import cardCenter from "@/public/assets/photo-center.jpg";
 import frame90Desktop from "@/public/assets/frame90.svg";
 import frame90Mobile from "@/public/assets/frame90-md.svg";
+import artBg from "@/public/assets/artbg.svg";
 
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
@@ -17,7 +16,7 @@ const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start gap-12 pt-24 bg-[#FDFDFD]">
-      <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none">
+      <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none hidden">
         <h1
           className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 md:pt-0 transform translate-y-[32%] md:translate-y-0"
           style={{
@@ -27,6 +26,16 @@ export default function Home() {
         >
           heya
         </h1>
+      </div>
+
+      {/* Art Background SVG */}
+      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-0 select-none flex items-start justify-center overflow-hidden">
+        <Image
+          src={artBg}
+          alt="Background artwork"
+          priority
+          className="object-cover w-full h-full opacity-100"
+        />
       </div>
 
       <div className="relative z-10">
@@ -43,9 +52,20 @@ export default function Home() {
       </div>
 
       {/* Text Content */}
-      <div className="flex flex-col items-center -gap-[0px] text-center -mt-8 z-10 px-4 w-full relative">
-        <AnimatedHeadline />
-        <div className="relative inline-block mx-auto mt-2">
+      <div className="flex flex-col items-center gap-[0px] text-center -mt-10 z-10 px-4 w-full relative">
+        <h1
+          data-text="HII, I'M HARSHIT SAIDANIYA"
+          className={`${bowlby.className} relative leading-[1.3] text-[32px] md:text-[48px] text-center -tracking-[0.5px] uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)]`}
+          style={{
+            backgroundImage: "linear-gradient(100.496deg, rgb(255, 199, 57) 8.3744%, rgb(235, 59, 20) 49.999%, rgb(255, 195, 16) 107.26%)",
+            color: "transparent",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+          }}
+        >
+          HII, I'M HARSHIT SAIDANIYA
+        </h1>
+        <div className="relative inline-block mx-auto -mt-1">
           {/* Desktop Version */}
           <img
             src={frame90Desktop.src}
@@ -75,8 +95,6 @@ export default function Home() {
           <LogoMarquee />
         </div>
         */}
-
-        <WorkSection />
       </div>
     </main>
   );

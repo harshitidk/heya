@@ -2,11 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 import profilePic from "@/public/assets/card-center.png";
 
 export function NavBar() {
+    const [isMenuLoading, setIsMenuLoading] = useState(false);
+    const [isWorkLoading, setIsWorkLoading] = useState(false);
+
+    const handleMenuClick = () => {
+        setIsMenuLoading(true);
+        setTimeout(() => {
+            setIsMenuLoading(false);
+        }, 1500);
+    };
+
+    const handleWorkClick = () => {
+        setIsWorkLoading(true);
+        setTimeout(() => {
+            setIsWorkLoading(false);
+        }, 1500);
+    };
+
     return (
         <div className="fixed bottom-4 md:bottom-8 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
 
@@ -51,16 +70,18 @@ export function NavBar() {
 
                 {/* Right Section: Work & CTA */}
                 <div className="flex items-center gap-6 shrink-0">
-                    <button
-                        onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="flex items-center justify-center shrink-0 hover:text-black/70 transition-colors cursor-pointer"
+                    <Link
+                        href="/work"
+                        onClick={handleWorkClick}
+                        className="flex items-center justify-center shrink-0 hover:bg-black/5 px-4 py-2 rounded-[14px] active:scale-95 transition-all duration-200 cursor-pointer gap-2"
                     >
+                        {isWorkLoading && <Loader2 className="w-[18px] h-[18px] text-black animate-spin" />}
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#1a1a1a] text-[20px] tracking-[-0.4px]">
                             work
                         </p>
-                    </button>
+                    </Link>
 
-                    <a href="mailto:iamharshit.idk@gmail.com">
+                    <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
@@ -100,16 +121,24 @@ export function NavBar() {
                     </div>
 
                     {/* Menu Button */}
-                    <button className="flex items-center gap-[4px] px-2 py-1 hover:bg-black/5 rounded-lg transition-colors cursor-pointer">
+                    <button
+                        onClick={handleMenuClick}
+                        disabled={isMenuLoading}
+                        className="flex items-center gap-[4px] px-2 py-1 hover:bg-black/5 rounded-lg transition-colors cursor-pointer group active:scale-95 transition-all duration-200"
+                    >
                         {/* Menu Icon */}
-                        <div className="relative shrink-0 size-[24px]">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 8H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
-                                <path d="M4 16H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
-                            </svg>
+                        <div className="relative shrink-0 size-[24px] flex items-center justify-center">
+                            {isMenuLoading ? (
+                                <Loader2 className="w-5 h-5 text-black animate-spin" />
+                            ) : (
+                                <svg className="group-hover:scale-110 transition-transform duration-200" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 8H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
+                                    <path d="M4 16H20" stroke="black" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                            )}
                         </div>
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[12px] tracking-[-0.32px]">
-                            menu
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[12px] tracking-[-0.32px] group-hover:opacity-80 transition-opacity">
+                            {isMenuLoading ? "loading..." : "menu"}
                         </p>
                     </button>
                 </div>
@@ -118,7 +147,7 @@ export function NavBar() {
                 <div className="w-full h-[1px] bg-black/10 shrink-0" />
 
                 {/* Bottom: Hire Him CTA */}
-                <a href="mailto:iamharshit.idk@gmail.com" className="w-full relative z-20">
+                <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer" className="w-full relative z-20">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
                         className="bg-[#6d3ef3] border-[3px] border-[#9c7aff] border-solid flex h-[48px] items-center justify-center px-[24px] relative rounded-[16px] shrink-0 w-full cursor-pointer shadow-[0px_6px_34.9px_0px_rgba(72,11,196,0.42)] overflow-hidden"
