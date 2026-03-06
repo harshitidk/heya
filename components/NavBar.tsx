@@ -16,18 +16,19 @@ export function NavBar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className={cn(
-                    "bg-white border-2 border-black border-solid items-center justify-between p-[16px] relative rounded-[24px]",
-                    "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto shadow-xl",
+                    "backdrop-blur-[4px] bg-white/40 border border-white/60 items-center justify-between p-[16px] relative rounded-[28px]",
+                    "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto",
+                    "shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
                     "hidden md:flex"
                 )}
             >
                 {/* Left Section: Profile & Socials */}
                 <div className="flex gap-[15px] items-center shrink-0">
                     <Link href="/" className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
-                        <div className="bg-[#f5f5f5] border-2 border-black border-solid overflow-hidden relative rounded-[23px] shrink-0 size-[42px]">
+                        <div className="bg-white/50 border border-white/80 overflow-hidden relative rounded-[23px] shrink-0 size-[42px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <Image src={profilePic} alt="Profile" fill className="object-cover" />
                         </div>
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[20px] tracking-[-0.4px]">
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#1a1a1a] text-[20px] tracking-[-0.4px]">
                             harshit heya
                         </p>
                     </Link>
@@ -54,7 +55,7 @@ export function NavBar() {
                         onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                         className="flex items-center justify-center shrink-0 hover:text-black/70 transition-colors cursor-pointer"
                     >
-                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[20px] tracking-[-0.4px]">
+                        <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#1a1a1a] text-[20px] tracking-[-0.4px]">
                             work
                         </p>
                     </button>
@@ -80,8 +81,9 @@ export function NavBar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className={cn(
-                    "bg-white border-2 border-black border-solid flex flex-col gap-[8px] p-[10px] relative rounded-[20px]",
-                    "w-full pointer-events-auto shadow-xl",
+                    "backdrop-blur-xl bg-white/40 border border-white/60 flex flex-col gap-[8px] p-[10px] relative rounded-[24px]",
+                    "w-full pointer-events-auto",
+                    "shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
                     "flex md:hidden"
                 )}
             >
@@ -89,7 +91,7 @@ export function NavBar() {
                 <div className="flex items-center justify-between w-full">
                     {/* Profile */}
                     <div className="flex items-center gap-[10px]">
-                        <div className="bg-[#f5f5f5] border border-black border-solid overflow-hidden relative rounded-[18px] shrink-0 size-[34px]">
+                        <div className="bg-white/50 border border-white/80 overflow-hidden relative rounded-[18px] shrink-0 size-[34px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <Image src={profilePic} alt="Profile" fill className="object-cover" />
                         </div>
                         <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[#151515] text-[16px] tracking-[-0.32px]">
