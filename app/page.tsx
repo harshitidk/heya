@@ -29,12 +29,13 @@ export default function Home() {
       </div>
 
       {/* Art Background SVG */}
-      <div className="fixed top-0 left-0 w-full h-screen pointer-events-none z-0 select-none flex items-start justify-center overflow-hidden">
+      <div className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden pointer-events-none">
         <Image
           src={artBg}
           alt="Background artwork"
+          fill
+          className="object-cover opacity-100"
           priority
-          className="object-cover w-full h-full opacity-100"
         />
       </div>
 
