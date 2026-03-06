@@ -29,7 +29,7 @@ export default function Home() {
       </div>
 
       {/* Art Background SVG */}
-      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-0 select-none flex items-start justify-center overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 select-none flex items-start justify-center overflow-hidden">
         <Image
           src={artBg}
           alt="Background artwork"
