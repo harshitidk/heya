@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { NavBar } from "@/components/NavBar";
+import ClientBody from "@/components/ClientBody";
+import { ThemeProvider } from "@/components/ThemeContext";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -46,8 +48,12 @@ export default function RootLayout({
           "antialiased bg-[#FDFDFD] text-foreground font-sans relative"
         )}
       >
-        <NavBar />
-        {children}
+        <ThemeProvider>
+          <ClientBody>
+            <NavBar />
+            {children}
+          </ClientBody>
+        </ThemeProvider>
       </body>
     </html>
   );
