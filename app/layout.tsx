@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { NavBar } from "@/components/NavBar";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import ClientBody from "@/components/ClientBody";
 import { ThemeProvider } from "@/components/ThemeContext";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ClientBody>
+            <ThemeSwitcher />
             <NavBar />
             {children}
           </ClientBody>

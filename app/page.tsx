@@ -22,7 +22,7 @@ import artBg from "@/public/assets/artbg.svg";
 import lightBg from "@/public/assets/light-bg.png";
 import nightBg1 from "@/public/assets/night-bg-1.png";
 import nightBg2 from "@/public/assets/night-bg-2.png";
-import nightPhoto1 from "@/public/assets/night-photo-1.jpg";
+import nightPhoto1 from "@/public/assets/night-photo-left-new.jpg";
 import nightPhoto2 from "@/public/assets/night-photo-2.jpg";
 import nightPhoto3 from "@/public/assets/night-photo-3.jpg";
 
@@ -38,25 +38,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-[100vh] w-full flex flex-col items-center justify-start gap-12 pt-24">
         {/* View Toggle Button */}
-        <div
-          onClick={() => setIsDark(!isDark)}
-          className={`absolute top-8 right-6 md:right-12 z-50 cursor-pointer hover:scale-105 border border-solid flex items-center rounded-[100px] shadow-lg ${poppins.className} w-[115px] h-[39px] overflow-hidden transition-all duration-700 ${!isDark ? 'border-black' : 'border-white'}`}
-          style={{
-            backgroundImage: !isDark
-              ? "linear-gradient(168.525deg, rgb(62, 62, 62) 14.436%, rgb(6, 6, 6) 114.44%)"
-              : "linear-gradient(128.414deg, rgba(255, 255, 255, 0.8) 3.633%, rgba(237, 237, 237, 0.8) 97.528%)",
-            backdropFilter: !isDark ? "none" : "blur(11.75px)"
-          }}
-        >
-          <div className={`absolute flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${!isDark ? 'translate-x-[14px]' : 'translate-x-[42px]'}`}>
-            <p className={`font-medium leading-[1.02] lowercase shrink-0 text-[14px] tracking-[-0.28px] whitespace-nowrap bg-clip-text text-[transparent] transition-colors duration-700 bg-gradient-to-r ${!isDark ? 'from-white to-[#c5c5c5]' : 'from-[#4f4f4f] to-[#262626]'}`}>
-              {!isDark ? "nightime" : "daylight"}
-            </p>
-          </div>
-          <div className={`absolute flex items-center justify-center rounded-full shrink-0 w-[31px] h-[31px] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] shadow-[0px_2.296px_14.696px_0px_rgba(0,0,0,0.19)] ${!isDark ? 'translate-x-[80px] bg-[#1c1c1c] border-[#353535] border-[0.86px] shadow-[0px_2.296px_14.696px_0px_rgba(0,0,0,0.49)]' : 'translate-x-[4px] bg-white border-[#f4f4f4] border-[0.86px]'}`}>
-            {!isDark ? <Moon className="w-[14px] h-[14px] text-white/90" strokeWidth={2.5} /> : <Sun className="w-[14px] h-[14px] text-[#1a1a1a]" strokeWidth={2.5} />}
-          </div>
-        </div>
+
         <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none hidden">
           <h1
             className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 md:pt-0 transform translate-y-[32%] md:translate-y-0"
@@ -143,8 +125,9 @@ export default function Home() {
       <div className="relative w-full z-10 flex flex-col pt-32 md:pt-40 pb-32">
         <WatermarkText text="curiosity" top isDark={isDark} />
         <ExperimentsSection isDark={isDark} />
-
-        <ExperienceSection isDark={isDark} />
+        <div className="mt-20 md:mt-44">
+          <ExperienceSection isDark={isDark} />
+        </div>
       </div>
     </main >
   );

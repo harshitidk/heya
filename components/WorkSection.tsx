@@ -50,6 +50,7 @@ function MockupImage({
     onZoom?: (src: string | StaticImageData) => void;
     tiltDirection?: "left" | "right";
 }) {
+    const { isDark } = useTheme();
     const tiltClass = tiltDirection === "left"
         ? "hover:-rotate-[1.5deg]"
         : "hover:rotate-[1.5deg]";
@@ -57,7 +58,7 @@ function MockupImage({
     return (
         <div
             onClick={() => src && onZoom?.(src)}
-            className={`relative bg-gray-100/40 rounded-xl overflow-hidden shadow-sm transition-all duration-300 ${src ? `cursor-pointer ${tiltClass} hover:scale-[1.03] hover:shadow-2xl hover:z-10` : ''} ${containerClassName}`}
+            className={`relative bg-white/10 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300 ${src ? `cursor-pointer ${tiltClass} hover:scale-[1.03] hover:shadow-2xl hover:z-10` : ''} ${containerClassName}`}
         >
             {src ? (
                 <Image
@@ -76,6 +77,7 @@ function MockupImage({
 }
 
 function CaseStudyButton({ text, primary, href }: { text: string; primary?: boolean; href?: string }) {
+    const { isDark } = useTheme();
     const Component = href ? "a" : "button" as any;
     const componentProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {};
 
@@ -91,7 +93,7 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
         );
     }
     return (
-        <Component {...componentProps} className="relative bg-white border border-[#E5E5E5] text-[#555] shadow-sm hover:shadow-[0_4px_14px_0_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:border-[#D0D0D0] hover:text-[#222] active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex">
+        <Component {...componentProps} className={`relative border shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex bg-white/10 backdrop-blur-md border-white/20 ${isDark ? 'text-white/90 hover:bg-white/20 hover:text-white' : 'text-[#555] hover:bg-white/30 hover:text-[#222]'}`}>
             <span className="font-medium text-[15px] tracking-[0.2px] whitespace-nowrap">
                 {text}
             </span>
@@ -100,11 +102,11 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
     );
 }
 
-function ShoppinCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
+function ShoppinCollage({ onZoom, isDark }: { onZoom: (src: string | StaticImageData) => void; isDark: boolean }) {
     return (
         <div className="flex flex-col md:flex-row gap-6 md:gap-[12.6px] items-center justify-center w-full px-4 md:px-0">
             {/* Left Card */}
-            <div className="bg-white p-6 md:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] md:max-w-none md:w-auto shrink-0">
+            <div className="p-6 md:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] md:max-w-none md:w-auto shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <MockupImage
                     src={shoppinP1}
                     onZoom={onZoom}
@@ -115,18 +117,18 @@ function ShoppinCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
 
             {/* Center Cards */}
             <div className="flex flex-col gap-4 md:gap-[18.9px] w-full max-w-[380px] md:max-w-none md:w-[379.3px] shrink-0">
-                <div className="bg-white p-5 md:p-[25.2px] flex gap-4 md:gap-[22.4px] rounded-[19.3px] items-center justify-center w-full">
+                <div className="p-5 md:p-[25.2px] flex gap-4 md:gap-[22.4px] rounded-[19.3px] items-center justify-center w-full transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={shoppinP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-1/2 md:w-[153.2px] aspect-[153.2/341] md:aspect-auto md:h-[341px] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white shrink-0" />
                     <MockupImage src={shoppinP3} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[153.2px] aspect-[153.2/341] md:aspect-auto md:h-[341px] rounded-[11.4px] shadow-[0_1.4px_13.5px_0_rgba(0,0,0,0.15)] border-[1.8px] border-white shrink-0" />
                 </div>
-                <div className="bg-white p-4 md:p-[18.4px] flex gap-4 md:gap-[18.4px] rounded-[13.8px] items-center justify-center w-full">
+                <div className="p-4 md:p-[18.4px] flex gap-4 md:gap-[18.4px] rounded-[13.8px] items-center justify-center w-full transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={shoppinP4} onZoom={onZoom} tiltDirection="left" containerClassName="w-[58%] md:w-[190.8px] aspect-[190.8/96.6] md:aspect-auto md:h-[96.6px] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white shrink-0" />
                     <MockupImage src={shoppinP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-[42%] md:w-[133.2px] aspect-[133.2/96.6] md:aspect-auto md:h-[96.6px] rounded-[9.3px] shadow-[0_1.2px_11px_0_rgba(0,0,0,0.15)] border-[1.2px] border-white shrink-0" />
                 </div>
             </div>
 
             {/* Right Cards */}
-            <div className="bg-white px-6 md:px-[35px] py-8 md:py-[32px] flex flex-col gap-4 md:gap-[16px] rounded-[24px] items-center justify-center w-full max-w-[280px] md:max-w-none md:w-auto shrink-0">
+            <div className="px-6 md:px-[35px] py-8 md:py-[32px] flex flex-col gap-4 md:gap-[16px] rounded-[24px] items-center justify-center w-full max-w-[280px] md:max-w-none md:w-auto shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <MockupImage src={shoppinP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[145.7px] aspect-[145.7/252.6] md:aspect-auto md:h-[252.6px] rounded-[6.4px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-2 border-white shrink-0" />
                 <MockupImage src={shoppinP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[145.6px] aspect-[145.6/210] md:aspect-auto md:h-[210px] rounded-[12.1px] shadow-[0_1.7px_16.2px_0_rgba(0,0,0,0.15)] border-[2.1px] border-white shrink-0" />
             </div>
@@ -134,25 +136,25 @@ function ShoppinCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
     );
 }
 
-function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
+function ZoffersCollage({ onZoom, isDark }: { onZoom: (src: string | StaticImageData) => void; isDark: boolean }) {
     return (
         <div className="flex flex-col md:flex-row gap-6 md:gap-[10px] items-center md:items-start justify-center w-full px-4 md:px-0">
             {/* Left Card */}
-            <div className="bg-white overflow-hidden p-6 md:px-[28px] md:py-[35px] rounded-[26.7px] w-full max-w-[300px] md:max-w-none md:w-auto flex items-center justify-center shrink-0">
+            <div className="overflow-hidden p-6 md:px-[28px] md:py-[35px] rounded-[26.7px] w-full max-w-[300px] md:max-w-none md:w-auto flex items-center justify-center shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <MockupImage src={zoffersP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[218.6px] aspect-[218.6/473.8] md:aspect-auto md:h-[473.8px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0" />
             </div>
 
             {/* Center Container  */}
             <div className="flex flex-col gap-4 md:gap-[9px] w-full max-w-[460px] md:max-w-none md:w-[448px] md:h-[544px] shrink-0">
-                <div className="bg-white overflow-hidden p-5 md:px-[36px] md:py-[22px] rounded-[26px] flex items-center md:items-start justify-center w-full md:h-[235px]">
+                <div className="overflow-hidden p-5 md:px-[36px] md:py-[22px] rounded-[26px] flex items-center md:items-start justify-center w-full md:h-[235px] transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={zoffersP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[385px] aspect-[385/628] md:aspect-auto md:h-[628px] rounded-[12px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] border-[2.5px] border-white shrink-0" />
                 </div>
                 <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full md:h-[300px] gap-4 md:gap-0">
-                    <div className="bg-white overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex gap-3 md:gap-[11px] rounded-[24.6px] md:rounded-[20px] items-center justify-center w-full md:w-[288px] md:h-full shrink-0">
+                    <div className="overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex gap-3 md:gap-[11px] rounded-[24.6px] md:rounded-[20px] items-center justify-center w-full md:w-[288px] md:h-full shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                         <MockupImage src={zoffersP3} onZoom={onZoom} tiltDirection="left" containerClassName="w-1/2 md:w-[114.7px] aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
                         <MockupImage src={zoffersP4} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[114.7px] aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
                     </div>
-                    <div className="bg-white overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex items-center justify-center w-full md:w-auto md:h-full rounded-[24.6px] md:rounded-[20px] shrink-0">
+                    <div className="overflow-hidden p-4 md:px-[18px] md:py-[19.8px] flex items-center justify-center w-full md:w-auto md:h-full rounded-[24.6px] md:rounded-[20px] shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                         <MockupImage src={zoffersP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[114.7px] max-w-[150px] md:max-w-none aspect-[114.7/255.3] md:aspect-auto md:h-[255.3px] rounded-[10.3px] shadow-[0_2px_19.3px_0_rgba(0,0,0,0.15)] border-[2px] border-white shrink-0" />
                     </div>
                 </div>
@@ -160,10 +162,10 @@ function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
 
             {/* Right Container */}
             <div className="flex flex-col gap-4 md:gap-0 justify-between items-center w-full max-w-[300px] md:max-w-none md:w-[164px] md:h-[544px] shrink-0">
-                <div className="bg-white overflow-hidden p-6 md:px-[12px] md:py-[19px] rounded-[24px] flex items-center justify-center w-full shrink-0">
+                <div className="overflow-hidden p-6 md:px-[12px] md:py-[19px] rounded-[24px] flex items-center justify-center w-full shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={zoffersP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-[139.4px] aspect-[139.4/141.8] md:aspect-auto md:h-[141.8px] rounded-[12px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
-                <div className="bg-white overflow-hidden p-6 md:px-[12px] md:py-[25px] flex flex-col gap-4 md:gap-[22px] rounded-[24px] items-center justify-center w-full md:h-[351px] shrink-0">
+                <div className="overflow-hidden p-6 md:px-[12px] md:py-[25px] flex flex-col gap-4 md:gap-[22px] rounded-[24px] items-center justify-center w-full md:h-[351px] shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={zoffersP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-full aspect-[173/202] rounded-[10px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
                     <MockupImage src={zoffersP8} onZoom={onZoom} tiltDirection="right" containerClassName="w-[80%] md:w-full aspect-[702/490] rounded-[12px] shadow-[0_2px_16px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
@@ -172,34 +174,34 @@ function ZoffersCollage({ onZoom }: { onZoom: (src: string | StaticImageData) =>
     );
 }
 
-function RabbitCollage({ onZoom }: { onZoom: (src: string | StaticImageData) => void }) {
+function RabbitCollage({ onZoom, isDark }: { onZoom: (src: string | StaticImageData) => void; isDark: boolean }) {
     return (
         <div className="flex flex-col md:flex-row gap-6 md:gap-[18px] items-center md:items-stretch justify-center w-full px-4 md:px-0">
             {/* Left Card */}
-            <div className="bg-white p-6 md:p-[35px] rounded-[16px] flex items-center justify-start w-full max-w-[300px] md:max-w-none md:w-[330px] md:h-[544px] shrink-0 overflow-hidden">
+            <div className="p-6 md:p-[35px] rounded-[16px] flex items-center justify-start w-full max-w-[300px] md:max-w-none md:w-[330px] md:h-[544px] shrink-0 overflow-hidden transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <MockupImage src={rabbitP1} onZoom={onZoom} tiltDirection="left" containerClassName="w-[250%] max-w-none md:w-[887px] aspect-[887/473] md:aspect-auto md:h-[473px] rounded-[16px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0 origin-left" />
             </div>
 
             {/* Center Cards */}
             <div className="flex flex-col gap-4 md:gap-[12px] w-full max-w-[300px] md:max-w-none md:w-[269px] shrink-0">
-                <div className="bg-white overflow-hidden p-6 md:p-[20px] rounded-[16px] flex flex-col items-center justify-center w-full shrink-0">
+                <div className="overflow-hidden p-6 md:p-[20px] rounded-[16px] flex flex-col items-center justify-center w-full shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={rabbitP2} onZoom={onZoom} tiltDirection="left" containerClassName="w-full md:w-[148px] aspect-[148/143] md:aspect-auto md:h-[143px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
-                <div className="bg-white overflow-hidden p-6 md:p-[20px] rounded-[16px] flex items-start justify-center w-full md:h-[349px] shrink-0">
+                <div className="overflow-hidden p-6 md:p-[20px] rounded-[16px] flex items-start justify-center w-full md:h-[349px] shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={rabbitP3} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[206px] aspect-[206/317] md:aspect-auto md:h-[317px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
             </div>
 
             {/* Right Cards */}
             <div className="flex flex-col gap-4 md:gap-[11px] w-full max-w-[300px] md:max-w-none md:w-[274px] shrink-0">
-                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex gap-3 md:gap-[9px] items-center justify-center w-full md:h-[174px] shrink-0">
+                <div className="overflow-hidden p-4 md:p-[16px] rounded-[14px] flex gap-3 md:gap-[9px] items-center justify-center w-full md:h-[174px] shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={rabbitP4} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[103px] aspect-[103/144] md:aspect-auto md:h-[144px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                     <MockupImage src={rabbitP5} onZoom={onZoom} tiltDirection="right" containerClassName="w-1/2 md:w-[120px] aspect-[120/144] md:aspect-auto md:h-[144px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
-                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0">
+                <div className="overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={rabbitP6} onZoom={onZoom} tiltDirection="right" containerClassName="w-full aspect-[1374/892] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
-                <div className="bg-white overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0">
+                <div className="overflow-hidden p-4 md:p-[16px] rounded-[14px] flex flex-col items-start w-full shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <MockupImage src={rabbitP7} onZoom={onZoom} tiltDirection="right" containerClassName="w-full md:w-[247px] aspect-[247/126] md:aspect-auto md:h-[126px] shadow-[0_2px_18.8px_0_rgba(0,0,0,0.15)] shrink-0" />
                 </div>
             </div>
@@ -219,11 +221,11 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className="relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-20 md:mb-32 pt-20 md:pt-20 pb-16 md:pb-24 transition-colors duration-700">
+        <section id="work" className={`relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-0 pt-20 md:pt-20 pb-24 md:pb-40 transition-colors duration-700 [clip-path:inset(0)] ${isDark ? 'bg-[#0A0E17]' : 'bg-transparent'}`}>
             {/* Backgrounds */}
-            <div className={`absolute top-0 left-0 w-full h-[120%] z-0 pointer-events-none transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
-                <Image src={workBgNight1} alt="Work Background Night" fill className="object-cover absolute" priority />
-                <Image src={workBgNight2} alt="Work Background Clouds" fill className="object-cover absolute" priority />
+            <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
+                <Image src={workBgNight1} alt="Work Background Night" fill className="object-cover" priority />
+                <Image src={workBgNight2} alt="Work Background Clouds" fill className="object-cover" priority />
                 <div className="absolute inset-0 bg-black/40" />
             </div>
 
@@ -231,7 +233,7 @@ export function WorkSection() {
                 {/* Title */}
                 <div className="flex flex-col gap-0 items-center text-center w-full max-w-2xl px-4 relative z-10">
                     {isDark ? (
-                        <Image src={selectedWorkNight} alt="Selected Work" className="w-[180px] md:w-[250px] h-auto drop-shadow-2xl" />
+                        <Image src={selectedWorkNight} alt="Selected Work" className="w-[220px] md:w-[289px] h-auto drop-shadow-2xl" />
                     ) : (
                         <svg className="w-[220px] md:w-[289px] h-auto -ml-2" width="289" height="92" viewBox="0 0 289 92" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Selected Work">
                             <g filter="url(#filter0_di_213_349)">
@@ -294,12 +296,12 @@ export function WorkSection() {
                 <div className="w-full flex flex-col gap-16 md:gap-24 items-center relative z-10 px-4 md:px-8">
                     {/* Shoppin' */}
                     <div className="w-full flex flex-col gap-[38px] items-center">
-                        <ShoppinCollage onZoom={setZoomedImage} />
+                        <ShoppinCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 md:gap-[24px] items-center md:items-start text-center md:text-left px-4">
                             <h3 className={`font-semibold text-[26px] md:text-[30px] leading-[1.64] tracking-[-0.6px] lowercase transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                 shoppin’ 🍓
                             </h3>
-                            <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
+                            <div className={`flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 <p>
                                     Shoppin’ was my first product design internship, where I worked
                                     across multiple problem spaces - from improving core interactions
@@ -323,12 +325,12 @@ export function WorkSection() {
 
                     {/* Zoffers */}
                     <div className="w-full flex flex-col gap-[38px] items-center">
-                        <ZoffersCollage onZoom={setZoomedImage} />
+                        <ZoffersCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 md:gap-[24px] items-center md:items-start text-center md:text-left px-4">
-                            <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
+                            <h3 className={`font-semibold text-[26px] md:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                 Zoffers
                             </h3>
-                            <div className="flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] text-[#656565] leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left">
+                            <div className={`flex flex-col gap-3 md:gap-[20px] font-medium text-[12px] md:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify md:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 <p>
                                     Zoffers is like UNiDAYS for Indian students — a platform
                                     connecting brands with students through exclusive offers and
@@ -344,13 +346,13 @@ export function WorkSection() {
 
                     {/* Rabbit Invest Section */}
                     <div className="w-full flex flex-col gap-[38px] items-center relative z-[20]">
-                        <RabbitCollage onZoom={setZoomedImage} />
+                        <RabbitCollage onZoom={setZoomedImage} isDark={isDark} />
 
                         <div className="w-full max-w-[884px] flex flex-col gap-4 md:gap-[24px] items-center md:items-start text-center md:text-left px-4">
-                            <h3 className="font-semibold text-[26px] md:text-[30px] leading-[1.64] text-[#2e2e2e] tracking-[-0.6px]">
+                            <h3 className={`font-semibold text-[26px] md:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                 Rabbit Invest
                             </h3>
-                            <p className="font-medium text-[#656565] text-[12px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left">
+                            <p className={`font-medium text-[12px] md:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify md:text-left transition-colors duration-700 ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
                             </p>
                             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-[13px] w-full mt-2 pb-16">

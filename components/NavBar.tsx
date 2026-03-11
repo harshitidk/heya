@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
 import profilePicDay from "@/public/assets/photo-left.jpg";
 import profilePicNight from "@/public/assets/night-photo-2.jpg";
 import { useTheme } from "@/components/ThemeContext";
@@ -13,17 +12,9 @@ import { useTheme } from "@/components/ThemeContext";
 export function NavBar() {
     const { isDark } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isWorkLoading, setIsWorkLoading] = useState(false);
 
     const handleMenuClick = () => {
         setIsMenuOpen(!isMenuOpen);
-    };
-
-    const handleWorkClick = () => {
-        setIsWorkLoading(true);
-        setTimeout(() => {
-            setIsWorkLoading(false);
-        }, 1500);
     };
 
     return (
@@ -69,8 +60,16 @@ export function NavBar() {
                     </div>
                 </div>
 
-                {/* Right Section: Let's Talk, Resume & Work (Primary on Far Right) */}
+                {/* Right Section: Home, Let's Talk, Resume & Work (Primary on Far Right) */}
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
+                    <Link href="/">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
+                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                                home
+                            </p>
+                        </div>
+                    </Link>
+
                     <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
                             <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
@@ -79,27 +78,23 @@ export function NavBar() {
                         </div>
                     </a>
 
-                    <Link
-                        href="/resume.pdf"
-                        target="_blank"
-                        className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}
+                    <div
+                        className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] transition-all duration-500 ${isDark ? 'text-white/40' : 'text-[#1a1a1a]/40'}`}
                     >
                         <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700`}>
                             resume
                         </p>
-                    </Link>
+                    </div>
 
                     <Link
                         href="/work"
-                        onClick={handleWorkClick}
                         className="relative group ml-1"
                     >
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
-                            className={`border-[1.5px] border-solid flex h-[38px] items-center justify-center px-5 xl:px-7 relative rounded-[12px] md:rounded-[14px] shrink-0 cursor-pointer overflow-hidden transition-all duration-700 ${isDark ? 'bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.2)] text-[#1a1a1a]' : 'bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'}`}
+                            className={`border-[1.5px] border-solid flex h-[38px] items-center justify-center px-5 xl:px-7 relative rounded-[12px] md:rounded-[14px] shrink-0 cursor-pointer overflow-hidden transition-all duration-700 ${isDark ? 'bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'}`}
                         >
-                            {isWorkLoading && <Loader2 className={`w-[14px] h-[14px] animate-spin mr-1.5 ${isDark ? 'text-black' : 'text-white'}`} />}
                             <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[15px] xl:text-[17px] tracking-[-0.3px] whitespace-nowrap relative z-10 transition-colors duration-700">
                                 work
                             </p>
@@ -170,13 +165,17 @@ export function NavBar() {
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
                             className="flex flex-col gap-[8px] overflow-hidden w-full mb-1"
                         >
+                            <Link href="/" onClick={() => setIsMenuOpen(false)} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
+                                <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
+                            </Link>
+
                             <div className="flex gap-[6px] w-full">
                                 <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer" className={`w-1/2 flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90`}>
                                     <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">let's talk</span>
                                 </a>
-                                <Link href="/resume.pdf" target="_blank" onClick={() => setIsMenuOpen(false)} className={`w-1/2 flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90`}>
+                                <div className={`w-1/2 flex items-center justify-center h-[38px] rounded-[12px] transition-colors bg-black/20 text-white/50 cursor-default`}>
                                     <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">resume</span>
-                                </Link>
+                                </div>
                             </div>
                             <div className="flex gap-[6px] w-full">
                                 <Link href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={`w-1/2 flex gap-2 items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
@@ -197,12 +196,11 @@ export function NavBar() {
                 </AnimatePresence>
 
                 {/* Bottom: Work Section CTA (Primary) */}
-                <Link href="/work" onClick={() => { setIsMenuOpen(false); handleWorkClick(); }} className="w-full relative z-20 overflow-hidden rounded-[14px] active:scale-95 transition-all">
+                <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 overflow-hidden rounded-[14px] active:scale-95 transition-all">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
                         className={`border-[1.5px] border-solid flex h-[42px] items-center justify-center px-6 relative rounded-[14px] shrink-0 w-full cursor-pointer transition-all duration-700 ${isDark ? 'bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'}`}
                     >
-                        {isWorkLoading && <Loader2 className={`w-[14px] h-[14px] animate-spin mr-1.5 ${isDark ? 'text-black' : 'text-white'}`} />}
                         <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[13px] relative z-10 transition-colors duration-700 tracking-[-0.2px]`}>
                             work
                         </p>
