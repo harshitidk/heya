@@ -32,8 +32,8 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
     const content = (
         <div className={`w-full group cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 ${isDark ? 'border-[#002277] hover:bg-[#07132b]' : 'border-[#fff5f5] hover:bg-[#fffcfc]'} py-6 px-4 md:px-8 gap-4 md:gap-0 hover:shadow-sm hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 rounded-[16px] ${poppins.className}`}>
             {/* Company Name */}
-            <div className="flex items-center gap-2 md:w-[25%] shrink-0">
-                <h3 className={`${isDark ? 'text-[#f6f6f6]' : 'text-[#eb502d]'} text-[20px] md:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700`}>
+            <div className="flex items-center gap-2 md:w-[30%] shrink-0">
+                <h3 className={`${isDark ? 'text-[#f6f6f6]' : 'text-[#eb502d]'} text-[20px] md:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700 whitespace-nowrap`}>
                     {company}
                 </h3>
                 {showArrow !== false && (
@@ -51,7 +51,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
             </div>
 
             {/* Timing Details */}
-            <div className={`flex items-center justify-start md:justify-end gap-3 md:gap-6 md:w-[40%] shrink-0 ${isDark ? 'text-[#dcdcdc]' : 'text-[#787878]'} opacity-90 transition-colors duration-700`}>
+            <div className={`flex items-center justify-start md:justify-end gap-3 md:gap-6 md:w-[35%] shrink-0 ${isDark ? 'text-[#dcdcdc]' : 'text-[#787878]'} opacity-90 transition-colors duration-700`}>
                 <p className="font-bold text-[14px] md:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
                     {duration}
                 </p>
