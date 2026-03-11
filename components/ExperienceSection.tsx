@@ -32,19 +32,19 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
     const content = (
         <div className={`w-full group cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 ${isDark ? 'border-[#002277] hover:bg-[#07132b]' : 'border-[#fff5f5] hover:bg-[#fffcfc]'} py-6 px-4 md:px-8 gap-4 md:gap-0 hover:shadow-sm hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 rounded-[16px] ${poppins.className}`}>
             {/* Company Name */}
-            <div className="flex items-center gap-2 md:w-[30%] shrink-0">
+            <div className="flex items-center gap-2 md:w-[40%] shrink-0">
                 <h3 className={`${isDark ? 'text-[#f6f6f6]' : 'text-[#eb502d]'} text-[20px] md:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700 whitespace-nowrap`}>
                     {company}
                 </h3>
                 {showArrow !== false && (
-                    <ArrowUpRight className={`w-5 h-5 ${isDark ? 'text-white' : 'text-[#eb502d]'} opacity-80 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300`} />
+                    <ArrowUpRight className={`w-5 h-5 ${isDark ? 'text-white' : 'text-[#eb502d]'} opacity-80 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 shrink-0`} />
                 )}
             </div>
 
             {/* Role Pill */}
-            <div className="md:w-[35%] flex justify-start md:justify-center shrink-0">
+            <div className="md:w-[25%] flex justify-start md:justify-center shrink-0">
                 <div className={`px-4 py-2 rounded-full ${currentStyles.bg}`}>
-                    <p className={`font-medium text-[14px] md:text-[18px] lg:text-[20px] tracking-tight ${currentStyles.text}`}>
+                    <p className={`font-medium text-[14px] md:text-[18px] lg:text-[20px] tracking-tight ${currentStyles.text} whitespace-nowrap`}>
                         {role}
                     </p>
                 </div>
@@ -55,7 +55,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
                 <p className="font-bold text-[14px] md:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
                     {duration}
                 </p>
-                <div className={`w-[1px] md:w-[20px] h-[16px] md:h-[1px] ${isDark ? 'bg-[#555]' : 'bg-[#ddd]'}`} />
+                <div className={`w-[1px] md:w-[20px] h-[16px] md:h-[1px] shrink-0 ${isDark ? 'bg-[#555]' : 'bg-[#ddd]'}`} />
                 <p className="font-medium text-[14px] md:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
                     {timeline}
                 </p>
