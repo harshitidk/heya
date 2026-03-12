@@ -7,6 +7,15 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
+import projCrescendoMain from "@/public/assets/proj-crescendo-main.png";
+import projCrescendoLeft from "@/public/assets/proj-crescendo-left.png";
+import projCrescendoCenter from "@/public/assets/proj-crescendo-center.png";
+import projCrescendoRight from "@/public/assets/proj-crescendo-right.png";
+import projOlogyLeft from "@/public/assets/proj-ology-left.png";
+import projOlogyRight from "@/public/assets/proj-ology-right.png";
+import projOlogyMain from "@/public/assets/proj-ology-main.png";
+import projSpotifyResume from "@/public/assets/proj-spotify-resume.png";
+
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
@@ -247,7 +256,7 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                         onClick={(e) => e.stopPropagation()}
                     >
                         <Image
-                            src="/assets/proj-spotify-resume.png"
+                            src={projSpotifyResume}
                             alt="Spotify Style Resume - Harshit Heya"
                             fill
                             className="object-contain rounded-[20px]"
@@ -267,28 +276,28 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 // ==========================================
 const crescendoImages: FloatingImage[] = [
     {
-        src: "/assets/proj-crescendo-main.png",
+        src: projCrescendoMain,
         width: 279, height: 157,
         hiddenRotate: 3, hiddenTop: -15, hiddenLeft: 30, hiddenScale: 0.55,
         revealedRotate: 6.7, revealedTop: -10, revealedLeft: 18, revealedScale: 1,
         borderRadius: 18, borderColor: "#a2cffb",
     },
     {
-        src: "/assets/proj-crescendo-left.png",
+        src: projCrescendoLeft,
         width: 100, height: 223,
         hiddenRotate: -8, hiddenTop: -10, hiddenLeft: 30, hiddenScale: 0.35,
         revealedRotate: -24.5, revealedTop: -43, revealedLeft: -17, revealedScale: 1,
         borderRadius: 9, borderColor: "#bbe3ff",
     },
     {
-        src: "/assets/proj-crescendo-center.png",
+        src: projCrescendoCenter,
         width: 100, height: 223,
         hiddenRotate: 2, hiddenTop: -20, hiddenLeft: 126, hiddenScale: 0.35,
         revealedRotate: -0.1, revealedTop: -59, revealedLeft: 126, revealedScale: 1,
         borderRadius: 9, borderColor: "#bbe3ff", zIndex: 1,
     },
     {
-        src: "/assets/proj-crescendo-right.png",
+        src: projCrescendoRight,
         width: 100, height: 223,
         hiddenRotate: 10, hiddenTop: -8, hiddenLeft: 220, hiddenScale: 0.35,
         revealedRotate: 38.7, revealedTop: -34, revealedLeft: 190, revealedScale: 1,
@@ -301,21 +310,21 @@ const crescendoImages: FloatingImage[] = [
 // ==========================================
 const ologyImages: FloatingImage[] = [
     {
-        src: "/assets/proj-ology-left.png",
+        src: projOlogyLeft,
         width: 88, height: 190,
         hiddenRotate: -5, hiddenTop: -10, hiddenLeft: 20, hiddenScale: 0.35,
         revealedRotate: -14.3, revealedTop: -63, revealedLeft: -18, revealedScale: 1,
         borderRadius: 10, borderColor: "#ffd9d9",
     },
     {
-        src: "/assets/proj-ology-right.png",
+        src: projOlogyRight,
         width: 88, height: 190,
         hiddenRotate: 5, hiddenTop: -10, hiddenLeft: 240, hiddenScale: 0.35,
         revealedRotate: 15.6, revealedTop: -69, revealedLeft: 255, revealedScale: 1,
         borderRadius: 10, borderColor: "#ffd9d9",
     },
     {
-        src: "/assets/proj-ology-main.png",
+        src: projOlogyMain,
         width: 232, height: 151,
         hiddenRotate: 1, hiddenTop: -12, hiddenLeft: 55, hiddenScale: 0.55,
         revealedRotate: 2.7, revealedTop: -40, revealedLeft: 50, revealedScale: 1,
@@ -328,7 +337,7 @@ const ologyImages: FloatingImage[] = [
 // ==========================================
 const spotifyImages: FloatingImage[] = [
     {
-        src: "/assets/proj-spotify-resume.png",
+        src: projSpotifyResume,
         width: 185, height: 262,
         hiddenRotate: 4, hiddenTop: -18, hiddenLeft: 80, hiddenScale: 0.42,
         revealedRotate: 11.9, revealedTop: -68, revealedLeft: 84, revealedScale: 1,
