@@ -8,6 +8,7 @@ import { ImageCards } from "@/components/ImageCards";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { ExperimentsSection } from "@/components/ExperimentsSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
 import { WatermarkText } from "@/components/WatermarkText";
 import { Moon } from "lucide-react";
 import cardLeft from "@/public/assets/photo-left.jpg";
@@ -127,6 +128,10 @@ export default function Home() {
         <ExperimentsSection isDark={isDark} />
         <div className="mt-20 md:mt-44">
           <ExperienceSection isDark={isDark} />
+        </div>
+        <div className="mt-20 md:mt-44">
+          <WatermarkText text="intuition" top isDark={isDark} />
+          <ProjectsSection isDark={isDark} />
         </div>
       </div>
     </main >
