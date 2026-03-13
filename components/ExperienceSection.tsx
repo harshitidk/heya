@@ -33,14 +33,14 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
 
     const content = (
         <div className={cn(
-            "w-full group cursor-pointer flex flex-col md:grid md:grid-cols-[4fr_2.5fr_3.5fr] items-start md:items-center justify-between",
-            "border-b-2 py-6 px-4 md:px-8 gap-4 md:gap-0 transition-all duration-300 rounded-[16px]",
+            "w-full group cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between",
+            "border-b-2 py-6 px-4 md:px-8 gap-4 md:gap-4 sm:gap-0 transition-all duration-300 rounded-[16px]",
             "hover:shadow-sm hover:scale-[1.02] hover:-translate-y-1",
             isDark ? "border-[#002277] hover:bg-[#07132b]" : "border-[#fff5f5] hover:bg-[#fffcfc]",
             poppins.className
         )}>
             {/* Company Name */}
-            <div className="flex items-center gap-2 w-full md:w-full shrink-0 min-w-0">
+            <div className="flex items-center gap-2 w-full sm:w-[40%] shrink-0 min-w-0">
 
                 <h3 className={cn(
                     "text-[20px] md:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700 whitespace-nowrap overflow-hidden text-ellipsis",
@@ -57,7 +57,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
             </div>
 
             {/* Role Pill */}
-            <div className="w-full md:w-full flex justify-start md:justify-center min-w-0">
+            <div className="w-full sm:w-[25%] flex justify-start sm:justify-center min-w-0">
                 <div className={cn("px-4 py-2 rounded-full", currentStyles.bg)}>
                     <p className={cn(
                         "font-medium text-[14px] md:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap",
@@ -70,7 +70,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
 
             {/* Timing Details */}
             <div className={cn(
-                "flex items-center justify-start md:justify-end gap-3 md:gap-6 w-full md:w-full min-w-0 opacity-90 transition-colors duration-700",
+                "flex items-center justify-start sm:justify-end gap-3 md:gap-6 w-full sm:w-[35%] min-w-0 opacity-90 transition-colors duration-700",
                 isDark ? 'text-[#dcdcdc]' : 'text-[#787878]'
             )}>
 
@@ -78,7 +78,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
                     {duration}
                 </p>
                 <div className={cn(
-                    "w-[1px] md:w-[20px] h-[16px] md:h-[1px] shrink-0",
+                    "w-[1px] sm:w-[20px] h-[16px] sm:h-[1px] shrink-0",
                     isDark ? 'bg-[#555]' : 'bg-[#ddd]'
                 )} />
                 <p className="font-medium text-[14px] md:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">

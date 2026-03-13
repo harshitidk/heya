@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import projCrescendoMain from "@/public/assets/proj-crescendo-main.png";
 import projCrescendoLeft from "@/public/assets/proj-crescendo-left.png";
@@ -23,12 +24,10 @@ type FloatingImage = {
     src: string | StaticImageData;
     width: number;
     height: number;
-    // Hidden state (inside the card/folder)
     hiddenRotate: number;
     hiddenTop: number;
     hiddenLeft: number;
     hiddenScale: number;
-    // Revealed state (popping out on hover)
     revealedRotate: number;
     revealedTop: number;
     revealedLeft: number;
@@ -55,7 +54,6 @@ type ProjectCardProps = {
     subtitleColor: string;
     floatingImages: FloatingImage[];
     clickAction: ClickAction;
-    isMobile: boolean;
     onResumeClick?: () => void;
 };
 
@@ -71,13 +69,9 @@ function ProjectCard({
     subtitleColor,
     floatingImages,
     clickAction,
-    isMobile,
     onResumeClick,
 }: ProjectCardProps) {
     const [isHovered, setIsHovered] = useState(false);
-
-    // On mobile, images are always visible (revealed)
-    const showImages = isMobile || isHovered;
 
     const handleClick = () => {
         if (clickAction.type === "link") {
@@ -93,9 +87,10 @@ function ProjectCard({
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
+            className="project-card-container"
         >
             <div
-                className={`block group ${clickAction.type !== "none" ? "cursor-pointer" : "cursor-default"}`}
+                className={cn("block group", clickAction.type !== "none" ? "cursor-pointer" : "cursor-default")}
                 onClick={handleClick}
             >
                 <div
@@ -105,37 +100,24 @@ function ProjectCard({
                         border: `2px solid ${borderColor}`,
                         boxShadow: `0px 25px 56px 0px ${shadowColor}`,
                     }}
-                    onMouseEnter={() => !isMobile && setIsHovered(true)}
-                    onMouseLeave={() => !isMobile && setIsHovered(false)}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                 >
-                    {/* Floating Images - wrapped in a scaled container on mobile */}
-                    <div
-                        className="absolute pointer-events-none"
-                        style={{
-                            width: 337,
-                            height: 270,
-                            top: 0,
-                            left: "50%",
-                            transform: isMobile
-                                ? "translateX(-50%) scale(0.55)"
-                                : "translateX(-50%) scale(1)",
-                            transformOrigin: "center top",
-                        }}
-                    >
+                    {/* Floating Images Container */}
+                    <div className="absolute pointer-events-none w-[337px] h-[270px] top-0 left-[-58.5px] md:left-0 scale-[0.55] md:scale-100 origin-top">
                         {floatingImages.map((img, idx) => (
                             <motion.div
                                 key={idx}
-                                className="absolute pointer-events-none"
+                                className="absolute pointer-events-none floating-image-wrapper"
                                 style={{
                                     zIndex: img.zIndex ?? 0,
-                                }}
-                                initial={isMobile ? {
-                                    top: img.revealedTop,
-                                    left: img.revealedLeft,
-                                    rotate: img.revealedRotate,
-                                    scale: img.revealedScale,
-                                    opacity: 1,
-                                } : {
+                                    // @ts-ignore
+                                    "--revealed-top": `${img.revealedTop}px`,
+                                    "--revealed-left": `${img.revealedLeft}px`,
+                                    "--revealed-rotate": `${img.revealedRotate}deg`,
+                                    "--revealed-scale": img.revealedScale,
+                                } as any}
+                                initial={{
                                     top: img.hiddenTop,
                                     left: img.hiddenLeft,
                                     rotate: img.hiddenRotate,
@@ -143,27 +125,27 @@ function ProjectCard({
                                     opacity: 0.7,
                                 }}
                                 animate={{
-                                    top: showImages ? img.revealedTop : img.hiddenTop,
-                                    left: showImages ? img.revealedLeft : img.hiddenLeft,
-                                    rotate: showImages ? img.revealedRotate : img.hiddenRotate,
-                                    scale: showImages ? img.revealedScale : img.hiddenScale,
-                                    opacity: showImages ? 1 : 0.7,
+                                    top: isHovered ? img.revealedTop : img.hiddenTop,
+                                    left: isHovered ? img.revealedLeft : img.hiddenLeft,
+                                    rotate: isHovered ? img.revealedRotate : img.hiddenRotate,
+                                    scale: isHovered ? img.revealedScale : img.hiddenScale,
+                                    opacity: isHovered ? 1 : 0.7,
                                 }}
                                 transition={{
                                     type: "spring",
                                     stiffness: 260,
                                     damping: 22,
                                     mass: 0.8,
-                                    delay: !isMobile && showImages ? idx * 0.06 : 0,
+                                    delay: isHovered ? idx * 0.06 : 0,
                                 }}
                             >
                                 <div
-                                    className="overflow-hidden shadow-lg"
+                                    className="overflow-hidden shadow-lg border-2 border-white transition-opacity duration-300"
                                     style={{
                                         width: img.width,
                                         height: img.height,
                                         borderRadius: img.borderRadius,
-                                        border: `2px solid ${img.borderColor}`,
+                                        borderColor: img.borderColor,
                                     }}
                                 >
                                     <Image
@@ -180,10 +162,11 @@ function ProjectCard({
 
                     {/* Gradient Bottom Label */}
                     <div
-                        className="absolute bottom-0 left-[-2px] right-0 rounded-[30px] md:rounded-[45px] overflow-hidden flex items-center justify-center z-20"
+                        className={cn(
+                            "absolute bottom-0 left-[-2px] right-0 rounded-[30px] md:rounded-[45px] overflow-hidden flex items-center justify-center z-20",
+                            "w-[calc(100%+4px)] h-[140px] md:h-[208px]"
+                        )}
                         style={{
-                            width: "calc(100% + 4px)",
-                            height: isMobile ? "140px" : "208px",
                             background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
                             border: `2px solid ${gradientBorderColor}`,
                         }}
@@ -202,6 +185,17 @@ function ProjectCard({
                     </div>
                 </div>
             </div>
+            
+            <style jsx>{`
+                @media (max-width: 767px) {
+                    :global(.floating-image-wrapper) {
+                        top: var(--revealed-top) !important;
+                        left: var(--revealed-left) !important;
+                        transform: rotate(var(--revealed-rotate)) scale(var(--revealed-scale)) !important;
+                        opacity: 1 !important;
+                    }
+                }
+            `}</style>
         </motion.div>
     );
 }
@@ -238,7 +232,6 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                     transition={{ duration: 0.3 }}
                     onClick={onClose}
                 >
-                    {/* Close button */}
                     <button
                         onClick={onClose}
                         className="absolute top-6 right-6 z-[10000] bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors rounded-full p-2 cursor-pointer"
@@ -246,7 +239,6 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                         <X className="w-6 h-6 text-white" />
                     </button>
 
-                    {/* Resume image */}
                     <motion.div
                         className="relative w-full max-w-[700px] h-[85vh] md:h-[90vh]"
                         initial={{ scale: 0.8, opacity: 0 }}
@@ -271,9 +263,6 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
     );
 }
 
-// ==========================================
-// Crescendo Website - 4 images
-// ==========================================
 const crescendoImages: FloatingImage[] = [
     {
         src: projCrescendoMain,
@@ -305,9 +294,6 @@ const crescendoImages: FloatingImage[] = [
     },
 ];
 
-// ==========================================
-// Ology Studios - 3 images
-// ==========================================
 const ologyImages: FloatingImage[] = [
     {
         src: projOlogyLeft,
@@ -332,9 +318,6 @@ const ologyImages: FloatingImage[] = [
     },
 ];
 
-// ==========================================
-// Spotify Style Resume - 1 image
-// ==========================================
 const spotifyImages: FloatingImage[] = [
     {
         src: projSpotifyResume,
@@ -346,15 +329,7 @@ const spotifyImages: FloatingImage[] = [
 ];
 
 export function ProjectsSection({ isDark }: { isDark?: boolean }) {
-    const [isMobile, setIsMobile] = useState(false);
     const [showResume, setShowResume] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
 
     return (
         <section className="relative w-full max-w-[1200px] mx-auto pt-16 md:pt-28 pb-24 px-4 md:px-8 z-10 flex flex-col items-center">
@@ -406,7 +381,6 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     subtitleColor="#c6d4ff"
                     floatingImages={crescendoImages}
                     clickAction={{ type: "link", url: "https://www.figma.com/design/2QSCTA0rNfCfPwqJLQTvQG/Crescendo--Starry-Nights-?node-id=555-1176" }}
-                    isMobile={isMobile}
                 />
                 <ProjectCard
                     title="Ology Studios"
@@ -420,7 +394,6 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     subtitleColor="#ffc6c6"
                     floatingImages={ologyImages}
                     clickAction={{ type: "none" }}
-                    isMobile={isMobile}
                 />
                 <ProjectCard
                     title="Spotify Style Resume"
@@ -434,12 +407,10 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     subtitleColor="#deffc6"
                     floatingImages={spotifyImages}
                     clickAction={{ type: "modal", modalContent: "resume" }}
-                    isMobile={isMobile}
                     onResumeClick={() => setShowResume(true)}
                 />
             </div>
 
-            {/* Resume Full-View Modal */}
             <ResumeModal isOpen={showResume} onClose={() => setShowResume(false)} />
         </section>
     );
