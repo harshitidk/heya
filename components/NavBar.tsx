@@ -12,10 +12,15 @@ import { useTheme } from "@/components/ThemeContext";
 export function NavBar() {
     const { isDark } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
         setMounted(true);
+        return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
     const handleMenuClick = () => {
@@ -25,9 +30,10 @@ export function NavBar() {
     if (!mounted) return null;
 
     return (
-        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] md:bottom-8 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-4 pointer-events-none" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>
 
-            {/* ----------------- DESKTOP LAYOUT (Hidden on Mobile) ----------------- */}
+            {/* ----------------- DESKTOP LAYOUT ----------------- */}
+            {!isMobile && (
             <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -37,7 +43,7 @@ export function NavBar() {
                     "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto",
                     isDark ? "bg-[#1f2838]/40 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2)]" :
                         "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
-                    "hidden md:flex"
+                    "flex"
                 )}
             >
                 {/* Left Section: Profile & Socials */}
@@ -110,8 +116,10 @@ export function NavBar() {
                     </Link>
                 </div>
             </motion.div>
+            )}
 
-            {/* ----------------- MOBILE LAYOUT (Hidden on Desktop) ----------------- */}
+            {/* ----------------- MOBILE LAYOUT ----------------- */}
+            {isMobile && (
             <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -121,7 +129,7 @@ export function NavBar() {
                     isDark ? "bg-[#1f2838]/80 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2)]" :
                         "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
                     "w-full pointer-events-auto",
-                    "flex flex-col gap-[8px] md:hidden"
+                    "flex flex-col gap-[8px]"
                 )}
             >
                 {/* Top Row: Profile & Menu Button */}
@@ -215,6 +223,7 @@ export function NavBar() {
                     </motion.div>
                 </Link>
             </motion.div>
+            )}
 
         </div>
     );

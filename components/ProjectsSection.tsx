@@ -94,7 +94,7 @@ function ProjectCard({
                 onClick={handleClick}
             >
                 <div
-                    className="relative rounded-[44px] w-[220px] h-[180px] md:w-[337px] md:h-[270px] overflow-visible transition-transform duration-300 group-hover:scale-[1.03] group-hover:-translate-y-2"
+                    className="relative rounded-[44px] w-[220px] h-[180px] sm:w-[337px] sm:h-[270px] overflow-visible transition-transform duration-300 group-hover:scale-[1.03] group-hover:-translate-y-2"
                     style={{
                         backgroundColor: bgColor,
                         border: `2px solid ${borderColor}`,
@@ -104,7 +104,7 @@ function ProjectCard({
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     {/* Floating Images Container */}
-                    <div className="absolute pointer-events-none w-[337px] h-[270px] top-0 left-[-58.5px] md:left-0 scale-[0.55] md:scale-100 origin-top">
+                    <div className="absolute pointer-events-none w-[337px] h-[270px] top-0 left-[-58.5px] sm:left-0 scale-[0.55] sm:scale-100 origin-top">
                         {floatingImages.map((img, idx) => (
                             <motion.div
                                 key={idx}
@@ -163,8 +163,8 @@ function ProjectCard({
                     {/* Gradient Bottom Label */}
                     <div
                         className={cn(
-                            "absolute bottom-0 left-[-2px] right-0 rounded-[30px] md:rounded-[45px] overflow-hidden flex items-center justify-center z-20",
-                            "w-[calc(100%+4px)] h-[140px] md:h-[208px]"
+                            "absolute bottom-0 left-[-2px] right-0 rounded-[30px] sm:rounded-[45px] overflow-hidden flex items-center justify-center z-20",
+                            "w-[calc(100%+4px)] h-[140px] sm:h-[208px]"
                         )}
                         style={{
                             background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
@@ -172,11 +172,11 @@ function ProjectCard({
                         }}
                     >
                         <div className={`text-center ${poppins.className}`}>
-                            <p className="text-white text-[15px] md:text-[24px] font-semibold tracking-tight leading-relaxed">
+                            <p className="text-white text-[15px] sm:text-[24px] font-semibold tracking-tight leading-relaxed">
                                 {title}
                             </p>
                             <p
-                                className="text-[12px] md:text-[20px] font-medium tracking-tight leading-relaxed"
+                                className="text-[12px] sm:text-[20px] font-medium tracking-tight leading-relaxed"
                                 style={{ color: subtitleColor }}
                             >
                                 {subtitle}
@@ -225,7 +225,7 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
         <AnimatePresence>
             {isOpen && (
                 <motion.div
-                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 px-4 md:px-12 py-8 cursor-zoom-out"
+                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 px-4 sm:px-12 py-8 cursor-zoom-out"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -240,7 +240,7 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                     </button>
 
                     <motion.div
-                        className="relative w-full max-w-[700px] h-[85vh] md:h-[90vh]"
+                        className="relative w-full max-w-[700px] h-[85vh] sm:h-[90vh]"
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.8, opacity: 0 }}
@@ -332,17 +332,17 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
     const [showResume, setShowResume] = useState(false);
 
     return (
-        <section className="relative w-full max-w-[1200px] mx-auto pt-16 md:pt-28 pb-24 px-4 md:px-8 z-10 flex flex-col items-center">
+        <section className="relative w-full max-w-[1200px] mx-auto pt-16 sm:pt-28 pb-24 px-4 sm:px-8 z-10 flex flex-col items-center">
             {/* Section Title */}
             <motion.div
-                className="flex flex-col items-center justify-center text-center mb-6 md:mb-8 hover:scale-105 transition-transform duration-500 cursor-default"
+                className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 hover:scale-105 transition-transform duration-500 cursor-default"
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
             >
                 <h2
-                    className={`${bowlby.className} text-[36px] md:text-[50px] lg:text-[60px] text-white tracking-wide uppercase transition-all duration-700`}
+                    className={`${bowlby.className} text-[36px] sm:text-[50px] lg:text-[60px] text-white tracking-wide uppercase transition-all duration-700`}
                     style={{
                         textShadow: isDark ? "4px 8px 0px #043edc" : "4px 8px 0px #ab3603",
                         WebkitTextStroke: isDark ? "0px transparent" : "2px #dc4504",
@@ -351,7 +351,7 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     Projects
                 </h2>
                 <p
-                    className={`mt-2 font-medium text-[12px] md:text-[16px] tracking-[2px] uppercase ${poppins.className} transition-all duration-700`}
+                    className={`mt-2 font-medium text-[12px] sm:text-[16px] tracking-[2px] uppercase ${poppins.className} transition-all duration-700`}
                     style={
                         isDark
                             ? { color: "#abb8f0" }
@@ -368,7 +368,7 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
             </motion.div>
 
             {/* Project Cards */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-24 md:gap-[50px] w-full pt-12 md:pt-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-24 sm:gap-[50px] w-full pt-12 sm:pt-16">
                 <ProjectCard
                     title="Crescendo Website"
                     subtitle="(College Fest)"

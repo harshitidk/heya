@@ -42,7 +42,7 @@ export default function Home() {
 
         <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none hidden">
           <h1
-            className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 md:pt-0 transform translate-y-[32%] md:translate-y-0"
+            className="text-[38vw] font-black text-[#151515] opacity-[0.03] tracking-tighter leading-none pt-24 sm:pt-0 transform translate-y-[32%] sm:translate-y-0"
             style={{
               WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)",
               maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)"
@@ -71,10 +71,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full flex justify-center mt-12 md:mt-0">
+        <div className="relative z-10 w-full flex justify-center mt-12 sm:mt-0">
           <ImageCards
             variant="frame19"
-            className="scale-[0.96] md:scale-100"
+            className="scale-[0.96] sm:scale-100"
             images={{
               left: isDark ? nightPhoto1 : cardCenter,
               center: isDark ? nightPhoto2 : cardLeft,
@@ -89,7 +89,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-[0px] text-center -mt-10 z-10 px-4 w-full relative transition-all duration-700">
           <h1
             data-text="HEY, I'M HARSHIT SAIDANIYA"
-            className={`${bowlby.className} relative leading-[1.3] text-[32px] md:text-[48px] lg:text-[56px] text-center uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white ${isDark ? "before:[-webkit-text-stroke:1.5px_white] before:[text-shadow:0px_4px_4px_rgba(0,0,0,0.5)] text-[rgba(255, 255, 255, 0.05)] tracking-[1.2px]" : "before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)] text-transparent -tracking-[0.5px]"} transition-all duration-700`}
+            className={`${bowlby.className} relative leading-[1.3] text-[32px] sm:text-[48px] lg:text-[56px] text-center uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white ${isDark ? "before:[-webkit-text-stroke:1.5px_white] before:[text-shadow:0px_4px_4px_rgba(0,0,0,0.5)] text-[rgba(255, 255, 255, 0.05)] tracking-[1.2px]" : "before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)] text-transparent -tracking-[0.5px]"} transition-all duration-700`}
             style={isDark ? { WebkitTextStroke: "1.5px white" } : {
               backgroundImage: "linear-gradient(100.496deg, rgb(255, 199, 57) 8.3744%, rgb(235, 59, 20) 49.999%, rgb(255, 195, 16) 107.26%)",
               WebkitBackgroundClip: "text",
@@ -98,24 +98,24 @@ export default function Home() {
           >
             HEY, I'M HARSHIT SAIDANIYA
           </h1>
-          <div className={`flex flex-wrap items-center justify-center gap-1.5 md:gap-4 mt-2 md:mt-4 max-w-[300px] md:max-w-none mx-auto ${poppins.className} transition-colors duration-700`}>
-            <p className={`font-bold leading-[1.02] lowercase text-[15px] md:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
+          <div className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 mt-2 sm:mt-4 max-w-[300px] sm:max-w-none mx-auto ${poppins.className} transition-colors duration-700`}>
+            <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
               and i am a
             </p>
-            <div className={`border-[1px] md:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 md:px-5 md:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
-              <p className={`font-semibold leading-[1.02] lowercase text-[15px] md:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
+            <div className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
+              <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                 product designer
               </p>
             </div>
-            <p className={`font-bold leading-[1.02] lowercase text-[15px] md:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
+            <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
               who
             </p>
-            <div className={`border-[1px] md:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 md:px-5 md:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
-              <p className={`font-semibold leading-[1.02] lowercase text-[15px] md:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6e6969]'}`}>
+            <div className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
+              <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6e6969]'}`}>
                 vibe codes
               </p>
             </div>
-            <p className={`font-bold leading-[1.02] lowercase text-[15px] md:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
+            <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
               for fun.
             </p>
           </div>
@@ -123,13 +123,13 @@ export default function Home() {
       </section>
 
       {/* Flowing Page Sections */}
-      <div className="relative w-full z-10 flex flex-col pt-32 md:pt-40 pb-32">
+      <div className="relative w-full z-10 flex flex-col pt-32 sm:pt-40 pb-32">
         <WatermarkText text="curiosity" top isDark={isDark} />
         <ExperimentsSection isDark={isDark} />
-        <div className="mt-20 md:mt-44">
+        <div className="mt-20 sm:mt-44">
           <ExperienceSection isDark={isDark} />
         </div>
-        <div className="mt-20 md:mt-44">
+        <div className="mt-20 sm:mt-44">
           <WatermarkText text="intuition" top isDark={isDark} />
           <ProjectsSection isDark={isDark} />
         </div>
