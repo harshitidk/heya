@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../components";
+@source "../app";
 
 @theme {
   --font-sans: var(--font-poppins), sans-serif;
