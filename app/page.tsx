@@ -9,6 +9,8 @@ import { LogoMarquee } from "@/components/LogoMarquee";
 import { ExperimentsSection } from "@/components/ExperimentsSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
+import { IdentitySection } from "@/components/IdentitySection";
+import { PurposeSection } from "@/components/PurposeSection";
 import { WatermarkText } from "@/components/WatermarkText";
 import { Moon } from "lucide-react";
 import cardLeft from "@/public/assets/photo-left.jpg";
@@ -132,6 +134,14 @@ export default function Home() {
         <div className="mt-20 sm:mt-44">
           <WatermarkText text="intuition" top isDark={isDark} />
           <ProjectsSection isDark={isDark} />
+        </div>
+        <div className="mt-20 sm:mt-44">
+          <WatermarkText text="identity" top isDark={isDark} />
+          <IdentitySection isDark={isDark} />
+        </div>
+        <div className="mt-0 pb-20">
+          <WatermarkText text="purpose" top isDark={isDark} />
+          <PurposeSection isDark={isDark} />
         </div>
       </div>
     </main >

@@ -16,12 +16,9 @@ import projOlogyLeft from "@/public/assets/proj-ology-left.png";
 import projOlogyRight from "@/public/assets/proj-ology-right.png";
 import projOlogyMain from "@/public/assets/proj-ology-main.png";
 import projSpotifyResume from "@/public/assets/proj-spotify-resume.png";
-import projChatHistory from "@/public/assets/chat_history.png";
-import projMicOff from "@/public/assets/mic_off.png";
+import projChatHistory from "@/public/assets/make_my_fit.png";
+import projMicOff from "@/public/assets/chat_history.png";
 import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
-import projCardLeft from "@/public/assets/card-left.png";
-import projCardCenter from "@/public/assets/card-center.png";
-import projCardRight from "@/public/assets/card-right.png";
 
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -336,29 +333,15 @@ const spotifyImages: FloatingImage[] = [
 
 const chatGPTImages: FloatingImage[] = [
     {
-        src: projCardLeft,
-        width: 140, height: 260,
-        hiddenRotate: -15, hiddenTop: -10, hiddenLeft: 20, hiddenScale: 0.4,
-        revealedRotate: -28, revealedTop: -70, revealedLeft: -10, revealedScale: 1,
-        borderRadius: 18, borderColor: "white",
-    },
-    {
         src: projChatHistory,
         width: 270, height: 160,
         hiddenRotate: -2, hiddenTop: -10, hiddenLeft: 35, hiddenScale: 0.5,
-        revealedRotate: -5, revealedTop: -50, revealedLeft: 40, revealedScale: 1,
+        revealedRotate: -5, revealedTop: -55, revealedLeft: 40, revealedScale: 1,
         borderRadius: 20, borderColor: "#c9f8ff", zIndex: 1,
     },
 ];
 
 const zoomImages: FloatingImage[] = [
-    {
-        src: projCardCenter,
-        width: 140, height: 260,
-        hiddenRotate: 5, hiddenTop: -10, hiddenLeft: 80, hiddenScale: 0.4,
-        revealedRotate: 12, revealedTop: -75, revealedLeft: 70, revealedScale: 1,
-        borderRadius: 18, borderColor: "white",
-    },
     {
         src: projMicOff,
         width: 270, height: 160,
@@ -369,13 +352,6 @@ const zoomImages: FloatingImage[] = [
 ];
 
 const makeMyFitImages: FloatingImage[] = [
-    {
-        src: projCardRight,
-        width: 140, height: 260,
-        hiddenRotate: -8, hiddenTop: -10, hiddenLeft: 160, hiddenScale: 0.4,
-        revealedRotate: 15, revealedTop: -65, revealedLeft: 190, revealedScale: 1,
-        borderRadius: 18, borderColor: "white",
-    },
     {
         src: projMakeMyFit,
         width: 270, height: 151,
@@ -477,7 +453,7 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                 transition={{ duration: 0.6 }}
             >
                 <p
-                    className={`font-bold text-[14px] sm:text-[16px] tracking-[2.24px] uppercase ${poppins.className}`}
+                    className={`mb-6 font-bold text-[14px] sm:text-[16px] tracking-[2.24px] uppercase ${poppins.className}`}
                     style={
                         isDark
                             ? { color: "#abb8f0" }
