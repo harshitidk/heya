@@ -16,6 +16,12 @@ import projOlogyLeft from "@/public/assets/proj-ology-left.png";
 import projOlogyRight from "@/public/assets/proj-ology-right.png";
 import projOlogyMain from "@/public/assets/proj-ology-main.png";
 import projSpotifyResume from "@/public/assets/proj-spotify-resume.png";
+import projChatHistory from "@/public/assets/chat_history.png";
+import projMicOff from "@/public/assets/mic_off.png";
+import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
+import projCardLeft from "@/public/assets/card-left.png";
+import projCardCenter from "@/public/assets/card-center.png";
+import projCardRight from "@/public/assets/card-right.png";
 
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -328,6 +334,57 @@ const spotifyImages: FloatingImage[] = [
     },
 ];
 
+const chatGPTImages: FloatingImage[] = [
+    {
+        src: projCardLeft,
+        width: 140, height: 260,
+        hiddenRotate: -15, hiddenTop: -10, hiddenLeft: 20, hiddenScale: 0.4,
+        revealedRotate: -28, revealedTop: -70, revealedLeft: -10, revealedScale: 1,
+        borderRadius: 18, borderColor: "white",
+    },
+    {
+        src: projChatHistory,
+        width: 270, height: 160,
+        hiddenRotate: -2, hiddenTop: -10, hiddenLeft: 35, hiddenScale: 0.5,
+        revealedRotate: -5, revealedTop: -50, revealedLeft: 40, revealedScale: 1,
+        borderRadius: 20, borderColor: "#c9f8ff", zIndex: 1,
+    },
+];
+
+const zoomImages: FloatingImage[] = [
+    {
+        src: projCardCenter,
+        width: 140, height: 260,
+        hiddenRotate: 5, hiddenTop: -10, hiddenLeft: 80, hiddenScale: 0.4,
+        revealedRotate: 12, revealedTop: -75, revealedLeft: 70, revealedScale: 1,
+        borderRadius: 18, borderColor: "white",
+    },
+    {
+        src: projMicOff,
+        width: 270, height: 160,
+        hiddenRotate: 5, hiddenTop: -8, hiddenLeft: 55, hiddenScale: 0.5,
+        revealedRotate: 8, revealedTop: -55, revealedLeft: 50, revealedScale: 1,
+        borderRadius: 20, borderColor: "#b6d9ff", zIndex: 1,
+    },
+];
+
+const makeMyFitImages: FloatingImage[] = [
+    {
+        src: projCardRight,
+        width: 140, height: 260,
+        hiddenRotate: -8, hiddenTop: -10, hiddenLeft: 160, hiddenScale: 0.4,
+        revealedRotate: 15, revealedTop: -65, revealedLeft: 190, revealedScale: 1,
+        borderRadius: 18, borderColor: "white",
+    },
+    {
+        src: projMakeMyFit,
+        width: 270, height: 151,
+        hiddenRotate: -3, hiddenTop: -12, hiddenLeft: 50, hiddenScale: 0.5,
+        revealedRotate: -4, revealedTop: -60, revealedLeft: 45, revealedScale: 1,
+        borderRadius: 20, borderColor: "#ffc6c6", zIndex: 1,
+    },
+];
+
 export function ProjectsSection({ isDark }: { isDark?: boolean }) {
     const [showResume, setShowResume] = useState(false);
 
@@ -408,6 +465,74 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     floatingImages={spotifyImages}
                     clickAction={{ type: "modal", modalContent: "resume" }}
                     onResumeClick={() => setShowResume(true)}
+                />
+            </div>
+
+            {/* Case Studies Header */}
+            <motion.div
+                className="flex flex-col items-center justify-center text-center mt-24 mb-6 sm:mb-8 hover:scale-105 transition-transform duration-500 cursor-default"
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+            >
+                <p
+                    className={`font-bold text-[14px] sm:text-[16px] tracking-[2.24px] uppercase ${poppins.className}`}
+                    style={
+                        isDark
+                            ? { color: "#abb8f0" }
+                            : {
+                                  backgroundImage: "linear-gradient(90deg, #e4741f, #bc5100)",
+                                  color: "transparent",
+                                  WebkitBackgroundClip: "text",
+                                  backgroundClip: "text",
+                              }
+                    }
+                >
+                    [Case Studies // stories]
+                </p>
+            </motion.div>
+
+            {/* Case Study Cards */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-24 sm:gap-[50px] w-full pt-4 sm:pt-16">
+                <ProjectCard
+                    title="ChatGPT History"
+                    subtitle="(Case Study)"
+                    bgColor="#328783"
+                    borderColor="#c9f8ff"
+                    shadowColor="rgba(28,255,236,0.29)"
+                    gradientFrom="#1ff1e0"
+                    gradientTo="#02886b"
+                    gradientBorderColor="#cafdff"
+                    subtitleColor="#e4ffc6"
+                    floatingImages={chatGPTImages}
+                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1BAI_V8u4KkZwq1xTw4kZ7XQgziRfTFOi/view?usp=sharing" }}
+                />
+                <ProjectCard
+                    title="Zoom Scary UX"
+                    subtitle="(Case Study)"
+                    bgColor="#4387c5"
+                    borderColor="#b6d9ff"
+                    shadowColor="rgba(0,108,231,0.29)"
+                    gradientFrom="#5cb6f2"
+                    gradientTo="#0054fd"
+                    gradientBorderColor="#e8f5fd"
+                    subtitleColor="#dae8f5"
+                    floatingImages={zoomImages}
+                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1pzCj94_BhSX7jiOWJhS_8BagbVFPDo54/view?usp=sharing" }}
+                />
+                <ProjectCard
+                    title="Make my fit - Feature"
+                    subtitle="(Converted Shoppin)"
+                    bgColor="#e46b86"
+                    borderColor="#ff8d84"
+                    shadowColor="rgba(113,0,0,0.29)"
+                    gradientFrom="#ff4369"
+                    gradientTo="#a6003d"
+                    gradientBorderColor="#ffb8b8"
+                    subtitleColor="#ffc6c6"
+                    floatingImages={makeMyFitImages}
+                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing" }}
                 />
             </div>
 
