@@ -52,11 +52,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full flex flex-col items-center -mt-20 sm:-mt-24">
+        <div className="relative z-10 w-full flex flex-col items-center -mt-24 sm:-mt-32">
             <div className="w-full flex justify-center">
               <ImageCards
                 variant="frame19"
-                className="scale-[0.8] sm:scale-100"
+                className="scale-[0.75] sm:scale-[0.9]"
                 images={{
                   left: isDark ? nightPhoto1 : cardCenter,
                   center: isDark ? nightPhoto2 : cardLeft,
@@ -66,7 +66,7 @@ export default function Home() {
             </div>
 
             {/* Text Content */}
-            <div className="flex flex-col items-center gap-[0px] text-center -mt-16 sm:-mt-20 z-10 px-4 w-full relative transition-all duration-700">
+            <div className="flex flex-col items-center gap-[0px] text-center -mt-20 sm:-mt-28 z-10 px-4 w-full relative transition-all duration-700">
               <h1
                 data-text="HEY, I'M HARSHIT SAIDANIYA"
                 className={`${bowlby.className} relative leading-[1.3] text-[32px] sm:text-[48px] lg:text-[56px] text-center uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white tracking-[1.2px] ${isDark ? "before:[-webkit-text-stroke:1.5px_white] before:[text-shadow:0px_4px_4px_rgba(0,0,0,0.5)] text-[rgba(255, 255, 255, 0.05)]" : "before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)] text-transparent"} transition-all duration-700`}
@@ -78,7 +78,7 @@ export default function Home() {
               >
                 HEY, I'M HARSHIT SAIDANIYA
               </h1>
-              <div className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 mt-2 sm:mt-4 max-w-[300px] sm:max-w-none mx-auto ${poppins.className} transition-colors duration-700`}>
+              <div className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 mt-1 sm:mt-2 max-w-[300px] sm:max-w-none mx-auto ${poppins.className} transition-colors duration-700`}>
                 <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                   and i am a
                 </p>
