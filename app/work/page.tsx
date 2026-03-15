@@ -51,8 +51,7 @@ export default function WorkPage() {
 
             <div className="w-full relative z-10 flex flex-col pt-12 sm:pt-20 pb-20">
                 {/* Curiosity Section */}
-                <div className="w-full">
-                    <WatermarkText text="curiosity" top isDark={isDark} />
+                <div className="w-full mt-8 sm:mt-20">
                     <ExperimentsSection isDark={isDark} />
                 </div>
 
@@ -62,13 +61,12 @@ export default function WorkPage() {
                 </div>
 
                 {/* Projects Section */}
-                <div className="w-full mt-20 sm:mt-44 mb-20 sm:mb-44">
-                    <WatermarkText text="intuition" top isDark={isDark} />
+                <div className="w-full mt-20 sm:mt-44">
                     <ProjectsSection isDark={isDark} />
                 </div>
 
                 {/* Original Work Section */}
-                <div className="w-full">
+                <div className="w-full mt-20 sm:mt-44">
                     <WorkSection />
                 </div>
             </div>
