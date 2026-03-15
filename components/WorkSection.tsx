@@ -295,7 +295,7 @@ export function WorkSection() {
 
                 <div className="w-full flex flex-col gap-16 sm:gap-24 items-center relative z-10 px-4 sm:px-8">
                     {/* Shoppin' */}
-                    <div className="w-full flex flex-col gap-[38px] items-center">
+                    <div id="shoppin" className="w-full flex flex-col gap-[38px] items-center">
                         <ShoppinCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
                             <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] lowercase transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
@@ -324,7 +324,7 @@ export function WorkSection() {
 
 
                     {/* Zoffers */}
-                    <div className="w-full flex flex-col gap-[38px] items-center">
+                    <div id="zoffers" className="w-full flex flex-col gap-[38px] items-center">
                         <ZoffersCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
                             <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
@@ -345,7 +345,7 @@ export function WorkSection() {
                     </div>
 
                     {/* Rabbit Invest Section */}
-                    <div className="w-full flex flex-col gap-[38px] items-center relative z-[20]">
+                    <div id="rabbit-invest" className="w-full flex flex-col gap-[38px] items-center relative z-[20]">
                         <RabbitCollage onZoom={setZoomedImage} isDark={isDark} />
 
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
