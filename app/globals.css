@@ -30,6 +30,13 @@
   --foreground: #151515;
 }
 
+/* Ensure no horizontal scrolling */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
 /* Ensure smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -39,6 +46,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
+  min-height: 100vh;
+  width: 100%;
 }
 
 @keyframes marquee {
