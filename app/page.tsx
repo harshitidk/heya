@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <main className={`relative w-full overflow-x-hidden ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'} transition-colors duration-700`}>
       {/* Hero Section */}
-      <section className="relative min-h-[100vh] w-full flex flex-col items-center justify-start gap-12 pt-24">
+      <section id="hero" className="relative min-h-[100vh] w-full flex flex-col items-center justify-start gap-12 pt-24">
         {/* View Toggle Button */}
 
         <div className="absolute top-10 left-0 w-full h-[90vh] flex items-center justify-center pointer-events-none z-0 select-none hidden">

@@ -48,7 +48,7 @@ export function NavBar() {
             >
                 {/* Left Section: Profile & Socials */}
                 <div className="flex gap-[15px] items-center shrink-0">
-                    <Link href="/" className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
+                    <Link href="/#hero" className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
                         <div className={`overflow-hidden relative rounded-[23px] shrink-0 size-[42px] transition-colors duration-700 ${isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]'}`}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
@@ -75,7 +75,7 @@ export function NavBar() {
 
                 {/* Right Section: Home, Let's Talk, Resume & Work (Primary on Far Right) */}
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
-                    <Link href="/">
+                    <Link href="/#hero">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
                             <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
                                 home
@@ -135,7 +135,7 @@ export function NavBar() {
                 {/* Top Row: Profile & Menu Button */}
                 <div className="flex items-center justify-between w-full">
                     {/* Profile */}
-                    <Link href="/" className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
+                    <Link href="/#hero" className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
                         <div className={`overflow-hidden relative rounded-[18px] shrink-0 size-[34px] transition-colors duration-700 ${isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]'}`}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
@@ -180,7 +180,7 @@ export function NavBar() {
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
                             className="flex flex-col gap-[8px] overflow-hidden w-full mb-1"
                         >
-                            <Link href="/" onClick={() => setIsMenuOpen(false)} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
+                            <Link href="/#hero" onClick={() => setIsMenuOpen(false)} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
                                 <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
                             </Link>
 
