@@ -12,9 +12,9 @@ export default function WorkPage() {
     const { isDark } = useTheme();
 
     return (
-        <main className={`relative min-h-[100dvh] w-full flex flex-col items-center justify-start transition-colors duration-700 ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}>
+        <main className={`relative min-h-[100dvh] w-full flex flex-col items-center justify-start transition-colors duration-700 bg-transparent`}>
             {/* Fixed Background Image */}
-            <div className={`fixed top-0 left-0 w-full h-screen z-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`fixed top-0 left-0 w-full h-screen z-0 overflow-hidden pointer-events-none transition-opacity duration-1000 opacity-100`}>
                 <Image
                     src={workBg}
                     alt="Work Section Background"
@@ -22,6 +22,8 @@ export default function WorkPage() {
                     className="object-cover"
                     priority
                 />
+                {/* Subtle dark overlay for dark mode to keep text readable */}
+                <div className={`absolute inset-0 transition-opacity duration-700 ${isDark ? 'bg-black/60' : 'bg-transparent'}`} />
             </div>
 
             <div className="w-full relative z-10 flex flex-col pt-12 sm:pt-20 pb-20">

@@ -221,13 +221,9 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className={`relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-0 pt-20 sm:pt-20 pb-24 sm:pb-40 transition-colors duration-700 [clip-path:inset(0)] ${isDark ? 'bg-[#0A0E17]' : 'bg-transparent'}`}>
-            {/* Backgrounds */}
-            <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
-                <Image src={workBgNight1} alt="Work Background Night" fill className="object-cover" priority />
-                <Image src={workBgNight2} alt="Work Background Clouds" fill className="object-cover" priority />
-                <div className="absolute inset-0 bg-black/40" />
-            </div>
+        <section id="work" className={`relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-0 pt-20 sm:pt-20 pb-24 sm:pb-40 transition-colors duration-700 [clip-path:inset(0)] bg-transparent`}>
+            {/* Backgrounds removed to allow page background to show through */}
+
 
             <div className="relative z-10 w-full max-w-[1200px] flex flex-col gap-16 sm:gap-24 items-center">
                 {/* Title */}
