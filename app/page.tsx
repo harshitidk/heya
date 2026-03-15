@@ -91,7 +91,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-[0px] text-center -mt-10 z-10 px-4 w-full relative transition-all duration-700">
           <h1
             data-text="HEY, I'M HARSHIT SAIDANIYA"
-            className={`${bowlby.className} relative leading-[1.3] text-[32px] sm:text-[48px] lg:text-[56px] text-center uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white ${isDark ? "before:[-webkit-text-stroke:1.5px_white] before:[text-shadow:0px_4px_4px_rgba(0,0,0,0.5)] text-[rgba(255, 255, 255, 0.05)] tracking-[1.2px]" : "before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)] text-transparent -tracking-[0.5px]"} transition-all duration-700`}
+            className={`${bowlby.className} relative leading-[1.3] text-[32px] sm:text-[48px] lg:text-[56px] text-center uppercase before:content-[attr(data-text)] before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:text-white tracking-[1.2px] ${isDark ? "before:[-webkit-text-stroke:1.5px_white] before:[text-shadow:0px_4px_4px_rgba(0,0,0,0.5)] text-[rgba(255, 255, 255, 0.05)]" : "before:[-webkit-text-stroke:4px_white] before:[text-shadow:0px_7px_11.8px_rgba(255,102,102,0.7)] text-transparent"} transition-all duration-700`}
             style={isDark ? { WebkitTextStroke: "1.5px white" } : {
               backgroundImage: "linear-gradient(100.496deg, rgb(255, 199, 57) 8.3744%, rgb(235, 59, 20) 49.999%, rgb(255, 195, 16) 107.26%)",
               WebkitBackgroundClip: "text",
