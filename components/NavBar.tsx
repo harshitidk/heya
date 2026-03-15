@@ -85,12 +85,20 @@ export function NavBar() {
                     </div>
                 </div>
 
-                {/* Right Section: Home, Let's Talk, Resume & Work (Primary on Far Right) */}
+                {/* Right Section: Home, Identity, Let's Talk, Resume & Work (Primary on Far Right) */}
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
-                    <Link href="/#hero" onClick={handleHomeClick}>
+                    <Link href="/" onClick={handleHomeClick}>
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
                             <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
                                 home
+                            </p>
+                        </div>
+                    </Link>
+
+                    <Link href="/identity">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
+                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                                identity
                             </p>
                         </div>
                     </Link>
@@ -192,8 +200,12 @@ export function NavBar() {
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
                             className="flex flex-col gap-[8px] overflow-hidden w-full mb-1"
                         >
-                            <Link href="/#hero" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
+                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
                                 <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
+                            </Link>
+
+                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
+                                <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
                             </Link>
 
                             <div className="flex gap-[6px] w-full">
