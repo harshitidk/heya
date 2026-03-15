@@ -24,7 +24,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
     }, []);
 
     return (
-        <section className="relative w-[100vw] max-w-[100vw] sm:max-w-[900px] mx-auto flex flex-col items-center justify-center min-h-[90vh] sm:min-h-[80vh] py-20 px-4 overflow-visible z-10">
+        <section className="relative w-[100vw] max-w-[100vw] sm:max-w-[900px] mx-auto flex flex-col items-center justify-center min-h-screen px-4 overflow-visible z-10">
             <div className="relative w-full flex flex-col items-center justify-center">
                 {/* Floating Images (Responsive positions and dimensions) */}
 
