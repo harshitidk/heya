@@ -49,9 +49,9 @@ export default function WorkPage() {
                 </div>
             </div>
 
-            <div className="w-full relative z-10 flex flex-col pt-12 sm:pt-20 pb-20">
+            <div className="w-full relative z-10 flex flex-col pt-0 pb-20">
                 {/* Curiosity Section */}
-                <div className="w-full">
+                <div className="w-full -mt-4 sm:-mt-8">
                     <ExperimentsSection isDark={isDark} />
                 </div>
 
