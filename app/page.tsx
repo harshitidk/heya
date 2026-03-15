@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full flex flex-col items-center -mt-40 sm:-mt-64">
+        <div className="relative z-10 w-full flex flex-col items-center -mt-32 sm:-mt-48">
             <div className="w-full flex justify-center">
               <ImageCards
                 variant="frame19"

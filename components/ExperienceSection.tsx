@@ -141,13 +141,6 @@ export function ExperienceSection({ isDark }: { isDark?: boolean }) {
                 ))}
             </div>
 
-            {/* Go to Work Section Button */}
-            <Link href="/work" scroll={true} className={`mt-16 ${isDark ? 'bg-[#001c57] hover:bg-[#00277a] shadow-none' : 'bg-[#fff4f4] hover:bg-[#ffeaea] shadow-[0_4px_14px_0_rgba(255,102,102,0.39)] hover:shadow-[0_6px_20px_rgba(255,102,102,0.5)]'} hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer px-8 py-3 rounded-full flex items-center justify-center gap-2 group`}>
-                <p className={`font-medium ${isDark ? 'text-[#dde8ff]' : 'text-[#ff2828]'} text-[16px] tracking-tight lowercase ${poppins.className} transition-colors duration-700`}>
-                    Go to work section
-                </p>
-                <ArrowUpRight className={`w-4 h-4 ${isDark ? 'text-[#dde8ff]' : 'text-[#ff2828]'} group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300`} />
-            </Link>
 
         </section>
     );
