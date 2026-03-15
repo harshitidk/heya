@@ -103,7 +103,7 @@ export function ExperienceSection({ isDark }: { isDark?: boolean }) {
         { company: "Zoffers", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "aug - sept 25'", href: "/work#zoffers" },
         { company: "Shoppin", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "june - july 25'", href: "/work#shoppin" },
         { company: "Rabbit Invest", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "feb - march 25'", href: "/work#rabbit-invest" },
-        { company: "Content Led Labs", role: "Freelance Designer", roleType: "freelance", duration: "3 month", timeline: "april - june 25'", showArrow: false },
+        { company: "Content Led Labs", role: "Freelance Designer", roleType: "freelance", duration: "3 month", timeline: "april - june 24'", showArrow: false },
         { company: "Urvann", role: "Graphic Design Intern", roleType: "graphic", duration: "2 month", timeline: "feb - march 24'", showArrow: false },
     ];
 
