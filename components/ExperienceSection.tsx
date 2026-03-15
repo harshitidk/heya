@@ -14,10 +14,11 @@ type ExperienceRowProps = {
     timeline: string;
     isDark?: boolean;
     showArrow?: boolean;
+    href?: string;
 };
 
 
-function ExperienceRow({ company, role, roleType, duration, timeline, isDark, showArrow }: ExperienceRowProps) {
+function ExperienceRow({ company, role, roleType, duration, timeline, isDark, showArrow, href }: ExperienceRowProps) {
     // Styles based on role type
     const typeStyles = isDark ? {
         product: { bg: "bg-[#362600]", text: "text-[#d59202]" },
@@ -88,24 +89,21 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
         </div>
     );
 
-    if (showArrow !== false) {
-        return (
-            <Link href="/work" className="w-full block" scroll={true}>
-                {content}
-            </Link>
-        );
-    }
-
-    return content;
+    return (
+        <Link href={href || "/work"} className="w-full block" scroll={true}>
+            {content}
+        </Link>
+    );
 }
 
 export function ExperienceSection({ isDark }: { isDark?: boolean }) {
     const experiences: ExperienceRowProps[] = [
-        { company: "Share Right", role: "Product Design Intern", roleType: "product", duration: "3 months", timeline: "nov 25' - jan 26'" },
+        { company: "Share Right", role: "Product Design Intern", roleType: "product", duration: "3 months", timeline: "nov 25' - jan 26'", showArrow: false },
         { company: "Ology Studios", role: "Freelance Designer", roleType: "freelance", duration: "2 months", timeline: "oct - dec 25'", showArrow: false },
-        { company: "Shoppin", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "june - july 25'" },
-        { company: "Rabbit Invest", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "feb - march 25'" },
-        { company: "Content Led Labs", role: "Freelance Designer", roleType: "freelance", duration: "3 month", timeline: "april - june", showArrow: false },
+        { company: "Zoffers", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "aug - sept 25'", href: "/work#zoffers" },
+        { company: "Shoppin", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "june - july 25'", href: "/work#shoppin" },
+        { company: "Rabbit Invest", role: "Product Design Intern", roleType: "product", duration: "2 month", timeline: "feb - march 25'", href: "/work#rabbit-invest" },
+        { company: "Content Led Labs", role: "Freelance Designer", roleType: "freelance", duration: "3 month", timeline: "april - june 25'", showArrow: false },
         { company: "Urvann", role: "Graphic Design Intern", roleType: "graphic", duration: "2 month", timeline: "feb - march 24'", showArrow: false },
     ];
 
