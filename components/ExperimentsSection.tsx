@@ -30,7 +30,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Top Left */}
                 <motion.div
-                    className="absolute -top-12 -left-10 sm:-top-10 sm:left-12 w-[140px] h-[180px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-0 cursor-zoom-in"
+                    className="absolute -top-12 -left-20 sm:-top-10 sm:left-12 w-[140px] h-[180px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-0 cursor-zoom-in"
                     initial={{ rotate: 10, y: 30, opacity: 0 }}
                     whileInView={{ rotate: 28, y: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: 32, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
@@ -43,7 +43,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Top Right */}
                 <motion.div
-                    className="absolute -top-20 -right-10 sm:-top-16 sm:right-16 w-[140px] h-[190px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-0 cursor-zoom-in"
+                    className="absolute -top-20 -right-20 sm:-top-16 sm:right-16 w-[140px] h-[190px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-0 cursor-zoom-in"
                     initial={{ rotate: -10, y: 30, opacity: 0 }}
                     whileInView={{ rotate: -29, y: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: -33, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
@@ -56,7 +56,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Center Left */}
                 <motion.div
-                    className="absolute top-[160px] sm:top-[120px] -left-12 sm:-left-8 w-[150px] h-[200px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-20 cursor-zoom-in"
+                    className="absolute top-[160px] sm:top-[120px] -left-28 sm:-left-8 w-[150px] h-[200px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-20 cursor-zoom-in"
                     initial={{ rotate: -5, x: 30, opacity: 0 }}
                     whileInView={{ rotate: -5, x: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: -9, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
@@ -69,7 +69,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Center Right */}
                 <motion.div
-                    className="absolute top-[140px] sm:top-[130px] -right-12 sm:-right-4 w-[150px] h-[200px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-20 cursor-zoom-in"
+                    className="absolute top-[140px] sm:top-[130px] -right-28 sm:-right-4 w-[150px] h-[200px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-20 cursor-zoom-in"
                     initial={{ rotate: 5, x: -30, opacity: 0 }}
                     whileInView={{ rotate: 8, x: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: 12, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
@@ -82,7 +82,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Bottom Left */}
                 <motion.div
-                    className="absolute top-[380px] sm:top-[300px] -left-10 sm:left-20 w-[140px] h-[190px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-10 cursor-zoom-in"
+                    className="absolute top-[380px] sm:top-[300px] -left-20 sm:left-20 w-[140px] h-[190px] sm:w-[150px] sm:h-[190px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-10 cursor-zoom-in"
                     initial={{ rotate: 0, y: -30, opacity: 0 }}
                     whileInView={{ rotate: 15, y: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: 19, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
@@ -95,7 +95,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
 
                 {/* Bottom Right */}
                 <motion.div
-                    className="absolute top-[400px] sm:top-[280px] -right-10 sm:right-24 w-[150px] h-[200px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-10 cursor-zoom-in"
+                    className="absolute top-[400px] sm:top-[280px] -right-20 sm:right-24 w-[150px] h-[200px] sm:w-[160px] sm:h-[200px] rounded-[14px] shadow-xl overflow-hidden border-2 border-white z-10 cursor-zoom-in"
                     initial={{ rotate: 0, y: -30, opacity: 0 }}
                     whileInView={{ rotate: -15, y: 0, opacity: 1 }}
                     whileHover={{ scale: 1.05, rotate: -19, zIndex: 50, boxShadow: "0 15px 35px rgba(0,0,0,0.4)" }}
