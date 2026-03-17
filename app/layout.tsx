@@ -34,7 +34,7 @@ const nanum = Nanum_Pen_Script({
 
 export const metadata: Metadata = {
   title: "Harshit - Portfolio",
-  description: "Harshit is a performative designer.",
+  description: "Portfolio of Harshit Saidaniya, a product designer who vibe codes for fun.",
 };
 
 export default function RootLayout({
