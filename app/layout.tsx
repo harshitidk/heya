@@ -35,6 +35,24 @@ const nanum = Nanum_Pen_Script({
 export const metadata: Metadata = {
   title: "Harshit - Portfolio",
   description: "Portfolio of Harshit Saidaniya, a product designer who vibe codes for fun.",
+  openGraph: {
+    title: "Harshit - Portfolio",
+    description: "Portfolio of Harshit Saidaniya, a product designer who vibe codes for fun.",
+    images: [
+      {
+        url: "https://harshitidk.github.io/heya/assets/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Harshit - Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Harshit - Portfolio",
+    description: "Portfolio of Harshit Saidaniya, a product designer who vibe codes for fun.",
+    images: ["https://harshitidk.github.io/heya/assets/og-image.png"],
+  },
 };
 
 export default function RootLayout({
