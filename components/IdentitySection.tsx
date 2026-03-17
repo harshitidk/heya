@@ -47,32 +47,32 @@ export function IdentitySection({ isDark }: { isDark?: boolean }) {
                     </div>
 
                     {/* Bio */}
-                    <div className="flex flex-col gap-[10px] text-center sm:text-left w-full sm:w-[364px]">
-                        <div className="space-y-[10px]">
-                            <h2 className={`text-[24px] font-medium lowercase tracking-[-0.48px] leading-[1.02] ${textColor}`}>
+                    <div className="flex flex-col gap-[12px] text-center sm:text-left w-full sm:w-[364px] px-6 sm:px-0">
+                        <div className="space-y-[12px]">
+                            <h2 className={`text-[20px] sm:text-[24px] font-medium lowercase tracking-[-0.48px] leading-[1.02] ${textColor}`}>
                                 Harshit heya
                             </h2>
-                            <p className={`text-[16px] font-medium capitalize tracking-[-0.32px] leading-[1.02] ${isDark ? 'text-white/80' : 'text-black'}`}>
+                            <p className={`text-[14px] sm:text-[16px] font-medium capitalize tracking-[-0.32px] leading-[1.02] ${isDark ? 'text-white/80' : 'text-black'}`}>
                                 Product Designer
                             </p>
                         </div>
 
                         <div className={`w-full h-[1px] ${isDark ? 'bg-white/10' : 'bg-black/10'}`} />
 
-                        <div className={`text-[16px] leading-[1.54] tracking-[-0.48px] ${subTextColor}`}>
+                        <div className={`text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px] ${subTextColor} space-y-1`}>
                             <p>Working on building a great taste 🍓 in design</p>
                             <p>Building products that solve my own problems</p>
                         </div>
 
-                        <div className="text-[16px] leading-[1.54] tracking-[-0.48px]">
+                        <div className="text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]">
                             <span className={subTextColor}>Final Sem - </span>
                             <span className="text-[#009c3e] font-medium">Open for a full time role</span>
                         </div>
 
-                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/10' : 'bg-black/10'}`} />
+                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/10' : 'bg-black/10'} my-1`} />
 
-                        <div className="flex items-center justify-center sm:justify-start gap-2 text-[#afafaf] text-[16px] leading-[1.54] tracking-[-0.48px]">
-                            <MapPin size={20} />
+                        <div className="flex items-center justify-center sm:justify-start gap-2 text-[#afafaf] text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]">
+                            <MapPin size={18} />
                             <span>delhi but looking to come blr</span>
                         </div>
                     </div>
