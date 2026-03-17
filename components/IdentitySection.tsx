@@ -89,11 +89,11 @@ export function IdentitySection({ isDark }: { isDark?: boolean }) {
                         Core Traits
                     </motion.p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-[26px] w-full max-w-[800px] justify-items-center">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-[26px] w-full max-w-[800px] justify-items-center px-4">
                         {traitImages.map((img, idx) => (
                             <motion.div
                                 key={idx}
-                                className="relative size-[215px] rounded-[16px] overflow-hidden group border border-black/5 shadow-sm"
+                                className="relative size-[160px] sm:size-[215px] rounded-[16px] overflow-hidden group border border-black/5 shadow-sm"
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
                                 viewport={{ once: true }}
