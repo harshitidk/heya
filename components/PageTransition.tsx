@@ -27,35 +27,50 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
             const href = target.getAttribute("href");
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank") return;
+
             try {
-                // Detect and strip the base path if it exists
-                const basePath = '/heya';
+                // Use URL constructor for consistent parsing
                 const url = new URL(href, window.location.origin);
                 let cleanPath = url.pathname;
                 
-                if (cleanPath.startsWith(basePath)) {
-                    cleanPath = cleanPath.slice(basePath.length);
+                // DYNAMIC BASE PATH DETECTION
+                // We compare window.location.pathname (with prefix) to our pathname hook (without prefix)
+                const fullPath = window.location.pathname;
+                const hookPath = pathname || "/";
+                
+                // If the full path starts with a prefix that the hook path doesn't have
+                // Example: fullPath = "/heya/work/", hookPath = "/work/" -> prefix = "/heya"
+                let detectedBasePath = "";
+                if (fullPath.includes(hookPath) && hookPath !== "/") {
+                    detectedBasePath = fullPath.substring(0, fullPath.indexOf(hookPath));
+                } else if (fullPath !== hookPath && hookPath === "/") {
+                    // Special case for home page "/"
+                    detectedBasePath = fullPath.endsWith("/") ? fullPath.slice(0, -1) : fullPath;
+                }
+
+                // Strip detected basePath if it's there
+                if (detectedBasePath && cleanPath.startsWith(detectedBasePath)) {
+                    cleanPath = cleanPath.slice(detectedBasePath.length);
                 }
                 
                 // Ensure starts with /
                 if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
 
-                // Normalize trailing slash to match next.config settings
-                let pathOnly = cleanPath;
-                if (!pathOnly.endsWith('/') && !pathOnly.includes('.')) {
-                    pathOnly += '/';
+                // Normalize trailing slash to match project settings (trailingSlash: true)
+                let targetPathOnly = cleanPath;
+                if (!targetPathOnly.endsWith('/') && !targetPathOnly.includes('.')) {
+                    targetPathOnly += '/';
                 }
                 
-                const fullDestination = pathOnly + url.search + url.hash;
+                const fullDestination = targetPathOnly + url.search + url.hash;
 
                 // Only navigate if it's a different page and not a simple same-page hash link
-                if (pathOnly !== pathname && !href.startsWith("#")) {
+                if (targetPathOnly !== hookPath && !href.startsWith("#")) {
                     e.preventDefault();
                     setDestination(fullDestination);
                     setIsNavigating(true);
                 }
             } catch (err) {
-                // Not a valid URL or other error, let default behavior happen
                 console.error("Navigation error:", err);
             }
         };
@@ -75,6 +90,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onAnimationComplete={() => {
                             if (isNavigating && destination) {
+                                // Important: Next.js router.push expects the path WITHOUT the basePath
                                 router.push(destination);
                             }
                         }}
