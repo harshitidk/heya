@@ -29,19 +29,48 @@ export function PageTransition({ children }: { children: ReactNode }) {
             // Only intercept internal links that aren't purely hashes
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank" || href.startsWith("#")) return;
 
-            // Stop default behavior and Next.js internal handlers
+            // Stop native and Next.js handlers
             e.preventDefault();
             e.stopPropagation();
 
-            // Store the raw href as the destination
-            setDestination(href);
-            setIsNavigating(true);
+            // We need to parse the URL to handle base path correctly
+            try {
+                const url = new URL(href, window.location.origin);
+                let path = url.pathname;
+
+                // CRITICAL: Handle production subfolder prefix
+                // If it starts with /heya/, we MUST strip it before router.push
+                const prefix = "/heya";
+                if (path.startsWith(prefix + "/")) {
+                    path = path.slice(prefix.length);
+                } else if (path === prefix) {
+                    path = "/";
+                }
+
+                // Ensure trailing slash for consistency (trailingSlash: true)
+                if (!path.endsWith("/") && !path.includes(".")) {
+                    path += "/";
+                }
+
+                const finalDestination = path + url.search + url.hash;
+
+                // Sync with current path to avoid redundant transitions
+                const currentPath = pathname || "/";
+                const normalizedCurrent = currentPath.endsWith("/") ? currentPath : currentPath + "/";
+
+                if (finalDestination !== normalizedCurrent) {
+                    setDestination(finalDestination);
+                    setIsNavigating(true);
+                }
+            } catch (err) {
+                console.error("Link parsing error:", err);
+            }
         };
 
         // Use capture phase to ensure we intercept first
         document.addEventListener("click", handleClick, { capture: true });
         return () => document.removeEventListener("click", handleClick, { capture: true });
-    }, []); // Removed pathname dependency as the listener doesn't need it
+    }, [pathname]);
 
     return (
         <>
@@ -54,10 +83,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onAnimationComplete={() => {
                             if (isNavigating && destination) {
-                                // USE NATIVE NAVIGATION
-                                // This solves all basePath duplication issues because we use the href 
-                                // that Next.js rendered directly in the DOM (which already has /heya/)
-                                window.location.assign(destination);
+                                // Important: Back to router.push for SPA feel,
+                                // but with the prefix already stripped.
+                                router.push(destination);
                             }
                         }}
                         className={`fixed inset-0 z-[99999] pointer-events-none ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}
@@ -71,6 +99,10 @@ export function PageTransition({ children }: { children: ReactNode }) {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                onAnimationComplete={() => {
+                    setIsNavigating(false);
+                    setDestination(null);
+                }}
                 className={`fixed inset-0 z-[99998] pointer-events-none ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}
             />
 
