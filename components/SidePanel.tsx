@@ -6,7 +6,7 @@ import { X, PenLine, Rocket, Mail, LayoutGrid, Sparkles } from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, BASE_PATH } from "@/lib/utils";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 
@@ -146,20 +146,20 @@ export function SidePanel() {
                             </div>
 
                             <div className="mt-auto grid grid-cols-2 gap-3 pt-6">
-                                <Link 
-                                    href="/identity" 
+                                <a
+                                    href={`${BASE_PATH}/identity/`}
                                     onClick={() => setIsOpen(false)}
                                     className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
                                 >
                                     <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>identity</span>
-                                </Link>
-                                <Link 
-                                    href="/work" 
+                                </a>
+                                <a
+                                    href={`${BASE_PATH}/work/`}
                                     onClick={() => setIsOpen(false)}
                                     className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
                                 >
                                     <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>work</span>
-                                </Link>
+                                </a>
                             </div>
 
                             <div className={cn("mt-6 text-center text-[10px] tracking-[4px] opacity-10", textColor, "font-bold uppercase")}>

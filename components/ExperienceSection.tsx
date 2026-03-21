@@ -1,7 +1,6 @@
 import { Bowlby_One_SC, Poppins } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, BASE_PATH } from "@/lib/utils";
 
 import { useTheme } from "./ThemeContext";
 
@@ -93,9 +92,9 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
     );
 
     return (
-        <Link href={href || "/work"} className="w-full block" scroll={true}>
+        <a href={href || `${BASE_PATH}/work/`} className="w-full block">
             {content}
-        </Link>
+        </a>
     );
 }
 
