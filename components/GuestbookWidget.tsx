@@ -17,12 +17,7 @@ interface Note {
     rotation: number;
 }
 
-const DEFAULT_NOTES: Note[] = [
-    { id: "1", name: "Alex", comment: "Love the vibe here! That garden background is stunning.", date: "20/03/26", rotation: -2 },
-    { id: "2", name: "Sarah M.", comment: "The sticky note idea is so cute. Moving fast lizard! 🦎", date: "19/03/26", rotation: 3 },
-    { id: "3", name: "Design Nerd", comment: "Incredible attention to detail in the projects section.", date: "18/03/26", rotation: -1 },
-    { id: "4", name: "Jordan", comment: "Can't wait to see more of Shoppin!", date: "21/03/26", rotation: 1 }
-];
+const DEFAULT_NOTES: Note[] = [];
 
 export function GuestbookWidget() {
     const { isDark } = useTheme();
@@ -46,7 +41,7 @@ export function GuestbookWidget() {
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                setNotes([...DEFAULT_NOTES, ...parsed.filter((n: Note) => !DEFAULT_NOTES.find(dn => dn.id === n.id))]);
+                setNotes(parsed);
             } catch (e) {
                 console.error("Failed to load notes", e);
             }
@@ -54,7 +49,7 @@ export function GuestbookWidget() {
     }, []);
 
     const saveNotes = (newNotes: Note[]) => {
-        const customNotes = newNotes.filter(n => !DEFAULT_NOTES.find(dn => dn.id === n.id));
+        const customNotes = newNotes;
         localStorage.setItem("visitor_notes", JSON.stringify(customNotes));
     };
 
