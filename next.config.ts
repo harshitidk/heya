@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isProd ? "/heya" : "",
+  // Only apply basePath if building for GitHub Pages subfolder
+  basePath: process.env.GITHUB_ACTIONS === 'true' ? "/heya" : "",
   trailingSlash: true,
   images: {
     unoptimized: true,
