@@ -26,37 +26,37 @@ export function PageTransition({ children }: { children: ReactNode }) {
             if (!target) return;
 
             const href = target.getAttribute("href");
-            if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank") return;
+            // Skip external links, target blank, or simple anchor links
+            if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank" || href.startsWith("#")) return;
 
             try {
+                // IMPORTANT: Stop Next.js and others from handling this click instantly
+                e.preventDefault();
+                e.stopPropagation();
+
                 // Use URL constructor for consistent parsing
                 const url = new URL(href, window.location.origin);
                 let cleanPath = url.pathname;
                 
                 // DYNAMIC BASE PATH DETECTION
-                // We compare window.location.pathname (with prefix) to our pathname hook (without prefix)
                 const fullPath = window.location.pathname;
                 const hookPath = pathname || "/";
                 
-                // If the full path starts with a prefix that the hook path doesn't have
-                // Example: fullPath = "/heya/work/", hookPath = "/work/" -> prefix = "/heya"
                 let detectedBasePath = "";
                 if (fullPath.includes(hookPath) && hookPath !== "/") {
                     detectedBasePath = fullPath.substring(0, fullPath.indexOf(hookPath));
                 } else if (fullPath !== hookPath && hookPath === "/") {
-                    // Special case for home page "/"
                     detectedBasePath = fullPath.endsWith("/") ? fullPath.slice(0, -1) : fullPath;
                 }
 
-                // Strip detected basePath if it's there
+                // Strip detected basePath before pushing to router
                 if (detectedBasePath && cleanPath.startsWith(detectedBasePath)) {
                     cleanPath = cleanPath.slice(detectedBasePath.length);
                 }
                 
-                // Ensure starts with /
                 if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
 
-                // Normalize trailing slash to match project settings (trailingSlash: true)
+                // Normalize trailing slash
                 let targetPathOnly = cleanPath;
                 if (!targetPathOnly.endsWith('/') && !targetPathOnly.includes('.')) {
                     targetPathOnly += '/';
@@ -64,9 +64,8 @@ export function PageTransition({ children }: { children: ReactNode }) {
                 
                 const fullDestination = targetPathOnly + url.search + url.hash;
 
-                // Only navigate if it's a different page and not a simple same-page hash link
-                if (targetPathOnly !== hookPath && !href.startsWith("#")) {
-                    e.preventDefault();
+                // Check if we are already on this page to avoid unnecessary transitions
+                if (targetPathOnly !== hookPath) {
                     setDestination(fullDestination);
                     setIsNavigating(true);
                 }
@@ -75,8 +74,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
             }
         };
 
-        document.addEventListener("click", handleClick);
-        return () => document.removeEventListener("click", handleClick);
+        // Use capture phase to intercept before Next.js Link handlers
+        document.addEventListener("click", handleClick, { capture: true });
+        return () => document.removeEventListener("click", handleClick, { capture: true });
     }, [pathname]);
 
     return (
@@ -90,7 +90,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onAnimationComplete={() => {
                             if (isNavigating && destination) {
-                                // Important: Next.js router.push expects the path WITHOUT the basePath
+                                // Now we only push manually after the transition overlay is full
                                 router.push(destination);
                             }
                         }}
