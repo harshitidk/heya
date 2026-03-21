@@ -146,20 +146,20 @@ export function SidePanel() {
                             </div>
 
                             <div className="mt-auto grid grid-cols-2 gap-3 pt-6">
-                                <a
-                                    href={`${BASE_PATH}/identity/`}
+                                <Link 
+                                    href="/identity" 
                                     onClick={() => setIsOpen(false)}
                                     className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
                                 >
                                     <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>identity</span>
-                                </a>
-                                <a
-                                    href={`${BASE_PATH}/work/`}
+                                </Link>
+                                <Link 
+                                    href="/work" 
                                     onClick={() => setIsOpen(false)}
                                     className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
                                 >
                                     <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>work</span>
-                                </a>
+                                </Link>
                             </div>
 
                             <div className={cn("mt-6 text-center text-[10px] tracking-[4px] opacity-10", textColor, "font-bold uppercase")}>

@@ -62,34 +62,34 @@ export function NavBar() {
             >
                 {/* Left Section: Profile & Socials */}
                 <div className="flex gap-[15px] items-center shrink-0">
-                    <a href={`${BASE_PATH}/`} onClick={handleHomeClick} className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
+                    <Link href="/" onClick={handleHomeClick} className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
                         <div className={cn("overflow-hidden relative shrink-0 size-[42px] transition-colors duration-700 rounded-[23px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
                         <p className={cn("font-medium leading-[1.64] lowercase shrink-0 text-[18px] sm:text-[20px] tracking-[-0.4px] transition-colors duration-700", isDark ? 'text-[#f5f5f5]' : 'text-[#1a1a1a]')}>
                             harshit heya
                         </p>
-                    </a>
+                    </Link>
 
                     <div className="flex gap-[8px] items-center shrink-0 ml-2">
                         {/* Icon 1: LinkedIn */}
-                        <a href="https://www.linkedin.com/in/harshitheya/" target="_blank" rel="noopener noreferrer" className={`relative shrink-0 size-[24px] cursor-pointer hover:scale-110 hover:-translate-y-0.5 transition-all duration-700 flex items-center justify-center ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
+                        <Link href="https://www.linkedin.com/in/harshitheya/" target="_blank" rel="noopener noreferrer" className={`relative shrink-0 size-[24px] cursor-pointer hover:scale-110 hover:-translate-y-0.5 transition-all duration-700 flex items-center justify-center ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                             </svg>
-                        </a>
+                        </Link>
                         {/* Icon 2: X (Twitter) */}
-                        <a href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={`relative shrink-0 size-[24px] cursor-pointer hover:scale-110 hover:-translate-y-0.5 transition-all duration-700 flex items-center justify-center pt-[2px] ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
+                        <Link href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={`relative shrink-0 size-[24px] cursor-pointer hover:scale-110 hover:-translate-y-0.5 transition-all duration-700 flex items-center justify-center pt-[2px] ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
                 {/* Right Section: Home, Identity, Let's Talk, Resume & Work (Primary on Far Right) */}
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
-                    <a href={`${BASE_PATH}/`} onClick={handleHomeClick}>
+                    <Link href="/" onClick={handleHomeClick}>
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
                             {pathname === '/' && (
                                 <motion.div
@@ -102,9 +102,9 @@ export function NavBar() {
                                 home
                             </p>
                         </div>
-                    </a>
+                    </Link>
 
-                    <a href={`${BASE_PATH}/identity/`}>
+                    <Link href="/identity">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
                             {pathname === '/identity' && (
                                 <motion.div
@@ -117,9 +117,9 @@ export function NavBar() {
                                 identity
                             </p>
                         </div>
-                    </a>
+                    </Link>
 
-                    <a href={`${BASE_PATH}/projects/`}>
+                    <Link href="/projects">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
                             {pathname === '/projects' && (
                                 <motion.div
@@ -132,7 +132,7 @@ export function NavBar() {
                                 projects
                             </p>
                         </div>
-                    </a>
+                    </Link>
 
                     <div
                         className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] transition-all duration-500 ${isDark ? 'text-white/40' : 'text-[#1a1a1a]/40'}`}
@@ -142,8 +142,8 @@ export function NavBar() {
                         </p>
                     </div>
 
-                    <a
-                        href={`${BASE_PATH}/work/`}
+                    <Link
+                        href="/work"
                         className="relative group ml-1"
                     >
                         <motion.div
@@ -159,7 +159,7 @@ export function NavBar() {
                             </p>
                             <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
                         </motion.div>
-                    </a>
+                    </Link>
                 </div>
             </motion.div>
             )}
