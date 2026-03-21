@@ -62,7 +62,7 @@ export function NavBar() {
             >
                 {/* Left Section: Profile & Socials */}
                 <div className="flex gap-[15px] items-center shrink-0">
-                    <Link href="/#hero" onClick={handleHomeClick} className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
+                    <Link href="/" onClick={handleHomeClick} className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
                         <div className={cn("overflow-hidden relative shrink-0 size-[42px] transition-colors duration-700 rounded-[23px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
@@ -180,7 +180,7 @@ export function NavBar() {
                 {/* Top Row: Profile & Menu Button */}
                 <div className="flex items-center justify-between w-full px-2">
                     {/* Profile */}
-                    <Link href="/#hero" onClick={handleHomeClick} className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
+                    <Link href="/" onClick={handleHomeClick} className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
                         <div className={cn("overflow-hidden relative shrink-0 size-[32px] transition-colors duration-700 rounded-[18px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
