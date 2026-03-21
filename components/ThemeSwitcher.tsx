@@ -13,7 +13,7 @@ export function ThemeSwitcher() {
     return (
         <div
             onClick={() => setIsDark(!isDark)}
-            className={`fixed top-6 right-6 md:top-8 md:right-12 z-[100] cursor-pointer hover:scale-105 border border-solid flex items-center rounded-[100px] shadow-lg ${poppins.className} w-[115px] h-[39px] overflow-hidden transition-all duration-700 ${isDark ? 'border-transparent' : 'border-black/10'}`}
+            className={`fixed top-[40.5px] right-8 md:right-12 z-[100] cursor-pointer hover:scale-105 border border-solid flex items-center rounded-[100px] shadow-lg ${poppins.className} w-[115px] h-[39px] overflow-hidden transition-all duration-700 ${isDark ? 'border-transparent' : 'border-black/10'}`}
             style={{
                 backgroundImage: isDark
                     ? "linear-gradient(168.525deg, rgb(62, 62, 62) 14.436%, rgb(6, 6, 6) 114.44%)"
