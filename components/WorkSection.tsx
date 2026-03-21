@@ -327,10 +327,10 @@ export function WorkSection() {
                                     I designed a <strong className="font-bold">virtual try-on experience</strong> to help users better judge fit and style before purchase. By restructuring the flow around how users actually evaluate products, this led to a <strong className="font-bold">13% drop in user drop-offs</strong> at a critical decision point.
                                 </p>
                                 <p>
-                                    I also worked on improving <strong className="font-bold">product discovery</strong>, redesigning parts of the search experience and integrating <em className="italic">“Make My Fit”</em>—a feature that guides users toward more relevant clothing based on contextual product inputs.
+                                    I also worked on improving <strong className="font-bold">product discovery</strong>, redesigning parts of the search experience and integrating <em className="italic">“Make My Fit”</em>, a feature that guides users toward more relevant clothing based on contextual product inputs.
                                 </p>
                                 <p>
-                                    The goal wasn’t just better UI—it was to make choosing feel easier, faster, and more confident.
+                                    The goal wasn’t just better UI. It was to make choosing feel easier, faster, and more confident.
                                 </p>
                             </div>
                             <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-[13px] items-center mt-2">
@@ -384,7 +384,7 @@ export function WorkSection() {
                                     I also translated the company’s <strong className="font-bold">mobile app into a web experience</strong>, adapting interactions and layouts to better suit desktop usage while maintaining consistency in identity and usability.
                                 </p>
                                 <p>
-                                    This work required designing for clarity over complexity—ensuring the product remained intuitive for users who are not naturally comfortable with digital tools.
+                                    This work required designing for clarity over complexity, ensuring the product remained intuitive for users who are not naturally comfortable with digital tools.
                                 </p>
                             </div>
                             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-[13px] w-full mt-2 pb-16">
