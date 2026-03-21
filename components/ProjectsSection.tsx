@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 import projCrescendoMain from "@/public/assets/proj-crescendo-main.png";
 import projCrescendoLeft from "@/public/assets/proj-crescendo-left.png";
 import projCrescendoCenter from "@/public/assets/proj-crescendo-center.png";
@@ -20,7 +19,9 @@ import projChatHistory from "@/public/assets/make_my_fit.png";
 import projMicOff from "@/public/assets/chat_history.png";
 import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
 
-const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
+import { useTheme } from "./ThemeContext";
+
+const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: ["400"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 type FloatingImage = {
@@ -59,6 +60,7 @@ type ProjectCardProps = {
     clickAction: ClickAction;
     onResumeClick?: () => void;
 };
+
 
 function ProjectCard({
     title,
@@ -101,7 +103,6 @@ function ProjectCard({
                     style={{
                         backgroundColor: bgColor,
                         border: `2px solid ${borderColor}`,
-                        boxShadow: `0px 25px 56px 0px ${shadowColor}`,
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
@@ -143,7 +144,10 @@ function ProjectCard({
                                 }}
                             >
                                 <div
-                                    className="overflow-hidden shadow-lg border-2 border-white transition-opacity duration-300"
+                                    className={cn(
+                                        "overflow-hidden border-2 border-white transition-all duration-300",
+                                        isHovered ? "shadow-2xl" : "shadow-none"
+                                    )}
                                     style={{
                                         width: img.width,
                                         height: img.height,
@@ -276,21 +280,21 @@ const crescendoImages: FloatingImage[] = [
     },
     {
         src: projCrescendoLeft,
-        width: 100, height: 223,
+        width: 140, height: 136,
         hiddenRotate: -8, hiddenTop: -10, hiddenLeft: 30, hiddenScale: 0.35,
         revealedRotate: -24.5, revealedTop: -43, revealedLeft: -17, revealedScale: 1,
         borderRadius: 9, borderColor: "#bbe3ff",
     },
     {
         src: projCrescendoCenter,
-        width: 100, height: 223,
+        width: 150, height: 95,
         hiddenRotate: 2, hiddenTop: -20, hiddenLeft: 126, hiddenScale: 0.35,
         revealedRotate: -0.1, revealedTop: -59, revealedLeft: 126, revealedScale: 1,
         borderRadius: 9, borderColor: "#bbe3ff", zIndex: 1,
     },
     {
         src: projCrescendoRight,
-        width: 100, height: 223,
+        width: 130, height: 98,
         hiddenRotate: 10, hiddenTop: -8, hiddenLeft: 220, hiddenScale: 0.35,
         revealedRotate: 38.7, revealedTop: -34, revealedLeft: 190, revealedScale: 1,
         borderRadius: 9, borderColor: "#bbe3ff",
@@ -356,7 +360,7 @@ const makeMyFitImages: FloatingImage[] = [
         src: projMakeMyFit,
         width: 270, height: 151,
         hiddenRotate: -3, hiddenTop: -12, hiddenLeft: 50, hiddenScale: 0.5,
-        revealedRotate: -4, revealedTop: -60, revealedLeft: 45, revealedScale: 1,
+        revealedRotate: -8, revealedTop: -60, revealedLeft: 45, revealedScale: 1,
         borderRadius: 20, borderColor: "#ffc6c6", zIndex: 1,
     },
 ];
@@ -413,7 +417,7 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                     gradientBorderColor="#8686ff"
                     subtitleColor="#c6d4ff"
                     floatingImages={crescendoImages}
-                    clickAction={{ type: "link", url: "https://www.figma.com/design/2QSCTA0rNfCfPwqJLQTvQG/Crescendo--Starry-Nights-?node-id=555-1176" }}
+                    clickAction={{ type: "link", url: "https://crescendo-mu.vercel.app/" }}
                 />
                 <ProjectCard
                     title="Ology Studios"

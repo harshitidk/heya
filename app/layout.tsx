@@ -7,6 +7,9 @@ import { NavBar } from "@/components/NavBar";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import ClientBody from "@/components/ClientBody";
 import { ThemeProvider } from "@/components/ThemeContext";
+import { PageTransition } from "@/components/PageTransition";
+import { SidePanel } from "@/components/SidePanel";
+import { GuestbookWidget } from "@/components/GuestbookWidget";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -71,7 +74,11 @@ export default function RootLayout({
           <ClientBody>
             <ThemeSwitcher />
             <NavBar />
-            {children}
+            <SidePanel />
+            <GuestbookWidget />
+            <PageTransition>
+              {children}
+            </PageTransition>
           </ClientBody>
         </ThemeProvider>
       </body>

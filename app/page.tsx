@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useTheme } from "@/components/ThemeContext";
 import { Sun } from "lucide-react";
+import { motion } from "framer-motion";
 import { Bowlby_One_SC, Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ImageCards } from "@/components/ImageCards";
 import { Moon } from "lucide-react";
@@ -52,7 +53,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full flex flex-col items-center -mt-32 sm:-mt-48">
+        <div className="relative z-10 w-full flex flex-col items-center -mt-24 sm:-mt-32">
             <div className="w-full flex justify-center">
               <ImageCards
                 variant="frame19"
@@ -82,19 +83,47 @@ export default function Home() {
                 <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                   and i am a
                 </p>
-                <div className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
-                  <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
+                <motion.div 
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: isDark ? "0 0 35px rgba(168, 85, 247, 0.5)" : "0 15px 40px rgba(168, 85, 247, 0.25)",
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  style={{ 
+                    backgroundImage: isDark ? "radial-gradient(rgba(255,255,255,0.08) 0.5px, transparent 0)" : "radial-gradient(rgba(0,0,0,0.02) 0.5px, transparent 0)",
+                    backgroundSize: "6px 6px"
+                  }}
+                  className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-5 py-2 sm:px-6 sm:py-3 relative rounded-full transition-all duration-500 cursor-default group overflow-hidden backdrop-blur-xl shadow-[inset_0_0_12px_rgba(255,255,255,0.1)] ${isDark ? 'bg-white/10 border-white/20' : 'bg-white/60 border-white shadow-lg shadow-black/[0.03]'}`}
+                >
+                  {/* Iridescent Highlight Overlay */}
+                  <div className={`absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10`} />
+                  
+                  <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-all duration-300 relative z-10 ${isDark ? 'text-white' : 'text-[#6b6b6b] group-hover:text-purple-600'}`}>
                     product designer
                   </p>
-                </div>
+                </motion.div>
                 <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                   who
                 </p>
-                <div className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 relative rounded-full transition-colors duration-700 ${isDark ? 'bg-transparent border-white/60' : 'bg-white border-white'}`}>
-                  <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6e6969]'}`}>
+                <motion.div 
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: isDark ? "0 0 35px rgba(235, 59, 20, 0.5)" : "0 15px 40px rgba(235, 59, 20, 0.25)",
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  style={{ 
+                    backgroundImage: isDark ? "radial-gradient(rgba(255,255,255,0.08) 0.5px, transparent 0)" : "radial-gradient(rgba(0,0,0,0.02) 0.5px, transparent 0)",
+                    backgroundSize: "6px 6px"
+                  }}
+                  className={`border-[1px] sm:border-[1.5px] border-solid flex items-center justify-center px-5 py-2 sm:px-6 sm:py-3 relative rounded-full transition-all duration-500 cursor-default group overflow-hidden backdrop-blur-xl shadow-[inset_0_0_12px_rgba(255,255,255,0.1)] ${isDark ? 'bg-white/10 border-white/20' : 'bg-white/60 border-white shadow-lg shadow-black/[0.03]'}`}
+                >
+                  {/* Iridescent Highlight Overlay */}
+                  <div className={`absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br from-orange-500/10 via-transparent to-red-500/10`} />
+                  
+                  <p className={`font-semibold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-all duration-300 relative z-10 ${isDark ? 'text-white' : 'text-[#6e6969] group-hover:text-orange-600'}`}>
                     vibe codes
                   </p>
-                </div>
+                </motion.div>
                 <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                   for fun.
                 </p>
@@ -102,6 +131,7 @@ export default function Home() {
             </div>
         </div>
       </section>
-    </main >
+
+    </main>
   );
 }

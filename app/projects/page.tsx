@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
-import { WorkSection } from "@/components/WorkSection";
-import { ExperienceSection } from "@/components/ExperienceSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
+import { ExperimentsSection } from "@/components/ExperimentsSection";
 import { WatermarkText } from "@/components/WatermarkText";
 import { useTheme } from "@/components/ThemeContext";
 import workBg from "@/public/assets/artwork.png";
 import workBgNight1 from "@/public/assets/work-bg-night-1.png";
 import workBgNight2 from "@/public/assets/work-bg-night-2.png";
 
-export default function WorkPage() {
+export default function ProjectsPage() {
     const { isDark } = useTheme();
 
     return (
@@ -47,15 +47,15 @@ export default function WorkPage() {
                 </div>
             </div>
 
-            <div className="w-full relative z-10 flex flex-col pt-20 pb-20">
-                {/* Original Work Section (Selected Work) */}
-                <div className="w-full">
-                    <WorkSection />
+            <div className="w-full relative z-10 flex flex-col pt-0 pb-20">
+                {/* Curiosity Section / Experiments */}
+                <div className="w-full -mt-4 sm:-mt-8">
+                    <ExperimentsSection isDark={isDark} />
                 </div>
 
-                {/* Experience Section */}
+                {/* Projects Section */}
                 <div className="w-full mt-24 sm:mt-44">
-                    <ExperienceSection isDark={isDark} />
+                    <ProjectsSection isDark={isDark} />
                 </div>
             </div>
         </main>

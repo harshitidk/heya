@@ -81,23 +81,42 @@ function CaseStudyButton({ text, primary, href }: { text: string; primary?: bool
     const Component = href ? "a" : "button" as any;
     const componentProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {};
 
+    const baseStyles = "relative h-[48px] px-6 rounded-full flex items-center justify-center gap-2 group cursor-pointer transition-all duration-500 hover:-translate-y-1 active:scale-[0.97] border focus:outline-none inline-flex";
+
     if (primary) {
         return (
-            <Component {...componentProps} className="relative overflow-hidden bg-gradient-to-r from-[#FFB800] to-[#FF8A00] text-white shadow-[0_4px_14px_0_rgba(255,138,0,0.25)] hover:shadow-[0_6px_20px_rgba(255,138,0,0.4)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex border border-white/20">
-                <span className="font-semibold text-[15px] tracking-[0.2px] whitespace-nowrap relative z-10">
+            <Component 
+                {...componentProps} 
+                className={`${baseStyles} ${
+                    isDark 
+                    ? "bg-white border-white/10 text-black shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.15)]" 
+                    : "bg-[#0A0A0A] border-black/10 text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)]"
+                }`}
+            >
+                <span className="font-semibold text-[15px] tracking-tight whitespace-nowrap relative z-10">
                     {text}
                 </span>
-                <ArrowUpRight className="w-[18px] h-[18px] text-white/90 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 relative z-10" />
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <ArrowUpRight className={`w-[18px] h-[18px] transition-all duration-300 relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
+                    isDark ? "text-black/60 group-hover:text-black" : "text-white/60 group-hover:text-white"
+                }`} />
             </Component>
         );
     }
     return (
-        <Component {...componentProps} className={`relative border shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all duration-300 h-[46px] px-[22px] rounded-full flex items-center justify-center gap-2 group cursor-pointer inline-flex bg-white/10 backdrop-blur-md border-white/20 ${isDark ? 'text-white/90 hover:bg-white/20 hover:text-white' : 'text-[#555] hover:bg-white/30 hover:text-[#222]'}`}>
-            <span className="font-medium text-[15px] tracking-[0.2px] whitespace-nowrap">
+        <Component 
+            {...componentProps} 
+            className={`${baseStyles} ${
+                isDark 
+                ? "bg-white/5 backdrop-blur-md border-white/10 text-white/80 hover:bg-white/10 hover:text-white shadow-sm" 
+                : "bg-black/5 backdrop-blur-md border-black/5 text-black/60 hover:bg-black/10 hover:text-black shadow-sm"
+            }`}
+        >
+            <span className="font-medium text-[15px] tracking-tight whitespace-nowrap relative z-10">
                 {text}
             </span>
-            <ArrowUpRight className="w-[18px] h-[18px] text-[#888] group-hover:text-[#444] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+            <ArrowUpRight className={`w-[18px] h-[18px] transition-all duration-300 relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
+                isDark ? "text-white/40 group-hover:text-white/70" : "text-black/30 group-hover:text-black/60"
+            }`} />
         </Component>
     );
 }
@@ -294,21 +313,24 @@ export function WorkSection() {
                     <div id="shoppin" className="w-full flex flex-col gap-[38px] items-center">
                         <ShoppinCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
-                            <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] lowercase transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                shoppin’ 🍓
+                            <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                Shoppin : Designing for decision-making, not just browsing
                             </h3>
                             <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 <p>
-                                    Shoppin’ was my first product design internship, where I worked
-                                    across multiple problem spaces - from improving core interactions
-                                    to redesigning the Virtual Try-On experience that helps users make
-                                    quicker decisions while shopping online.
+                                    Most users don’t drop off because they don’t like a product—they drop off because they’re unsure.
                                 </p>
                                 <p>
-                                    Interestingly, one of the features I later implemented was originally
-                                    a project I had built before joining Shoppin’ - the same project
-                                    that got me the internship in the first place. You can read that{" "}
-                                    <span className="italic">case study</span> here.
+                                    At Shoppin, I focused on reducing this uncertainty.
+                                </p>
+                                <p>
+                                    I designed a <strong className="font-bold">virtual try-on experience</strong> to help users better judge fit and style before purchase. By restructuring the flow around how users actually evaluate products, this led to a <strong className="font-bold">13% drop in user drop-offs</strong> at a critical decision point.
+                                </p>
+                                <p>
+                                    I also worked on improving <strong className="font-bold">product discovery</strong>, redesigning parts of the search experience and integrating <em className="italic">“Make My Fit”</em>—a feature that guides users toward more relevant clothing based on contextual product inputs.
+                                </p>
+                                <p>
+                                    The goal wasn’t just better UI—it was to make choosing feel easier, faster, and more confident.
                                 </p>
                             </div>
                             <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-[13px] items-center mt-2">
@@ -324,14 +346,17 @@ export function WorkSection() {
                         <ZoffersCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
                             <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                Zoffers
+                                Zoffers : Designing a student discount platform from scratch
                             </h3>
                             <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 <p>
-                                    Zoffers is like UNiDAYS for Indian students — a platform
-                                    connecting brands with students through exclusive offers and
-                                    campaigns. I designed the responsive web app from scratch, laying
-                                    the product’s core design foundations.
+                                    Zoffers connects students looking for discounts with brands seeking access to a student audience.
+                                </p>
+                                <p>
+                                    I worked on building both the <strong className="font-bold">product identity and the web experience from the ground up</strong>, designing an end-to-end platform covering onboarding, browsing, and offer discovery.
+                                </p>
+                                <p>
+                                    The focus was to create a system that feels <strong className="font-bold">trustworthy for brands and effortless for students</strong>, balancing two different user needs within a simple, clear experience.
                                 </p>
                             </div>
                             <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-[13px] items-center mt-2">
@@ -346,11 +371,22 @@ export function WorkSection() {
 
                         <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
                             <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                Rabbit Invest
+                                Rabbit Invest : Designing for non-tech-savvy financial distributors
                             </h3>
-                            <p className={`font-medium text-[12px] sm:text-[16px] tracking-[0.32px] leading-[1.64] w-full text-justify sm:text-left transition-colors duration-700 ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
-                                Rabbit Invest is a fintech platform that works with mutual fund distributors, helping them manage their clients while giving investors a way to track and manage their funds. I designed a CRM tool tailored for distributors to efficiently manage customers and their investments.
-                            </p>
+                            <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
+                                <p>
+                                    At Rabbit Invest, I worked on two core products focused on mutual fund distributors, many of whom were <strong className="font-bold whitespace-nowrap">older users (45+) with low digital familiarity</strong>.
+                                </p>
+                                <p>
+                                    I designed a <strong className="font-bold">CRM platform from scratch</strong> to help distributors manage their customers, focusing on simplifying workflows, reducing cognitive load, and making complex financial tasks easier to navigate.
+                                </p>
+                                <p>
+                                    I also translated the company’s <strong className="font-bold">mobile app into a web experience</strong>, adapting interactions and layouts to better suit desktop usage while maintaining consistency in identity and usability.
+                                </p>
+                                <p>
+                                    This work required designing for clarity over complexity—ensuring the product remained intuitive for users who are not naturally comfortable with digital tools.
+                                </p>
+                            </div>
                             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-[13px] w-full mt-2 pb-16">
                                 <CaseStudyButton text="View Work" primary href="https://drive.google.com/file/d/1OzrCVp-937ZCp__33DdNR-8JCS55zlRR/view?usp=sharing" />
                                 <CaseStudyButton text="Read documentation" href="https://rabbitinvest.com/how-to-initiate-purchase-with-rabbit-invest/" />

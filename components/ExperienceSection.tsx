@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+import { useTheme } from "./ThemeContext";
+
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
@@ -19,6 +21,7 @@ type ExperienceRowProps = {
 
 
 function ExperienceRow({ company, role, roleType, duration, timeline, isDark, showArrow, href }: ExperienceRowProps) {
+    
     // Styles based on role type
     const typeStyles = isDark ? {
         product: { bg: "bg-[#362600]", text: "text-[#d59202]" },
@@ -106,7 +109,6 @@ export function ExperienceSection({ isDark }: { isDark?: boolean }) {
         { company: "Content Led Labs", role: "Freelance Designer", roleType: "freelance", duration: "3 month", timeline: "april - june 24'", showArrow: false },
         { company: "Urvann", role: "Graphic Design Intern", roleType: "graphic", duration: "2 month", timeline: "feb - march 24'", showArrow: false },
     ];
-
     return (
         <section className="relative w-full max-w-[1200px] mx-auto py-24 px-4 sm:px-8 z-10 flex flex-col items-center">
 

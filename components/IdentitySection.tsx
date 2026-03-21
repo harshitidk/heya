@@ -14,13 +14,16 @@ import trait4 from "@/public/assets/trait-4.png";
 import trait5 from "@/public/assets/trait-5.png";
 import trait6 from "@/public/assets/trait-6.png";
 
+import { useTheme } from "./ThemeContext";
+
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
 
 export function IdentitySection({ isDark }: { isDark?: boolean }) {
+
     const textColor = isDark ? "text-white" : "text-black";
-    const subTextColor = isDark ? "text-gray-400" : "text-[#484848]";
-    const borderColor = isDark ? "border-white/10" : "border-black/10";
+    const subTextColor = isDark ? "text-white/90" : "text-[#484848]";
+    const borderColor = isDark ? "border-white/20" : "border-black/10";
 
     const traitImages = [trait1, trait2, trait3, trait4, trait5, trait6];
 
@@ -57,7 +60,7 @@ export function IdentitySection({ isDark }: { isDark?: boolean }) {
                             </p>
                         </div>
 
-                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/10' : 'bg-black/10'}`} />
+                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/20' : 'bg-black/10'}`} />
 
                         <div className={`text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px] ${subTextColor} space-y-1`}>
                             <p>Working on building a great taste 🍓 in design</p>
@@ -66,14 +69,14 @@ export function IdentitySection({ isDark }: { isDark?: boolean }) {
 
                         <div className="text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]">
                             <span className={subTextColor}>Final Sem - </span>
-                            <span className="text-[#009c3e] font-medium">Open for a full time role</span>
+                            <span className={`${isDark ? 'text-yellow-400' : 'text-[#009c3e]'} font-medium`}>Open for a full time role</span>
                         </div>
 
-                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/10' : 'bg-black/10'} my-1`} />
+                        <div className={`w-full h-[1px] ${isDark ? 'bg-white/20' : 'bg-black/10'} my-1`} />
 
-                        <div className="flex items-center justify-center sm:justify-start gap-2 text-[#afafaf] text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]">
+                        <div className={`flex items-center justify-center sm:justify-start gap-2 ${isDark ? 'text-white/70' : 'text-[#afafaf]'} text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]`}>
                             <MapPin size={18} />
-                            <span>delhi but looking to come blr</span>
+                            <span>ROHINI, DELHI</span>
                         </div>
                     </div>
                 </motion.div>

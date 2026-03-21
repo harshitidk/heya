@@ -13,6 +13,8 @@ import exp4 from "@/public/assets/exp-4.png";
 import exp5 from "@/public/assets/exp-5.png";
 import exp6 from "@/public/assets/exp-6.png";
 
+import { useTheme } from "./ThemeContext";
+
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
@@ -22,6 +24,24 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    const modalContent = mounted && zoomedImage && createPortal(
+        <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 px-4 sm:px-12 py-12 cursor-zoom-out animate-in fade-in duration-300 pointer-events-auto"
+            onClick={() => setZoomedImage(null)}
+        >
+            <div className="relative w-full max-w-lg sm:max-w-2xl h-[70vh] sm:h-[80vh]">
+                <Image
+                    src={zoomedImage}
+                    alt="Zoomed experiment"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+            </div>
+        </div>,
+        document.body
+    );
 
     return (
         <section className="relative w-full sm:w-[100vw] max-w-[100vw] sm:max-w-[900px] mx-auto flex flex-col items-center justify-center min-h-screen px-4 overflow-hidden sm:overflow-visible z-10">
@@ -127,23 +147,7 @@ export function ExperimentsSection({ isDark }: { isDark?: boolean }) {
             </div>
 
             {/* Portal for zoomed image modal */}
-            {mounted && zoomedImage && createPortal(
-                <div
-                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 px-4 sm:px-12 py-12 cursor-zoom-out animate-in fade-in duration-300 pointer-events-auto"
-                    onClick={() => setZoomedImage(null)}
-                >
-                    <div className="relative w-full max-w-lg sm:max-w-2xl h-[70vh] sm:h-[80vh]">
-                        <Image
-                            src={zoomedImage}
-                            alt="Zoomed experiment"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 1024px) 100vw, 60vw"
-                        />
-                    </div>
-                </div>,
-                document.body
-            )}
+            {modalContent}
         </section>
     );
 }

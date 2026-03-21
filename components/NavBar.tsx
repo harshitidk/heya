@@ -41,8 +41,10 @@ export function NavBar() {
 
     if (!mounted) return null;
 
+    const underlineStyle = "h-[3px] rounded-full bg-gradient-to-r from-[#FFC739] via-[#EB3B14] to-[#FFC310] shadow-[0_2px_8px_rgba(235,59,20,0.4)] -bottom-1 left-3 right-3";
+
     return (
-        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-4 pointer-events-none" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>
+        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-4 pointer-events-none transition-all duration-700" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>
 
             {/* ----------------- DESKTOP LAYOUT ----------------- */}
             {!isMobile && (
@@ -51,20 +53,20 @@ export function NavBar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className={cn(
-                    "backdrop-blur-[6px] items-center justify-between p-[16px] relative rounded-[28px] transition-colors duration-700",
-                    "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto",
+                    "items-center justify-between p-[16px] relative transition-colors duration-700",
+                    "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto flex",
+                    "backdrop-blur-[6px] rounded-[28px]",
                     isDark ? "bg-[#1f2838]/40 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2)]" :
-                        "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
-                    "flex"
+                    "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]"
                 )}
             >
                 {/* Left Section: Profile & Socials */}
                 <div className="flex gap-[15px] items-center shrink-0">
                     <Link href="/#hero" onClick={handleHomeClick} className="flex gap-[12px] items-center shrink-0 hover:opacity-80 transition-opacity">
-                        <div className={`overflow-hidden relative rounded-[23px] shrink-0 size-[42px] transition-colors duration-700 ${isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]'}`}>
+                        <div className={cn("overflow-hidden relative shrink-0 size-[42px] transition-colors duration-700 rounded-[23px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
-                        <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[20px] tracking-[-0.4px] transition-colors duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#1a1a1a]'}`}>
+                        <p className={cn("font-medium leading-[1.64] lowercase shrink-0 text-[18px] sm:text-[20px] tracking-[-0.4px] transition-colors duration-700", isDark ? 'text-[#f5f5f5]' : 'text-[#1a1a1a]')}>
                             harshit heya
                         </p>
                     </Link>
@@ -88,33 +90,54 @@ export function NavBar() {
                 {/* Right Section: Home, Identity, Let's Talk, Resume & Work (Primary on Far Right) */}
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
                     <Link href="/" onClick={handleHomeClick}>
-                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
+                            {pathname === '/' && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className={cn("absolute", underlineStyle)}
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
                                 home
                             </p>
                         </div>
                     </Link>
 
                     <Link href="/identity">
-                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
+                            {pathname === '/identity' && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className={cn("absolute", underlineStyle)}
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
                                 identity
                             </p>
                         </div>
                     </Link>
 
-                    <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer">
-                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] active:scale-95 transition-all duration-500 cursor-pointer ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
-                                let’s talk
+                    <Link href="/projects">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
+                            {pathname === '/projects' && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className={cn("absolute", underlineStyle)}
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                                projects
                             </p>
                         </div>
-                    </a>
+                    </Link>
 
                     <div
                         className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] transition-all duration-500 ${isDark ? 'text-white/40' : 'text-[#1a1a1a]/40'}`}
                     >
-                        <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700`}>
+                        <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700`}>
                             resume
                         </p>
                     </div>
@@ -126,9 +149,12 @@ export function NavBar() {
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
-                            className={`border-[1.5px] border-solid flex h-[38px] items-center justify-center px-5 xl:px-7 relative rounded-[12px] md:rounded-[14px] shrink-0 cursor-pointer overflow-hidden transition-all duration-700 ${isDark ? 'bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'}`}
+                            className={cn(
+                                "flex items-center justify-center h-[38px] px-5 xl:px-7 relative shrink-0 cursor-pointer transition-all duration-700",
+                                isDark ? 'border-[1.5px] border-solid rounded-[12px] md:rounded-[14px] overflow-hidden bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[12px] md:rounded-[14px] overflow-hidden bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
+                            )}
                         >
-                            <p className="font-semibold leading-[1.64] lowercase shrink-0 text-[15px] xl:text-[17px] tracking-[-0.3px] whitespace-nowrap relative z-10 transition-colors duration-700">
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[15px] xl:text-[17px] tracking-[-0.3px] whitespace-nowrap relative z-10 transition-colors duration-700">
                                 work
                             </p>
                             <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
@@ -145,21 +171,20 @@ export function NavBar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className={cn(
-                    "backdrop-blur-xl transition-colors duration-700 p-[10px] relative rounded-[24px]",
+                    "transition-colors duration-700 p-[10px] relative w-full pointer-events-auto flex flex-col gap-[8px]",
+                    "backdrop-blur-xl rounded-[24px]",
                     isDark ? "bg-[#1f2838]/80 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2)]" :
-                        "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]",
-                    "w-full pointer-events-auto",
-                    "flex flex-col gap-[8px]"
+                    "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]"
                 )}
             >
                 {/* Top Row: Profile & Menu Button */}
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full px-2">
                     {/* Profile */}
                     <Link href="/#hero" onClick={handleHomeClick} className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
-                        <div className={`overflow-hidden relative rounded-[18px] shrink-0 size-[34px] transition-colors duration-700 ${isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]'}`}>
+                        <div className={cn("overflow-hidden relative shrink-0 size-[32px] transition-colors duration-700 rounded-[18px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
-                        <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[16px] tracking-[-0.32px] transition-colors duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#151515]'}`}>
+                        <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[16px] tracking-[-0.32px] transition-colors duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#151515]'}`}>
                             harshit heya
                         </p>
                     </Link>
@@ -167,7 +192,7 @@ export function NavBar() {
                     {/* Menu Button */}
                     <button
                         onClick={handleMenuClick}
-                        className={`flex items-center gap-[4px] px-2 py-1 rounded-lg transition-colors cursor-pointer group active:scale-95 duration-200 ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+                        className={`flex items-center gap-[4px] px-2 py-1 transition-colors cursor-pointer group active:scale-95 duration-200 ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
                     >
                         {/* Menu Icon */}
                         <div className={`relative shrink-0 size-[24px] flex items-center justify-center transition-colors duration-700 ${isDark ? 'text-white' : 'text-black'}`}>
@@ -182,7 +207,7 @@ export function NavBar() {
                                 </svg>
                             )}
                         </div>
-                        <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[12px] tracking-[-0.32px] group-hover:opacity-80 transition-all duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#151515]'}`}>
+                        <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[12px] tracking-[-0.32px] group-hover:opacity-80 transition-all duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#151515]'}`}>
                             {isMenuOpen ? "close" : "menu"}
                         </p>
                     </button>
@@ -198,36 +223,36 @@ export function NavBar() {
                             initial={{ height: 0, opacity: 0, marginTop: 0 }}
                             animate={{ height: "auto", opacity: 1, marginTop: 4 }}
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                            className="flex flex-col gap-[8px] overflow-hidden w-full mb-1"
+                            className="flex flex-col gap-[8px] overflow-hidden w-full mb-1 px-2"
                         >
-                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
-                                <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
+                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                                <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
                             </Link>
 
-                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={`w-full flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-[#1a1a1a]'}`}>
-                                <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
+                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/identity' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                                <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
                             </Link>
 
-                            <div className="flex gap-[6px] w-full">
-                                <a href="https://wa.me/917303908292" target="_blank" rel="noopener noreferrer" className={`w-1/2 flex items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90`}>
-                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">let's talk</span>
-                                </a>
-                                <div className={`w-1/2 flex items-center justify-center h-[38px] rounded-[12px] transition-colors bg-black/20 text-white/50 cursor-default`}>
-                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">resume</span>
+                             <div className="flex gap-[6px] w-full">
+                                <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90 rounded-[12px]")}>
+                                    <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">projects</span>
+                                </Link>
+                                <div className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors bg-black/20 text-white/50 cursor-default rounded-[12px]")}>
+                                    <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">resume</span>
                                 </div>
                             </div>
                             <div className="flex gap-[6px] w-full">
-                                <Link href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={`w-1/2 flex gap-2 items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
+                                <Link href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={cn("w-1/2 flex gap-2 items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5')}>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                     </svg>
-                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[13px] tracking-[-0.32px]">x</span>
+                                    <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[13px] tracking-[-0.32px]">x</span>
                                 </Link>
-                                <Link href="https://www.linkedin.com/in/harshitheya/" target="_blank" rel="noopener noreferrer" className={`w-1/2 flex gap-2 items-center justify-center h-[38px] rounded-[12px] transition-colors active:scale-95 ${isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5'}`}>
+                                <Link href="https://www.linkedin.com/in/harshitheya/" target="_blank" rel="noopener noreferrer" className={cn("w-1/2 flex gap-2 items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5')}>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                     </svg>
-                                    <span className="font-semibold leading-[1.64] lowercase pb-[1px] text-[13px] tracking-[-0.32px]">linkedin</span>
+                                    <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[13px] tracking-[-0.32px]">linkedin</span>
                                 </Link>
                             </div>
                         </motion.div>
@@ -235,12 +260,15 @@ export function NavBar() {
                 </AnimatePresence>
 
                 {/* Bottom: Work Section CTA (Primary) */}
-                <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 overflow-hidden rounded-[14px] active:scale-95 transition-all">
+                <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 overflow-hidden active:scale-95 transition-all px-2 pb-2 rounded-[14px]">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
-                        className={`border-[1.5px] border-solid flex h-[42px] items-center justify-center px-6 relative rounded-[14px] shrink-0 w-full cursor-pointer transition-all duration-700 ${isDark ? 'bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'}`}
+                        className={cn(
+                            "flex h-[42px] items-center justify-center px-6 relative shrink-0 w-full cursor-pointer transition-all duration-700",
+                            isDark ? 'border-[1.5px] border-solid rounded-[14px] bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[14px] bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
+                        )}
                     >
-                        <p className={`font-semibold leading-[1.64] lowercase shrink-0 text-[13px] relative z-10 transition-colors duration-700 tracking-[-0.2px]`}>
+                        <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[13px] relative z-10 transition-colors duration-700 tracking-[-0.2px]`}>
                             work
                         </p>
                         <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
