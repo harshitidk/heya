@@ -26,77 +26,47 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
             // Get the raw href from the anchor tag
             const href = target.getAttribute("href");
+            // Only intercept internal links that aren't purely hashes or external
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank" || href.startsWith("#")) return;
 
-            // Block default to handle transition
+            // Sync check: Don't transition if already on that page
+            const url = new URL(href, window.location.origin);
+            if (url.pathname === window.location.pathname) return;
+
+            // Stop default behavior to show our transition
             e.preventDefault();
             e.stopPropagation();
 
-            try {
-                const url = new URL(href, window.location.origin);
-                let path = url.pathname;
-                
-                // CRITICAL: Next.js App Router prepends basePath to everything passed to router.push.
-                // Since the DOM already has the basePath, we MUST strip it completely.
-                const prefix = "/heya";
-                
-                // Remove prefix regardless of trailing slash or double slashes
-                if (path.startsWith(prefix)) {
-                    path = path.slice(prefix.length);
-                }
-                
-                // Ensure starts with /
-                if (!path.startsWith("/")) path = "/" + path;
-                
-                // Ensure trailing slash for static export consistency (trailingSlash: true)
-                if (!path.endsWith("/") && !path.includes(".")) {
-                    path += "/";
-                }
+            // 1. Trigger the "Exit" animation (fade-in the overlay)
+            setDestination(href);
+            setIsNavigating(true);
 
-                const finalDestination = path + url.search + url.hash;
-
-                // Only navigate if it's a different page
-                const currentPath = pathname || "/";
-                const normalizedCurrent = currentPath.endsWith("/") ? currentPath : currentPath + "/";
-                
-                if (finalDestination !== normalizedCurrent) {
-                    setDestination(finalDestination);
-                    setIsNavigating(true);
-                }
-            } catch (err) {
-                console.error("Navigation error:", err);
-                // Fallback to native navigation if parsing fails
+            // 2. Schedule the mandatory page load after animation
+            // We use the raw 'href' because Next.js already prefixed it correctly
+            setTimeout(() => {
                 window.location.assign(href);
-            }
+            }, 600); // Slightly longer than the 0.5s transition to ensure visibility
         };
 
-        // Use capture phase to ensure we intercept first
         document.addEventListener("click", handleClick, { capture: true });
         return () => document.removeEventListener("click", handleClick, { capture: true });
-    }, [pathname]);
+    }, []);
 
     return (
         <>
             <AnimatePresence>
-                {isNavigating && destination && (
+                {isNavigating && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        onAnimationComplete={() => {
-                            if (isNavigating && destination) {
-                                // Important: Back to router.push for SPA feel,
-                                // but with the prefix already stripped.
-                                router.push(destination);
-                            }
-                        }}
                         className={`fixed inset-0 z-[99999] pointer-events-none ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}
                     />
                 )}
             </AnimatePresence>
 
-            {/* Entrance Animation Overlay */}
+            {/* Entrance Animation Overlay (Always runs on mount) */}
             <motion.div
                 key={pathname + "-enter"}
                 initial={{ opacity: 1 }}
@@ -114,4 +84,4 @@ export function PageTransition({ children }: { children: ReactNode }) {
             </main>
         </>
     );
-}
+};
