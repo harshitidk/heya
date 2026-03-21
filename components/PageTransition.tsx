@@ -28,14 +28,30 @@ export function PageTransition({ children }: { children: ReactNode }) {
             const href = target.getAttribute("href");
             if (!href) return;
 
-            // Only intercept internal links that aren't purely hashes on the same page
-            const isInternal = href.startsWith("/");
-            const isTargetBlank = target.getAttribute("target") === "_blank";
-            const isSamePageHash = href.startsWith("#") || (href.startsWith(pathname!) && href.includes("#"));
+            // Handle production basePath /heya
+            const isProd = process.env.NODE_ENV === 'production';
+            const basePath = isProd ? '/heya' : '';
+            
+            // Get the path relative to the base path for router and comparison
+            let cleanPath = href;
+            if (basePath && href.startsWith(basePath)) {
+                cleanPath = href.slice(basePath.length) || '/';
+            }
+            if (!cleanPath.startsWith('/') && !cleanPath.startsWith('#')) {
+                cleanPath = '/' + cleanPath;
+            }
 
-            if (isInternal && !isTargetBlank && !isSamePageHash && href !== pathname) {
+            // Extract just the path part for comparison (strip hash)
+            const [pathOnly] = cleanPath.split('#');
+
+            // Only intercept internal links that aren't purely hashes on the same page
+            const isInternal = href.startsWith("/") || (basePath && href.startsWith(basePath));
+            const isTargetBlank = target.getAttribute("target") === "_blank";
+            const isSamePageHash = href.startsWith("#") || (pathOnly === pathname && href.includes("#"));
+
+            if (isInternal && !isTargetBlank && !isSamePageHash && pathOnly !== pathname) {
                 e.preventDefault();
-                setDestination(href);
+                setDestination(cleanPath);
                 setIsNavigating(true);
             }
         };
