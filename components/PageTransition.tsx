@@ -26,58 +26,22 @@ export function PageTransition({ children }: { children: ReactNode }) {
             if (!target) return;
 
             const href = target.getAttribute("href");
-            // Skip external links, target blank, or simple anchor links
+            // Only intercept internal links that aren't purely hashes
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank" || href.startsWith("#")) return;
 
-            try {
-                // IMPORTANT: Stop Next.js and others from handling this click instantly
-                e.preventDefault();
-                e.stopPropagation();
+            // Stop default behavior and Next.js internal handlers
+            e.preventDefault();
+            e.stopPropagation();
 
-                // Use URL constructor for consistent parsing
-                const url = new URL(href, window.location.origin);
-                let cleanPath = url.pathname;
-                
-                // DYNAMIC BASE PATH DETECTION
-                const fullPath = window.location.pathname;
-                const hookPath = pathname || "/";
-                
-                let detectedBasePath = "";
-                if (fullPath.includes(hookPath) && hookPath !== "/") {
-                    detectedBasePath = fullPath.substring(0, fullPath.indexOf(hookPath));
-                } else if (fullPath !== hookPath && hookPath === "/") {
-                    detectedBasePath = fullPath.endsWith("/") ? fullPath.slice(0, -1) : fullPath;
-                }
-
-                // Strip detected basePath before pushing to router
-                if (detectedBasePath && cleanPath.startsWith(detectedBasePath)) {
-                    cleanPath = cleanPath.slice(detectedBasePath.length);
-                }
-                
-                if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
-
-                // Normalize trailing slash
-                let targetPathOnly = cleanPath;
-                if (!targetPathOnly.endsWith('/') && !targetPathOnly.includes('.')) {
-                    targetPathOnly += '/';
-                }
-                
-                const fullDestination = targetPathOnly + url.search + url.hash;
-
-                // Check if we are already on this page to avoid unnecessary transitions
-                if (targetPathOnly !== hookPath) {
-                    setDestination(fullDestination);
-                    setIsNavigating(true);
-                }
-            } catch (err) {
-                console.error("Navigation error:", err);
-            }
+            // Store the raw href as the destination
+            setDestination(href);
+            setIsNavigating(true);
         };
 
-        // Use capture phase to intercept before Next.js Link handlers
+        // Use capture phase to ensure we intercept first
         document.addEventListener("click", handleClick, { capture: true });
         return () => document.removeEventListener("click", handleClick, { capture: true });
-    }, [pathname]);
+    }, []); // Removed pathname dependency as the listener doesn't need it
 
     return (
         <>
@@ -90,8 +54,10 @@ export function PageTransition({ children }: { children: ReactNode }) {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onAnimationComplete={() => {
                             if (isNavigating && destination) {
-                                // Now we only push manually after the transition overlay is full
-                                router.push(destination);
+                                // USE NATIVE NAVIGATION
+                                // This solves all basePath duplication issues because we use the href 
+                                // that Next.js rendered directly in the DOM (which already has /heya/)
+                                window.location.assign(destination);
                             }
                         }}
                         className={`fixed inset-0 z-[99999] pointer-events-none ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}
