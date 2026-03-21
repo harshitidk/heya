@@ -41,7 +41,7 @@ export function GuestbookWidget() {
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                setNotes(parsed);
+                setNotes(parsed.filter((n: Note) => !["1", "2", "3", "4"].includes(n.id)));
             } catch (e) {
                 console.error("Failed to load notes", e);
             }
