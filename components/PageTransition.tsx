@@ -26,33 +26,37 @@ export function PageTransition({ children }: { children: ReactNode }) {
             if (!target) return;
 
             const href = target.getAttribute("href");
-            if (!href) return;
+            if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank") return;
 
             // Handle production basePath /heya
             const isProd = process.env.NODE_ENV === 'production';
             const basePath = isProd ? '/heya' : '';
             
-            // Get the path relative to the base path for router and comparison
-            let cleanPath = href;
-            if (basePath && href.startsWith(basePath)) {
-                cleanPath = href.slice(basePath.length) || '/';
-            }
-            if (!cleanPath.startsWith('/') && !cleanPath.startsWith('#')) {
-                cleanPath = '/' + cleanPath;
-            }
+            try {
+                // Use URL constructor to handle normalization
+                const url = new URL(href, window.location.origin);
+                let cleanPath = url.pathname;
+                
+                // Strip basePath if present
+                if (basePath && cleanPath.startsWith(basePath)) {
+                    cleanPath = cleanPath.slice(basePath.length) || '/';
+                }
+                
+                // Ensure starting slash
+                if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
 
-            // Extract just the path part for comparison (strip hash)
-            const [pathOnly] = cleanPath.split('#');
+                // For the 'destination' we use the relative path for router.push
+                const fullDestination = cleanPath + url.search + url.hash;
+                const isSamePageHash = (cleanPath === pathname && url.hash !== "");
 
-            // Only intercept internal links that aren't purely hashes on the same page
-            const isInternal = href.startsWith("/") || (basePath && href.startsWith(basePath));
-            const isTargetBlank = target.getAttribute("target") === "_blank";
-            const isSamePageHash = href.startsWith("#") || (pathOnly === pathname && href.includes("#"));
-
-            if (isInternal && !isTargetBlank && !isSamePageHash && pathOnly !== pathname) {
-                e.preventDefault();
-                setDestination(cleanPath);
-                setIsNavigating(true);
+                if (!isSamePageHash && cleanPath !== pathname) {
+                    e.preventDefault();
+                    setDestination(fullDestination);
+                    setIsNavigating(true);
+                }
+            } catch (err) {
+                // Not a valid URL or other error, let default behavior happen
+                console.error("Navigation error:", err);
             }
         };
 
@@ -70,8 +74,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onAnimationComplete={() => {
-                            // Once the screen is purely black (fade out is complete), navigate!
-                            if (isNavigating) {
+                            if (isNavigating && destination) {
                                 router.push(destination);
                             }
                         }}
