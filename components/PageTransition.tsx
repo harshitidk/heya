@@ -27,29 +27,29 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
             const href = target.getAttribute("href");
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank") return;
-
-            // Handle production basePath /heya
-            const isProd = process.env.NODE_ENV === 'production';
-            const basePath = isProd ? '/heya' : '';
-            
             try {
-                // Use URL constructor to handle normalization
+                // Detect and strip the base path if it exists
+                const basePath = '/heya';
                 const url = new URL(href, window.location.origin);
                 let cleanPath = url.pathname;
                 
-                // Strip basePath if present
-                if (basePath && cleanPath.startsWith(basePath)) {
-                    cleanPath = cleanPath.slice(basePath.length) || '/';
+                if (cleanPath.startsWith(basePath)) {
+                    cleanPath = cleanPath.slice(basePath.length);
                 }
                 
-                // Ensure starting slash
+                // Ensure starts with /
                 if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
 
-                // For the 'destination' we use the relative path for router.push
-                const fullDestination = cleanPath + url.search + url.hash;
-                const isSamePageHash = (cleanPath === pathname && url.hash !== "");
+                // Normalize trailing slash to match next.config settings
+                let pathOnly = cleanPath;
+                if (!pathOnly.endsWith('/') && !pathOnly.includes('.')) {
+                    pathOnly += '/';
+                }
+                
+                const fullDestination = pathOnly + url.search + url.hash;
 
-                if (!isSamePageHash && cleanPath !== pathname) {
+                // Only navigate if it's a different page and not a simple same-page hash link
+                if (pathOnly !== pathname && !href.startsWith("#")) {
                     e.preventDefault();
                     setDestination(fullDestination);
                     setIsNavigating(true);
