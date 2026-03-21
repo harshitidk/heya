@@ -39,12 +39,15 @@ export function PageTransition({ children }: { children: ReactNode }) {
                 let path = url.pathname;
 
                 // CRITICAL: Handle production subfolder prefix
-                // If it starts with /heya/, we MUST strip it before router.push
+                // If it starts with /heya, we MUST strip it before router.push
                 const prefix = "/heya";
-                if (path.startsWith(prefix + "/")) {
+                if (path === prefix || path.startsWith(prefix + "/")) {
                     path = path.slice(prefix.length);
-                } else if (path === prefix) {
-                    path = "/";
+                }
+
+                // Ensure path starts with / after stripping
+                if (!path.startsWith("/")) {
+                    path = "/" + path;
                 }
 
                 // Ensure trailing slash for consistency (trailingSlash: true)
