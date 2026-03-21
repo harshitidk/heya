@@ -21,52 +21,52 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const handleClick = (e: MouseEvent) => {
-            // Find the closest anchor tag
             const target = (e.target as Element).closest("a");
             if (!target) return;
 
+            // Get the raw href from the anchor tag
             const href = target.getAttribute("href");
-            // Only intercept internal links that aren't purely hashes
             if (!href || href.startsWith("http") || target.getAttribute("target") === "_blank" || href.startsWith("#")) return;
 
-            // Stop native and Next.js handlers
+            // Block default to handle transition
             e.preventDefault();
             e.stopPropagation();
 
-            // We need to parse the URL to handle base path correctly
             try {
                 const url = new URL(href, window.location.origin);
                 let path = url.pathname;
-
-                // CRITICAL: Handle production subfolder prefix
-                // If it starts with /heya, we MUST strip it before router.push
+                
+                // CRITICAL: Next.js App Router prepends basePath to everything passed to router.push.
+                // Since the DOM already has the basePath, we MUST strip it completely.
                 const prefix = "/heya";
-                if (path === prefix || path.startsWith(prefix + "/")) {
+                
+                // Remove prefix regardless of trailing slash or double slashes
+                if (path.startsWith(prefix)) {
                     path = path.slice(prefix.length);
                 }
-
-                // Ensure path starts with / after stripping
-                if (!path.startsWith("/")) {
-                    path = "/" + path;
-                }
-
-                // Ensure trailing slash for consistency (trailingSlash: true)
+                
+                // Ensure starts with /
+                if (!path.startsWith("/")) path = "/" + path;
+                
+                // Ensure trailing slash for static export consistency (trailingSlash: true)
                 if (!path.endsWith("/") && !path.includes(".")) {
                     path += "/";
                 }
 
                 const finalDestination = path + url.search + url.hash;
 
-                // Sync with current path to avoid redundant transitions
+                // Only navigate if it's a different page
                 const currentPath = pathname || "/";
                 const normalizedCurrent = currentPath.endsWith("/") ? currentPath : currentPath + "/";
-
+                
                 if (finalDestination !== normalizedCurrent) {
                     setDestination(finalDestination);
                     setIsNavigating(true);
                 }
             } catch (err) {
-                console.error("Link parsing error:", err);
+                console.error("Navigation error:", err);
+                // Fallback to native navigation if parsing fails
+                window.location.assign(href);
             }
         };
 
