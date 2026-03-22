@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, MessageSquareText, PenLine, Sparkles, Smile } from "lucide-react";
+import { X, PenLine, Sparkles, Smile, Trash2, RotateCw, CloudUpload } from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 import { Poppins, Nanum_Pen_Script } from "next/font/google";
+import { supabase } from "@/lib/supabase";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
@@ -13,11 +14,9 @@ interface Note {
     id: string;
     name: string;
     comment: string;
-    date: string;
+    created_at: string;
     rotation: number;
 }
-
-const DEFAULT_NOTES: Note[] = [];
 
 export function GuestbookWidget() {
     const { isDark } = useTheme();
@@ -26,63 +25,165 @@ export function GuestbookWidget() {
     const [name, setName] = useState("");
     const [comment, setComment] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [notes, setNotes] = useState<Note[]>(DEFAULT_NOTES);
+    const [notes, setNotes] = useState<Note[]>([]);
+    const [ownNoteIds, setOwnNoteIds] = useState<string[]>([]);
+    const [hasOldNotes, setHasOldNotes] = useState(false);
 
     const accentGradient = "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
 
     useEffect(() => {
         const handleOpen = () => setIsExpanded(true);
         window.addEventListener("open-guestbook", handleOpen);
+        fetchNotes();
+        
+        // Load own note IDs from localStorage
+        const saved = localStorage.getItem("my_guestbook_notes");
+        if (saved) {
+            try {
+                setOwnNoteIds(JSON.parse(saved));
+            } catch (e) {
+                console.error("Failed to load own note IDs", e);
+            }
+        }
+
         return () => window.removeEventListener("open-guestbook", handleOpen);
     }, []);
 
     useEffect(() => {
-        const saved = localStorage.getItem("visitor_notes");
-        if (saved) {
+        // Check if there are any old local-only notes to sync
+        const oldNotes = localStorage.getItem("visitor_notes");
+        if (oldNotes) {
             try {
-                const parsed = JSON.parse(saved);
-                setNotes(parsed);
-            } catch (e) {
-                console.error("Failed to load notes", e);
-            }
+                const parsed = JSON.parse(oldNotes);
+                if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+                    setHasOldNotes(true);
+                }
+            } catch (e) {}
         }
-    }, []);
+    }, [showWall]);
 
-    const saveNotes = (newNotes: Note[]) => {
-        const customNotes = newNotes;
-        localStorage.setItem("visitor_notes", JSON.stringify(customNotes));
+    const fetchNotes = async () => {
+        const { data, error } = await supabase
+            .from('guestbook')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        if (error) {
+            console.error("Error fetching notes:", error);
+        } else {
+            setNotes(data || []);
+        }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!comment.trim()) return;
 
         setIsSubmitting(true);
         
-        const newNote: Note = {
-            id: Date.now().toString(),
+        const rotation = (Math.random() * 6) - 3;
+        const newNote = {
             name: name.trim() || "Anonymous",
             comment: comment.trim(),
-            date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' }),
-            rotation: (Math.random() * 6) - 3,
+            rotation,
         };
 
-        setTimeout(() => {
-            const updatedNotes = [newNote, ...notes];
-            setNotes(updatedNotes);
-            saveNotes(updatedNotes);
+        const { data, error } = await supabase
+            .from('guestbook')
+            .insert([newNote])
+            .select();
+
+        if (error) {
+            console.error("Error sticking note:", error);
+            alert("Failed to stick the note. Make sure you've created the 'guestbook' table in Supabase!");
+        } else if (data) {
+            const insertedNote = data[0] as Note;
+            setNotes([insertedNote, ...notes]);
             
-            setIsSubmitting(false);
+            // Save this note ID as "ours"
+            const updatedOwnIds = [...ownNoteIds, insertedNote.id];
+            setOwnNoteIds(updatedOwnIds);
+            localStorage.setItem("my_guestbook_notes", JSON.stringify(updatedOwnIds));
+
             setName("");
             setComment("");
             setIsExpanded(false);
             setShowWall(true);
-        }, 500);
+        }
+        
+        setIsSubmitting(false);
+    };
+
+    const handleDelete = async (id: string) => {
+        if (!confirm("Are you sure you want to remove your note?")) return;
+
+        const { error } = await supabase
+            .from('guestbook')
+            .delete()
+            .eq('id', id);
+        
+        if (error) {
+            console.error("Error deleting note:", error);
+            alert("Failed to delete note.");
+        } else {
+            // Update UI
+            setNotes(notes.filter(n => n.id !== id));
+            const updatedOwnIds = ownNoteIds.filter(oid => oid !== id);
+            setOwnNoteIds(updatedOwnIds);
+            localStorage.setItem("my_guestbook_notes", JSON.stringify(updatedOwnIds));
+        }
+    };
+
+    const syncOldNotes = async () => {
+        const oldNotesStr = localStorage.getItem("visitor_notes");
+        if (!oldNotesStr) return;
+
+        try {
+            const oldNotes = JSON.parse(oldNotesStr);
+            setIsSubmitting(true);
+            
+            const toInsert = oldNotes.map((n: any) => ({
+                name: n.name || "Anonymous",
+                comment: n.comment || "",
+                rotation: n.rotation || 0,
+            }));
+
+            const { data, error } = await supabase
+                .from('guestbook')
+                .insert(toInsert)
+                .select();
+
+            if (error) {
+                alert("Sync failed: " + error.message);
+            } else if (data) {
+                // Remove the old local storage key after successful sync
+                localStorage.removeItem("visitor_notes");
+                setHasOldNotes(false);
+                
+                // Add the new IDs to our "own notes" list so we can delete them if needed
+                const syncedIds = (data as any[]).map(n => n.id);
+                const updatedOwnIds = [...ownNoteIds, ...syncedIds];
+                setOwnNoteIds(updatedOwnIds);
+                localStorage.setItem("my_guestbook_notes", JSON.stringify(updatedOwnIds));
+                
+                fetchNotes();
+                alert(`Successfully synced ${toInsert.length} notes to the backend!`);
+            }
+        } catch (e) {
+            console.error("Sync error:", e);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const glassyBg = isDark ? "bg-[#0A0E17]/40" : "bg-white/40";
     const glassyBorder = isDark ? "border-white/10" : "border-white/60";
     const textColor = isDark ? "text-white" : "text-[#1a1a1a]";
+
+    const formatDate = (dateStr: string) => {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+    };
 
     return (
         <>
@@ -139,7 +240,7 @@ export function GuestbookWidget() {
                                         whileTap={{ scale: 0.98 }}
                                         type="submit"
                                         disabled={isSubmitting || !comment.trim()}
-                                        className={`flex-1 ${accentGradient} text-white py-4.5 rounded-[22px] font-black uppercase tracking-[1px] text-[13px] flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all disabled:opacity-30 flex-1`}
+                                        className={`flex-1 ${accentGradient} text-white py-4.5 rounded-[22px] font-black uppercase tracking-[1px] text-[13px] flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all disabled:opacity-30`}
                                     >
                                         {isSubmitting ? "sticking..." : "stick it"} <PenLine size={16} />
                                     </motion.button>
@@ -188,39 +289,87 @@ export function GuestbookWidget() {
                                     </h2>
                                     <p className={`text-[14px] font-[600] opacity-40 lowercase ${textColor}`}>[vibe check: passed successfully]</p>
                                 </div>
-                                <motion.button 
-                                    whileHover={{ rotate: 90, scale: 1.1 }}
-                                    onClick={() => setShowWall(false)} 
-                                    className={`p-6 rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white' : 'bg-black/5 text-black'} hover:shadow-2xl`}
-                                >
-                                    <X size={28} />
-                                </motion.button>
+                                <div className="flex gap-4 items-center">
+                                    <AnimatePresence>
+                                        {hasOldNotes && (
+                                            <motion.button
+                                                initial={{ x: 20, opacity: 0 }}
+                                                animate={{ x: 0, opacity: 1 }}
+                                                exit={{ x: 20, opacity: 0 }}
+                                                onClick={syncOldNotes}
+                                                disabled={isSubmitting}
+                                                className={`flex items-center gap-2 px-6 py-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white text-[13px] font-black uppercase tracking-wider transition-all shadow-lg hover:shadow-orange-500/20 disabled:opacity-50`}
+                                            >
+                                                <CloudUpload size={18} />
+                                                Sync Local Notes
+                                            </motion.button>
+                                        )}
+                                    </AnimatePresence>
+
+                                    <motion.button 
+                                        whileHover={{ rotate: 180, scale: 1.1 }}
+                                        onClick={fetchNotes}
+                                        className={`p-6 rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white/40 hover:text-white' : 'bg-black/5 text-black/40 hover:text-black'}`}
+                                        title="Refresh wall"
+                                    >
+                                        <RotateCw size={24} className={isSubmitting ? "animate-spin" : ""} />
+                                    </motion.button>
+
+                                    <motion.button 
+                                        whileHover={{ rotate: 90, scale: 1.1 }}
+                                        onClick={() => setShowWall(false)} 
+                                        className={`p-6 rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white' : 'bg-black/5 text-black'} hover:shadow-2xl`}
+                                    >
+                                        <X size={28} />
+                                    </motion.button>
+                                </div>
                             </div>
 
                             <div className="flex-1 overflow-y-auto pr-6 custom-scrollbar pb-12">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                                    {notes.map((note) => (
-                                        <motion.div
-                                            key={note.id} 
-                                            initial={{ opacity: 0, scale: 0.9 }} 
-                                            animate={{ opacity: 1, scale: 1, rotate: note.rotation }}
-                                            whileHover={{ y: -15, rotate: 0, scale: 1.05, zIndex: 10, transition: { type: "spring", stiffness: 300 } }}
-                                            className={`group relative p-10 rounded-[44px] border transition-all cursor-default flex flex-col min-h-[260px] ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white/95 border-white/60 text-[#1a1a1a] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]'}`}
-                                        >
-                                            <div className="absolute top-8 left-8 w-8 h-8 rounded-full bg-current opacity-[0.03] group-hover:opacity-10 transition-opacity" />
-                                            
-                                            <div className="flex-1 flex flex-col items-center justify-center text-center">
-                                                <p className={`${nanum.className} text-[24px] sm:text-[28px] leading-tight mb-8 opacity-90`}>{note.comment}</p>
-                                            </div>
-                                            
-                                            <div className="mt-auto flex flex-col items-center">
-                                                <div className={`w-10 h-[2px] ${accentGradient} opacity-20 group-hover:opacity-100 transition-all rounded-full mb-6`} />
-                                                <p className={`${poppins.className} text-[16px] font-[800] tracking-tighter uppercase`}>{note.name}</p>
-                                                <p className="text-[10px] font-black opacity-30 uppercase tracking-[2px] mt-2">{note.date}</p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
+                                {notes.length === 0 ? (
+                                    <div className="flex flex-col items-center justify-center h-full opacity-20">
+                                        <p className={`${nanum.className} text-[32px] ${textColor}`}>no notes yet. be the first?</p>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                                        {notes.map((note) => (
+                                            <motion.div
+                                                key={note.id} 
+                                                initial={{ opacity: 0, scale: 0.9 }} 
+                                                animate={{ opacity: 1, scale: 1, rotate: note.rotation }}
+                                                whileHover={{ y: -15, rotate: 0, scale: 1.05, zIndex: 10, transition: { type: "spring", stiffness: 300 } }}
+                                                className={`group relative p-10 rounded-[44px] border transition-all cursor-default flex flex-col min-h-[260px] ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white/95 border-white/60 text-[#1a1a1a] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]'}`}
+                                            >
+                                                <div className="absolute top-8 left-8 w-8 h-8 rounded-full bg-current opacity-[0.03] group-hover:opacity-10 transition-opacity" />
+                                                
+                                                {/* Delete Button (Only for own notes) */}
+                                                {ownNoteIds.includes(note.id) && (
+                                                    <motion.button
+                                                        whileHover={{ scale: 1.1, color: "#ef4444" }}
+                                                        whileTap={{ scale: 0.9 }}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleDelete(note.id);
+                                                        }}
+                                                        className="absolute top-8 right-8 z-20 p-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/5 rounded-full text-current/40"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </motion.button>
+                                                )}
+
+                                                <div className="flex-1 flex flex-col items-center justify-center text-center">
+                                                    <p className={`${nanum.className} text-[24px] sm:text-[28px] leading-tight mb-8 opacity-90`}>{note.comment}</p>
+                                                </div>
+                                                
+                                                <div className="mt-auto flex flex-col items-center">
+                                                    <div className={`w-10 h-[2px] ${accentGradient} opacity-20 group-hover:opacity-100 transition-all rounded-full mb-6`} />
+                                                    <p className={`${poppins.className} text-[16px] font-[800] tracking-tighter uppercase`}>{note.name}</p>
+                                                    <p className="text-[10px] font-black opacity-30 uppercase tracking-[2px] mt-2">{formatDate(note.created_at)}</p>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     </div>
