@@ -160,6 +160,13 @@ export function SidePanel() {
                                 >
                                     <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>work</span>
                                 </Link>
+                                <Link 
+                                    href="/note-wall" 
+                                    onClick={() => setIsOpen(false)}
+                                    className={cn("col-span-2 p-3 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
+                                >
+                                    <span className={cn("text-[10px] tracking-[4px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>View Full Note Wall</span>
+                                </Link>
                             </div>
 
                             <div className={cn("mt-6 text-center text-[10px] tracking-[4px] opacity-10", textColor, "font-bold uppercase")}>
