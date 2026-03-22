@@ -56,15 +56,19 @@ type ProjectCardProps = {
     gradientTo: string;
     gradientBorderColor: string;
     subtitleColor: string;
+    description: string;
     floatingImages: FloatingImage[];
     clickAction: ClickAction;
     onResumeClick?: () => void;
+    isDark?: boolean;
+    category: "case-studies" | "design-projects";
 };
 
 
 function ProjectCard({
     title,
     subtitle,
+    description,
     bgColor,
     borderColor,
     shadowColor,
@@ -75,6 +79,7 @@ function ProjectCard({
     floatingImages,
     clickAction,
     onResumeClick,
+    isDark,
 }: ProjectCardProps) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -99,16 +104,20 @@ function ProjectCard({
                 onClick={handleClick}
             >
                 <div
-                    className="relative rounded-[44px] w-[220px] h-[180px] sm:w-[337px] sm:h-[270px] overflow-visible transition-transform duration-300 group-hover:scale-[1.03] group-hover:-translate-y-2"
+                    className={cn(
+                        "relative rounded-[40px] w-[190px] h-[160px] sm:w-[280px] sm:h-[235px] overflow-visible transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-2",
+                        "backdrop-blur-[20px]"
+                    )}
                     style={{
-                        backgroundColor: bgColor,
-                        border: `2px solid ${borderColor}`,
+                        backgroundColor: `${bgColor}40`, // 25% opacity
+                        border: `1.5px solid ${borderColor}66`, // 40% opacity
+                        boxShadow: `0 16px 40px -8px ${shadowColor}, inset 0 2px 20px 0 ${borderColor}33, inset 0 1px 1px 0 rgba(255,255,255,${isDark ? 0.1 : 0.4})`
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     {/* Floating Images Container */}
-                    <div className="absolute pointer-events-none w-[337px] h-[270px] top-0 left-[-58.5px] sm:left-0 scale-[0.55] sm:scale-100 origin-top">
+                    <div className="absolute pointer-events-none w-[337px] h-[270px] top-0 left-1/2 -ml-[168.5px] scale-[0.5] sm:scale-[0.8] origin-top">
                         {floatingImages.map((img, idx) => (
                             <motion.div
                                 key={idx}
@@ -167,26 +176,32 @@ function ProjectCard({
                         ))}
                     </div>
 
-                    {/* Gradient Bottom Label */}
+                    {/* Gradient Bottom Label (Front Folder Flap) */}
                     <div
                         className={cn(
-                            "absolute bottom-0 left-[-2px] right-0 rounded-[30px] sm:rounded-[45px] overflow-hidden flex items-center justify-center z-20",
-                            "w-[calc(100%+4px)] h-[140px] sm:h-[208px]"
+                            "absolute bottom-0 left-[-2px] right-0 rounded-[30px] sm:rounded-[36px] overflow-hidden flex items-center justify-center z-20",
+                            "w-[calc(100%+4px)] h-[125px] sm:h-[185px]",
+                            "backdrop-blur-[30px] shadow-[0_-8px_24px_rgba(0,0,0,0.06)]"
                         )}
                         style={{
-                            background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
-                            border: `2px solid ${gradientBorderColor}`,
+                            background: `linear-gradient(to bottom, ${gradientFrom}33 0%, ${gradientTo}CC 100%)`, // 20% to 80%
+                            border: `1.5px solid ${gradientBorderColor}99`, // 60% opacity
+                            borderTop: `1.5px solid rgba(255,255,255,${isDark ? 0.15 : 0.5})`, // Strong top highlight
+                            boxShadow: `inset 0 1px 2px 0 rgba(255,255,255,${isDark ? 0.1 : 0.4})`
                         }}
                     >
-                        <div className={`text-center ${poppins.className}`}>
-                            <p className="text-white text-[15px] sm:text-[24px] font-semibold tracking-tight leading-relaxed">
+                        <div className={`text-center flex flex-col items-center justify-center px-3 sm:px-6 w-full ${poppins.className}`}>
+                            <p className="text-white text-[13px] sm:text-[18px] font-semibold tracking-tight leading-tight">
                                 {title}
                             </p>
                             <p
-                                className="text-[12px] sm:text-[20px] font-medium tracking-tight leading-relaxed"
+                                className="text-[9px] sm:text-[13px] font-medium tracking-tight leading-tight mt-[1px] sm:mt-0.5"
                                 style={{ color: subtitleColor }}
                             >
                                 {subtitle}
+                            </p>
+                            <p className="text-[9px] sm:text-[12px] font-medium leading-[1.3] sm:leading-[1.4] tracking-tight mt-1 sm:mt-3 opacity-95 text-[#f5f5f5] line-clamp-3 sm:line-clamp-4 max-w-[95%]">
+                                {description}
                             </p>
                         </div>
                     </div>
@@ -365,8 +380,114 @@ const makeMyFitImages: FloatingImage[] = [
     },
 ];
 
+type ProjectItem = Omit<ProjectCardProps, 'onResumeClick' | 'isDark'> & { id: string };
+
+const allProjects: ProjectItem[] = [
+    {
+        id: "crescendo",
+        title: "Crescendo",
+        subtitle: "(College Fest)",
+        description: "Arcade-inspired fest website built around immersive, game-like navigation.",
+        bgColor: "#3870d2",
+        borderColor: "#c8d8ff",
+        shadowColor: "rgba(32,28,255,0.29)",
+        gradientFrom: "#dba5ff",
+        gradientTo: "#0024f3",
+        gradientBorderColor: "#8686ff",
+        subtitleColor: "#c6d4ff",
+        floatingImages: crescendoImages,
+        clickAction: { type: "link", url: "https://crescendo-mu.vercel.app/" },
+        category: "design-projects"
+    },
+    {
+        id: "ology",
+        title: "Ology Studios",
+        subtitle: "(Agency Website)",
+        description: "Designed a complete website system for a modern branding studio.",
+        bgColor: "#9f2b2b",
+        borderColor: "#ffb6b6",
+        shadowColor: "rgba(231,0,0,0.29)",
+        gradientFrom: "#f2ac5c",
+        gradientTo: "#fd0000",
+        gradientBorderColor: "#ffc0c0",
+        subtitleColor: "#ffc6c6",
+        floatingImages: ologyImages,
+        clickAction: { type: "none" },
+        category: "design-projects"
+    },
+    {
+        id: "spotify",
+        title: "Spotify Resume",
+        subtitle: "(Fun Project)",
+        description: "Explored applying Spotify’s design language to a structured resume format.",
+        bgColor: "#074b16",
+        borderColor: "#1a6218",
+        shadowColor: "rgba(15,113,0,0.29)",
+        gradientFrom: "#a0ff1c",
+        gradientTo: "#006003",
+        gradientBorderColor: "#00cf80",
+        subtitleColor: "#deffc6",
+        floatingImages: spotifyImages,
+        clickAction: { type: "modal", modalContent: "resume" },
+        category: "design-projects"
+    },
+    {
+        id: "chatgpt",
+        title: "ChatGPT History",
+        subtitle: "(Case Study)",
+        description: "Conceptualized a prompt history feature to track progress within conversations.",
+        bgColor: "#328783",
+        borderColor: "#c9f8ff",
+        shadowColor: "rgba(28,255,236,0.29)",
+        gradientFrom: "#1ff1e0",
+        gradientTo: "#02886b",
+        gradientBorderColor: "#cafdff",
+        subtitleColor: "#e4ffc6",
+        floatingImages: chatGPTImages,
+        clickAction: { type: "link", url: "https://drive.google.com/file/d/1BAI_V8u4KkZwq1xTw4kZ7XQgziRfTFOi/view?usp=sharing" },
+        category: "case-studies"
+    },
+    {
+        id: "zoom",
+        title: "Zoom Scary UX",
+        subtitle: "(Case Study)",
+        description: "UX case study on missing consent and unexpected exposure in live sessions.",
+        bgColor: "#4387c5",
+        borderColor: "#b6d9ff",
+        shadowColor: "rgba(0,108,231,0.29)",
+        gradientFrom: "#5cb6f2",
+        gradientTo: "#0054fd",
+        gradientBorderColor: "#e8f5fd",
+        subtitleColor: "#dae8f5",
+        floatingImages: zoomImages,
+        clickAction: { type: "link", url: "https://drive.google.com/file/d/1pzCj94_BhSX7jiOWJhS_8BagbVFPDo54/view?usp=sharing" },
+        category: "case-studies"
+    },
+    {
+        id: "makemyfit",
+        title: "Make My Fit",
+        subtitle: "(Converted Shoppin)",
+        description: "Designed a “Make My Fit” feature to recommend clothing based on users’ existing wardrobe.",
+        bgColor: "#e46b86",
+        borderColor: "#ff8d84",
+        shadowColor: "rgba(113,0,0,0.29)",
+        gradientFrom: "#ff4369",
+        gradientTo: "#a6003d",
+        gradientBorderColor: "#ffb8b8",
+        subtitleColor: "#ffc6c6",
+        floatingImages: makeMyFitImages,
+        clickAction: { type: "link", url: "https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing" },
+        category: "case-studies"
+    }
+];
+
 export function ProjectsSection({ isDark }: { isDark?: boolean }) {
     const [showResume, setShowResume] = useState(false);
+    const [activeTab, setActiveTab] = useState<"all" | "case-studies" | "design-projects">("all");
+
+    const filteredProjects = allProjects.filter(project => 
+        activeTab === "all" ? true : project.category === activeTab
+    );
 
     return (
         <section className="relative w-full max-w-[1200px] mx-auto pt-16 sm:pt-28 pb-24 px-4 sm:px-8 z-10 flex flex-col items-center">
@@ -404,117 +525,69 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                 </p>
             </motion.div>
 
-            {/* Project Cards */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-24 sm:gap-[50px] w-full pt-12 sm:pt-16">
-                <ProjectCard
-                    title="Crescendo Website"
-                    subtitle="(College Fest)"
-                    bgColor="#3870d2"
-                    borderColor="#c8d8ff"
-                    shadowColor="rgba(32,28,255,0.29)"
-                    gradientFrom="#dba5ff"
-                    gradientTo="#0024f3"
-                    gradientBorderColor="#8686ff"
-                    subtitleColor="#c6d4ff"
-                    floatingImages={crescendoImages}
-                    clickAction={{ type: "link", url: "https://crescendo-mu.vercel.app/" }}
-                />
-                <ProjectCard
-                    title="Ology Studios"
-                    subtitle="(Agency Website)"
-                    bgColor="#9f2b2b"
-                    borderColor="#ffb6b6"
-                    shadowColor="rgba(231,0,0,0.29)"
-                    gradientFrom="#f2ac5c"
-                    gradientTo="#fd0000"
-                    gradientBorderColor="#ffc0c0"
-                    subtitleColor="#ffc6c6"
-                    floatingImages={ologyImages}
-                    clickAction={{ type: "none" }}
-                />
-                <ProjectCard
-                    title="Spotify Style Resume"
-                    subtitle="(Fun Project)"
-                    bgColor="#074b16"
-                    borderColor="#1a6218"
-                    shadowColor="rgba(15,113,0,0.29)"
-                    gradientFrom="#a0ff1c"
-                    gradientTo="#006003"
-                    gradientBorderColor="#00cf80"
-                    subtitleColor="#deffc6"
-                    floatingImages={spotifyImages}
-                    clickAction={{ type: "modal", modalContent: "resume" }}
-                    onResumeClick={() => setShowResume(true)}
-                />
-            </div>
-
-            {/* Case Studies Header */}
-            <motion.div
-                className="flex flex-col items-center justify-center text-center mt-24 mb-6 sm:mb-8 hover:scale-105 transition-transform duration-500 cursor-default"
-                initial={{ y: 30, opacity: 0 }}
+            {/* Tab Switcher */}
+            <motion.div 
+                className={cn(
+                    "flex p-1.5 gap-1 rounded-full mb-12 sm:mb-16 backdrop-blur-[24px] border transition-colors duration-500",
+                    isDark 
+                        ? "bg-white/5 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]" 
+                        : "bg-black/5 border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                )}
+                initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
             >
-                <p
-                    className={`mb-6 font-bold text-[14px] sm:text-[16px] tracking-[2.24px] uppercase ${poppins.className}`}
-                    style={
-                        isDark
-                            ? { color: "#abb8f0" }
-                            : {
-                                  backgroundImage: "linear-gradient(90deg, #e4741f, #bc5100)",
-                                  color: "transparent",
-                                  WebkitBackgroundClip: "text",
-                                  backgroundClip: "text",
-                              }
-                    }
-                >
-                    [Case Studies // stories]
-                </p>
+                {(["all", "case-studies", "design-projects"] as const).map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={cn(
+                            "relative px-4 sm:px-8 py-2 rounded-full text-[12px] sm:text-[14px] font-semibold transition-all duration-300 capitalize whitespace-nowrap",
+                            activeTab === tab 
+                                ? "text-white" 
+                                : isDark ? "text-white/40 hover:text-white/70" : "text-black/50 hover:text-black/80"
+                        )}
+                    >
+                        {activeTab === tab && (
+                            <motion.div
+                                layoutId="activeTab"
+                                className="absolute inset-0 rounded-full z-0 shadow-lg"
+                                style={{
+                                    background: "linear-gradient(135deg, #FF4D00 0%, #FF9500 100%)", // Red-Orange Gradient
+                                    boxShadow: "0 4px 15px rgba(255, 77, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4)"
+                                }}
+                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                        )}
+                        <span className="relative z-10">{tab.replace("-", " ")}</span>
+                    </button>
+                ))}
             </motion.div>
 
-            {/* Case Study Cards */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-24 sm:gap-[50px] w-full pt-4 sm:pt-16">
-                <ProjectCard
-                    title="ChatGPT History"
-                    subtitle="(Case Study)"
-                    bgColor="#328783"
-                    borderColor="#c9f8ff"
-                    shadowColor="rgba(28,255,236,0.29)"
-                    gradientFrom="#1ff1e0"
-                    gradientTo="#02886b"
-                    gradientBorderColor="#cafdff"
-                    subtitleColor="#e4ffc6"
-                    floatingImages={chatGPTImages}
-                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1BAI_V8u4KkZwq1xTw4kZ7XQgziRfTFOi/view?usp=sharing" }}
-                />
-                <ProjectCard
-                    title="Zoom Scary UX"
-                    subtitle="(Case Study)"
-                    bgColor="#4387c5"
-                    borderColor="#b6d9ff"
-                    shadowColor="rgba(0,108,231,0.29)"
-                    gradientFrom="#5cb6f2"
-                    gradientTo="#0054fd"
-                    gradientBorderColor="#e8f5fd"
-                    subtitleColor="#dae8f5"
-                    floatingImages={zoomImages}
-                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1pzCj94_BhSX7jiOWJhS_8BagbVFPDo54/view?usp=sharing" }}
-                />
-                <ProjectCard
-                    title="Make my fit - Feature"
-                    subtitle="(Converted Shoppin)"
-                    bgColor="#e46b86"
-                    borderColor="#ff8d84"
-                    shadowColor="rgba(113,0,0,0.29)"
-                    gradientFrom="#ff4369"
-                    gradientTo="#a6003d"
-                    gradientBorderColor="#ffb8b8"
-                    subtitleColor="#ffc6c6"
-                    floatingImages={makeMyFitImages}
-                    clickAction={{ type: "link", url: "https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing" }}
-                />
-            </div>
+            {/* Project Cards Grid */}
+            <motion.div 
+                layout
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 sm:gap-y-32 gap-x-12 sm:gap-x-16 pt-8 sm:pt-12 items-start justify-items-center w-full"
+            >
+                <AnimatePresence mode="popLayout">
+                    {filteredProjects.map((project) => (
+                        <motion.div
+                            key={project.id}
+                            layout
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: "circOut" }}
+                        >
+                            <ProjectCard
+                                {...project}
+                                isDark={isDark}
+                                onResumeClick={project.id === "spotify" ? () => setShowResume(true) : undefined}
+                            />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </motion.div>
 
             <ResumeModal isOpen={showResume} onClose={() => setShowResume(false)} />
         </section>
