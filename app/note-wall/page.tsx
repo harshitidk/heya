@@ -1,15 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { useTheme } from "@/components/ThemeContext";
 import { Poppins, Nanum_Pen_Script } from "next/font/google";
-import { ArrowLeft, Sparkles, RotateCw, Trash2 } from "lucide-react";
-import Link from "next/link";
-import wallBg from "@/public/assets/wall_texture.png";
-import wallBgNight from "@/public/assets/wall_texture_night.png";
+import { Sparkles, Trash2, Plus } from "lucide-react";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
@@ -30,8 +26,6 @@ export default function NoteWallPage() {
     
     const accentGradient = "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
     const textColor = isDark ? "text-white" : "text-[#1a1a1a]";
-    const glassBg = isDark ? "bg-[#0A0E17]/40" : "bg-white/40";
-    const glassBorder = isDark ? "border-white/10" : "border-white/60";
 
     useEffect(() => {
         fetchNotes();
@@ -70,51 +64,39 @@ export default function NoteWallPage() {
     };
 
     return (
-        <main className="relative min-h-screen w-full flex flex-col items-center overflow-x-hidden transition-colors duration-700">
-            {/* Background Texture Layer */}
-            <div className={`fixed inset-0 z-0 overflow-hidden pointer-events-none`}>
-                <div className={`absolute inset-0 transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
-                    <Image src={wallBg} alt="Wall Texture" fill className="object-cover opacity-80" priority />
-                </div>
-                <div className={`absolute inset-0 transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
-                    <Image src={wallBgNight} alt="Wall Texture Night" fill className="object-cover opacity-40" priority />
-                </div>
-                {/* Subtle Overlays for more "natural" feel */}
-                <div className="absolute inset-0 bg-white/10 dark:bg-black/20" />
-            </div>
+        <main className={`relative min-h-screen w-full flex flex-col items-center overflow-x-hidden transition-colors duration-700 ${isDark ? 'bg-[#0A0E17]' : 'bg-white'}`}>
+            {/* Background Pattern Layer */}
+            <div className={`fixed inset-0 z-0 opacity-[0.6] pointer-events-none transition-opacity duration-1000`}
+                style={{
+                    backgroundImage: isDark 
+                        ? `radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.06) 1.5px, transparent 0)` 
+                        : `radial-gradient(circle at 1.5px 1.5px, rgba(0,0,0,0.04) 1.5px, transparent 0)`,
+                    backgroundSize: '32px 32px'
+                }}
+            />
 
-            <div className="relative z-10 w-full max-w-[1400px] px-6 sm:px-12 pt-16 sm:pt-24 pb-32">
+            <div className="relative z-10 w-full max-w-[1500px] px-6 sm:px-12 pt-16 sm:pt-24 pb-32">
                 {/* Header Section */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-10 mb-16 sm:mb-24">
-                    <div className="space-y-5">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-10 mb-20 sm:mb-28">
+                    <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <div className={`w-12 h-[3px] rounded-full ${accentGradient}`} />
-                            <span className={`text-[12px] font-black uppercase tracking-[4px] opacity-30 ${textColor}`}>community</span>
+                            <div className={`w-10 h-[3px] rounded-full ${accentGradient}`} />
+                            <span className={`text-[11px] font-black uppercase tracking-[3px] opacity-30 ${textColor}`}>community</span>
                         </div>
-                        <h1 className={`${poppins.className} text-[50px] sm:text-[90px] font-[800] leading-[0.8] tracking-[-0.04em] ${textColor}`}>
-                            the note <br /><span className="opacity-40">wall.</span>
+                        <h1 className={`${poppins.className} text-[44px] sm:text-[84px] font-[800] leading-[0.9] tracking-[-0.04em] ${textColor}`}>
+                            the note wall.
                         </h1>
-                        <p className={`text-[14px] sm:text-[16px] font-[600] opacity-40 lowercase ${textColor}`}>[total vibes recorded: {notes.length}]</p>
+                        <p className={`text-[13px] sm:text-[15px] font-[600] opacity-40 lowercase ${textColor}`}>[total vibes recorded: {notes.length}]</p>
                     </div>
 
                     <div className="flex gap-4">
                         <motion.button 
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={fetchNotes}
-                            className={cn("p-4.5 rounded-[22px] border transition-all flex items-center gap-3", glassBg, glassBorder, textColor)}
-                        >
-                            <RotateCw size={18} className={isLoading ? "animate-spin" : "opacity-60"} />
-                            <span className="text-[11px] font-black uppercase tracking-[1px] hidden sm:inline opacity-70">refresh</span>
-                        </motion.button>
-                        
-                        <motion.button 
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             onClick={() => window.dispatchEvent(new Event("open-guestbook"))}
-                            className={cn("px-10 py-5 rounded-[26px] font-black uppercase tracking-[1px] text-[12px] text-white shadow-xl hover:shadow-2xl transition-all", accentGradient)}
+                            className={cn("px-7 py-3.5 rounded-[20px] font-black uppercase tracking-[1px] text-[11px] text-white shadow-lg hover:shadow-xl transition-all flex items-center gap-2.5", accentGradient)}
                         >
-                            stick a note
+                            stick a note <Plus size={16} strokeWidth={3} />
                         </motion.button>
                     </div>
                 </div>
@@ -122,60 +104,60 @@ export default function NoteWallPage() {
                 {/* Wall Content */}
                 {isLoading && notes.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-40 opacity-20">
-                        <RotateCw size={48} className="animate-spin mb-4" />
-                        <p className={`${nanum.className} text-[32px] ${textColor}`}>loading the wall...</p>
+                        <div className="w-10 h-10 border-4 border-current border-t-transparent rounded-full animate-spin mb-4" />
+                        <p className={`${nanum.className} text-[28px] ${textColor}`}>loading the wall...</p>
                     </div>
                 ) : notes.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-40 opacity-20">
-                        <p className={`${nanum.className} text-[48px] ${textColor} text-center`}>the wall is empty.<br />be the first to stick a note!</p>
+                        <p className={`${nanum.className} text-[40px] ${textColor} text-center`}>the wall is empty.<br />be the first to stick a note!</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 sm:gap-10">
                         <AnimatePresence mode="popLayout">
-                            {notes.map((note, idx) => (
+                            {notes.map((note) => (
                                 <motion.div
                                     key={note.id}
                                     layout
-                                    initial={{ opacity: 0, y: 20, scale: 0.9, rotate: note.rotation * 0.5 }}
+                                    initial={{ opacity: 0, y: 15, scale: 0.95, rotate: note.rotation * 0.5 }}
                                     animate={{ opacity: 1, y: 0, scale: 1, rotate: note.rotation }}
                                     whileHover={{ 
-                                        y: -15, 
+                                        y: -8, 
                                         rotate: 0, 
-                                        scale: 1.05, 
+                                        scale: 1.02, 
                                         zIndex: 20,
-                                        transition: { type: "spring", stiffness: 300, damping: 20 } 
+                                        transition: { type: "spring", stiffness: 400, damping: 25 } 
                                     }}
                                     className={cn(
-                                        "group relative p-10 rounded-[44px] border transition-all cursor-default flex flex-col min-h-[300px]",
+                                        "group relative p-8 rounded-[32px] border transition-all cursor-default flex flex-col min-h-[220px]",
                                         isDark 
-                                            ? "bg-[#0A0E17]/60 border-white/10 text-white shadow-[0_24px_48px_-12px_rgba(0,0,0,0.4)]" 
-                                            : "bg-white/80 border-white/60 text-[#1a1a1a] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.1)]",
+                                            ? "bg-[#0A0E17]/60 border-white/5 text-white shadow-xl" 
+                                            : "bg-white/80 border-black/[0.03] text-[#1a1a1a] shadow-sm hover:shadow-md",
                                         "backdrop-blur-xl"
                                     )}
                                 >
-                                    <Sparkles className="absolute -top-4 -right-4 w-20 h-20 opacity-[0.03] rotate-12 pointer-events-none group-hover:opacity-[0.08] transition-opacity" />
+                                    <Sparkles className="absolute -top-3 -right-3 w-16 h-16 opacity-[0.02] rotate-12 pointer-events-none group-hover:opacity-[0.05] transition-opacity" />
                                     
                                     {ownNoteIds.includes(note.id) && (
                                         <button
                                             onClick={() => handleDelete(note.id)}
-                                            className="absolute top-8 right-8 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all bg-red-500/10 hover:bg-red-500 hover:text-white text-red-500"
+                                            className="absolute top-6 right-6 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all bg-red-500/10 hover:bg-red-500 hover:text-white text-red-500"
                                         >
-                                            <Trash2 size={16} />
+                                            <Trash2 size={14} />
                                         </button>
                                     )}
 
-                                    <div className="flex-1 flex flex-col items-center justify-center text-center px-2">
-                                        <p className={`${nanum.className} text-[28px] sm:text-[32px] leading-tight mb-8 opacity-90 group-hover:opacity-100 transition-opacity`}>
+                                    <div className="flex-1 flex flex-col items-center justify-center text-center px-1">
+                                        <p className={`${nanum.className} text-[22px] sm:text-[24px] leading-[1.3] mb-6 opacity-90 group-hover:opacity-100 transition-opacity`}>
                                             "{note.comment}"
                                         </p>
                                     </div>
                                     
                                     <div className="mt-auto flex flex-col items-center">
-                                        <div className={`w-12 h-[3px] ${accentGradient} opacity-20 group-hover:opacity-100 transition-all rounded-full mb-6`} />
-                                        <p className={`${poppins.className} text-[18px] font-[800] tracking-tighter uppercase mb-1`}>
+                                        <div className={`w-8 h-[2px] ${accentGradient} opacity-20 group-hover:opacity-100 transition-all rounded-full mb-5`} />
+                                        <p className={`${poppins.className} text-[14px] font-[800] tracking-tighter uppercase mb-0.5`}>
                                             {note.name}
                                         </p>
-                                        <p className="text-[10px] font-black opacity-30 uppercase tracking-[3px]">{formatDate(note.created_at)}</p>
+                                        <p className="text-[9px] font-black opacity-30 uppercase tracking-[2.5px]">{formatDate(note.created_at)}</p>
                                     </div>
                                 </motion.div>
                             ))}
