@@ -6,8 +6,8 @@ import { Sun } from "lucide-react";
 import { motion } from "framer-motion";
 import { Bowlby_One_SC, Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ImageCards } from "@/components/ImageCards";
+import { GuestbookWallLayer } from "@/components/GuestbookWallLayer";
 import { Moon } from "lucide-react";
-import { ScribbledNotes } from "@/components/ScribbledNotes";
 import cardLeft from "@/public/assets/photo-left.jpg";
 import cardRight from "@/public/assets/photo-right.jpg";
 import cardCenter from "@/public/assets/photo-center.jpg";
@@ -52,10 +52,10 @@ export default function Home() {
             <Image src={nightBg2} alt="Night Sky Layer 2" fill className="object-cover absolute max-w-none" priority />
             <div className="absolute inset-0 bg-black/50" />
           </div>
-          
-          {/* Scribbled notes in the background */}
-          <ScribbledNotes />
         </div>
+
+        {/* Ambient Note Wall */}
+        <GuestbookWallLayer />
 
         <div className="relative z-10 w-full flex flex-col items-center -mt-24 sm:-mt-32">
             <div className="w-full flex justify-center">

@@ -109,6 +109,9 @@ export function GuestbookWidget() {
             setComment("");
             setIsExpanded(false);
             setShowWall(true);
+            
+            // Tell the background layer to refresh
+            window.dispatchEvent(new Event("refresh-guestbook-layer"));
         }
         
         setIsSubmitting(false);
