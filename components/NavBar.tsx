@@ -41,6 +41,7 @@ export function NavBar() {
 
     if (!mounted) return null;
 
+    const normalizedPathname = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
     const underlineStyle = "h-[3px] rounded-full bg-gradient-to-r from-[#FFC739] via-[#EB3B14] to-[#FFC310] shadow-[0_2px_8px_rgba(235,59,20,0.4)] -bottom-1 left-3 right-3";
 
     return (
@@ -91,7 +92,7 @@ export function NavBar() {
                 <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
                     <Link href="/" onClick={handleHomeClick}>
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
-                            {pathname === '/' && (
+                            {normalizedPathname === '/' && (
                                 <motion.div
                                     layoutId="nav-underline"
                                     className={cn("absolute", underlineStyle)}
@@ -106,7 +107,7 @@ export function NavBar() {
 
                     <Link href="/identity">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
-                            {pathname === '/identity' && (
+                            {normalizedPathname === '/identity' && (
                                 <motion.div
                                     layoutId="nav-underline"
                                     className={cn("absolute", underlineStyle)}
@@ -121,7 +122,7 @@ export function NavBar() {
 
                     <Link href="/projects">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
-                            {pathname === '/projects' && (
+                            {normalizedPathname === '/projects' && (
                                 <motion.div
                                     layoutId="nav-underline"
                                     className={cn("absolute", underlineStyle)}
@@ -225,11 +226,11 @@ export function NavBar() {
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
                             className="flex flex-col gap-[8px] overflow-hidden w-full mb-1 px-2"
                         >
-                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", normalizedPathname === '/' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
                                 <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
                             </Link>
 
-                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/identity' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", normalizedPathname === '/identity' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
                                 <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
                             </Link>
 
