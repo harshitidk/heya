@@ -70,9 +70,9 @@ export default function NoteWallPage() {
                 style={{
                     backgroundImage: isDark 
                         ? `radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.08) 1.5px, transparent 0)` 
-                        : `radial-gradient(circle at 1.5px 1.5px, rgba(0,0,0,0.05) 1.5px, transparent 0)`,
+                        : `radial-gradient(circle at 1.5px 1.5px, rgba(0,0,0,0.12) 1.5px, transparent 0)`,
                     backgroundSize: '28px 28px',
-                    opacity: isDark ? 0.8 : 0.6
+                    opacity: isDark ? 0.8 : 1.0
                 }}
             />
 
