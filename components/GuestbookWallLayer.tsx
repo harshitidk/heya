@@ -45,14 +45,16 @@ export function GuestbookWallLayer() {
             const shuffled = [...data].sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, numNotes);
 
-            // Regions that strictly avoid the center (hero content area)
+            // Regions that surround the center content more closely
             const regions = [
-                { t: [5, 20], l: [2, 25] },   // Top-Left
-                { t: [5, 20], l: [75, 98] },  // Top-Right
-                { t: [30, 70], l: [2, 12] },  // Left Edge
-                { t: [30, 70], l: [88, 98] }, // Right Edge
-                { t: [80, 95], l: [2, 25] },  // Bottom-Left
-                { t: [80, 95], l: [75, 98] }, // Bottom-Right
+                { t: [22, 36], l: [15, 45] },  // Top-Left Inner
+                { t: [22, 36], l: [55, 85] },  // Top-Right Inner
+                { t: [64, 78], l: [15, 45] },  // Bottom-Left Inner
+                { t: [64, 78], l: [55, 85] },  // Bottom-Right Inner
+                { t: [38, 62], l: [10, 22] },  // Middle-Left
+                { t: [38, 62], l: [78, 90] },  // Middle-Right
+                { t: [10, 24], l: [30, 70] },  // Top Center (high)
+                { t: [76, 90], l: [30, 70] },  // Bottom Center (low)
             ];
 
             const positioned = selected.map((note) => {
