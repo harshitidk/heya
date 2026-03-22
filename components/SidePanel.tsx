@@ -6,7 +6,7 @@ import { X, PenLine, Rocket, Mail, LayoutGrid, Sparkles } from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { cn, BASE_PATH } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 

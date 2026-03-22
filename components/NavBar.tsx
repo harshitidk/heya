@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { cn, BASE_PATH } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import profilePicDay from "@/public/assets/photo-left.jpg";
@@ -180,14 +180,14 @@ export function NavBar() {
                 {/* Top Row: Profile & Menu Button */}
                 <div className="flex items-center justify-between w-full px-2">
                     {/* Profile */}
-                    <a href={`${BASE_PATH}/`} onClick={handleHomeClick} className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
+                    <Link href="/" onClick={handleHomeClick} className="flex items-center gap-[10px] hover:opacity-80 transition-opacity active:scale-[0.98]">
                         <div className={cn("overflow-hidden relative shrink-0 size-[32px] transition-colors duration-700 rounded-[18px]", isDark ? 'bg-black/50 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]' : 'bg-white/50 border border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]')}>
                             <Image src={isDark ? profilePicNight : profilePicDay} alt="Profile" fill className="object-cover scale-[1.15] translate-y-[8%] transition-all duration-700" />
                         </div>
                         <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[16px] tracking-[-0.32px] transition-colors duration-700 ${isDark ? 'text-[#f5f5f5]' : 'text-[#151515]'}`}>
                             harshit heya
                         </p>
-                    </a>
+                    </Link>
 
                     {/* Menu Button */}
                     <button
@@ -225,18 +225,18 @@ export function NavBar() {
                             exit={{ height: 0, opacity: 0, marginTop: 0 }}
                             className="flex flex-col gap-[8px] overflow-hidden w-full mb-1 px-2"
                         >
-                            <a href={`${BASE_PATH}/`} onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                            <Link href="/" onClick={(e) => { handleHomeClick(e); setIsMenuOpen(false); }} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
                                 <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">home</span>
-                            </a>
+                            </Link>
 
-                            <a href={`${BASE_PATH}/identity/`} onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/identity' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                            <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", pathname === '/identity' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
                                 <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
-                            </a>
+                            </Link>
 
                              <div className="flex gap-[6px] w-full">
-                                <a href={`${BASE_PATH}/projects/`} onClick={() => setIsMenuOpen(false)} className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90 rounded-[12px]")}>
+                                <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90 rounded-[12px]")}>
                                     <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">projects</span>
-                                </a>
+                                </Link>
                                 <div className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors bg-black/20 text-white/50 cursor-default rounded-[12px]")}>
                                     <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">resume</span>
                                 </div>
@@ -260,12 +260,12 @@ export function NavBar() {
                 </AnimatePresence>
 
                 {/* Bottom: Work Section CTA (Primary) */}
-                <a href={`${BASE_PATH}/work/`} onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 overflow-hidden active:scale-95 transition-all px-2 pb-2 rounded-[14px]">
+                <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 active:scale-95 transition-all px-2 pb-2">
                     <motion.div
                         whileTap={{ scale: 0.98 }}
                         className={cn(
                             "flex h-[42px] items-center justify-center px-6 relative shrink-0 w-full cursor-pointer transition-all duration-700",
-                            isDark ? 'border-[1.5px] border-solid rounded-[14px] bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[14px] bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
+                            isDark ? 'border-[1.5px] border-solid rounded-[14px] overflow-hidden bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[14px] overflow-hidden bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
                         )}
                     >
                         <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[13px] relative z-10 transition-colors duration-700 tracking-[-0.2px]`}>
@@ -273,7 +273,7 @@ export function NavBar() {
                         </p>
                         <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
                     </motion.div>
-                </a>
+                </Link>
             </motion.div>
             )}
 

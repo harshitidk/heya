@@ -1,7 +1,7 @@
 import { Bowlby_One_SC, Poppins } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { cn, BASE_PATH } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 import { useTheme } from "./ThemeContext";
 
