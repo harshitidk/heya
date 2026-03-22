@@ -112,6 +112,20 @@ export function SidePanel() {
                                     </div>
                                 </motion.button>
 
+                                <Link 
+                                    href="/note-wall" 
+                                    onClick={() => setIsOpen(false)}
+                                    className={cn("group flex items-center gap-5 p-5 transition-all border border-transparent", textColor, "rounded-[28px] hover:border-white/20 hover:bg-black/5 dark:hover:bg-white/5")}
+                                >
+                                    <div className={cn("w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-110", textColor, "bg-black/5 dark:bg-white/10 rounded-2xl shadow-lg")}>
+                                        <LayoutGrid size={20} className="opacity-70 group-hover:opacity-100" />
+                                    </div>
+                                    <div className="flex flex-col items-start">
+                                        <span className={cn("text-[16px] tracking-tight lowercase", `${poppins.className} font-bold`)}>the note wall</span>
+                                        <span className="text-[11px] opacity-40 lowercase tracking-wide font-medium">all vibes</span>
+                                    </div>
+                                </Link>
+
                                 <motion.a
                                     whileHover={{ x: 8 }}
                                     href="https://crescendo-mu.vercel.app/"
@@ -145,29 +159,7 @@ export function SidePanel() {
                                 </motion.button>
                             </div>
 
-                            <div className="mt-auto grid grid-cols-2 gap-3 pt-6">
-                                <Link 
-                                    href="/identity" 
-                                    onClick={() => setIsOpen(false)}
-                                    className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
-                                >
-                                    <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>identity</span>
-                                </Link>
-                                <Link 
-                                    href="/work" 
-                                    onClick={() => setIsOpen(false)}
-                                    className={cn("p-4 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
-                                >
-                                    <span className={cn("text-[10px] tracking-[2px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>work</span>
-                                </Link>
-                                <Link 
-                                    href="/note-wall" 
-                                    onClick={() => setIsOpen(false)}
-                                    className={cn("col-span-2 p-3 transition-all text-center group border", glassBorder, "rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10")}
-                                >
-                                    <span className={cn("text-[10px] tracking-[4px] opacity-60 group-hover:opacity-100", textColor, "font-black uppercase")}>View Full Note Wall</span>
-                                </Link>
-                            </div>
+
 
                             <div className={cn("mt-6 text-center text-[10px] tracking-[4px] opacity-10", textColor, "font-bold uppercase")}>
                                 Harshit Saidaniya © 2026
