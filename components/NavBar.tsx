@@ -45,7 +45,7 @@ export function NavBar() {
     const underlineStyle = "h-[3px] rounded-full bg-gradient-to-r from-[#FFC739] via-[#EB3B14] to-[#FFC310] shadow-[0_2px_8px_rgba(235,59,20,0.4)] -bottom-1 left-3 right-3";
 
     return (
-        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-4 pointer-events-none transition-all duration-700" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>
+        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-6 sm:px-12 pointer-events-none transition-all duration-700" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>
 
             {/* ----------------- DESKTOP LAYOUT ----------------- */}
             {!isMobile && (
@@ -55,7 +55,7 @@ export function NavBar() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className={cn(
                     "items-center justify-between p-[16px] relative transition-colors duration-700",
-                    "w-[90%] max-w-[1400px] h-[78px] pointer-events-auto flex",
+                    "w-full max-w-[1500px] h-[78px] pointer-events-auto flex",
                     "backdrop-blur-[6px] rounded-[28px]",
                     isDark ? "bg-[#1f2838]/40 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2)]" :
                     "bg-white/40 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(0,0,0,0.06)]"
