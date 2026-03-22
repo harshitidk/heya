@@ -18,6 +18,7 @@ import projSpotifyResume from "@/public/assets/proj-spotify-resume.png";
 import projChatHistory from "@/public/assets/make_my_fit.png";
 import projMicOff from "@/public/assets/chat_history.png";
 import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
+import projVirtualTryOn from "@/public/assets/virtual_try_on.png";
 
 import { useTheme } from "./ThemeContext";
 
@@ -380,6 +381,16 @@ const makeMyFitImages: FloatingImage[] = [
     },
 ];
 
+const virtualTryOnImages: FloatingImage[] = [
+    {
+        src: projVirtualTryOn,
+        width: 270, height: 270,
+        hiddenRotate: 3, hiddenTop: -12, hiddenLeft: 55, hiddenScale: 0.5,
+        revealedRotate: 5, revealedTop: -60, revealedLeft: 50, revealedScale: 0.9,
+        borderRadius: 20, borderColor: "#fcf1d1", zIndex: 1,
+    },
+];
+
 type ProjectItem = Omit<ProjectCardProps, 'onResumeClick' | 'isDark'> & { id: string };
 
 const allProjects: ProjectItem[] = [
@@ -477,6 +488,22 @@ const allProjects: ProjectItem[] = [
         subtitleColor: "#ffc6c6",
         floatingImages: makeMyFitImages,
         clickAction: { type: "link", url: "https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing" },
+        category: "case-studies"
+    },
+    {
+        id: "virtual-try-on",
+        title: "Virtual try on",
+        subtitle: "(Case study)",
+        description: "Reduced drop-off by 13% in the virtual try-on flow by aligning it with real user behavior.",
+        bgColor: "#8a7b00",
+        borderColor: "#fcf1d1",
+        shadowColor: "rgba(184, 134, 11, 0.29)",
+        gradientFrom: "#ffdf00",
+        gradientTo: "#b8860b",
+        gradientBorderColor: "#fcf1d1",
+        subtitleColor: "#fcf1d1",
+        floatingImages: virtualTryOnImages,
+        clickAction: { type: "none" },
         category: "case-studies"
     }
 ];
