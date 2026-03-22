@@ -76,7 +76,7 @@ export default function NoteWallPage() {
                 }}
             />
 
-            <div className="relative z-10 w-full max-w-[1500px] px-6 sm:px-12 pt-12 sm:pt-16 pb-32">
+            <div className="relative z-10 w-full max-w-[1500px] px-6 sm:px-12 pt-28 sm:pt-36 pb-32">
                 {/* Header Section */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8 mb-12 sm:mb-16">
                     <div className="space-y-4">
