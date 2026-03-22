@@ -115,8 +115,6 @@ export function GuestbookWidget() {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Are you sure you want to remove your note?")) return;
-
         const { error } = await supabase
             .from('guestbook')
             .delete()
