@@ -272,20 +272,20 @@ export function GuestbookWidget() {
                             animate={{ scale: 1, opacity: 1, y: 0 }} 
                             exit={{ scale: 0.9, opacity: 0, y: 50 }}
                             transition={{ type: "spring", damping: 25, stiffness: 150 }}
-                            className={`relative w-full max-w-[1240px] h-full max-h-[88vh] rounded-[56px] p-8 sm:p-16 flex flex-col overflow-hidden transition-all duration-700 ${glassyBg} backdrop-blur-[60px] border ${glassyBorder} shadow-[0_60px_150px_-30px_rgba(0,0,0,0.4)]`}
+                            className={`relative w-full max-w-[1240px] h-full max-h-[92vh] sm:max-h-[88vh] rounded-[32px] sm:rounded-[56px] p-6 sm:p-16 flex flex-col overflow-hidden transition-all duration-700 ${glassyBg} backdrop-blur-[60px] border ${glassyBorder} shadow-[0_60px_150px_-30px_rgba(0,0,0,0.4)]`}
                         >
                             <Sparkles className="absolute -top-10 -right-10 w-60 h-60 opacity-[0.02] rotate-45 pointer-events-none" />
 
                             <div className="flex justify-between items-start mb-16 shrink-0">
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-3">
-                                        <div className={`w-12 h-[4px] rounded-full ${accentGradient}`} />
-                                        <span className={`text-[12px] font-black uppercase tracking-[4px] opacity-30 ${textColor}`}>Guestbook</span>
+                                        <div className={`w-8 sm:w-12 h-[3px] sm:h-[4px] rounded-full ${accentGradient}`} />
+                                        <span className={`text-[10px] sm:text-[12px] font-black uppercase tracking-[3px] sm:tracking-[4px] opacity-30 ${textColor}`}>Guestbook</span>
                                     </div>
-                                    <h2 className={`${poppins.className} text-[44px] sm:text-[64px] font-[800] leading-[0.9] tracking-[-0.04em] ${textColor}`}>
+                                    <h2 className={`${poppins.className} text-[32px] sm:text-[44px] lg:text-[64px] font-[800] leading-[0.9] tracking-[-0.04em] ${textColor}`}>
                                         the note wall.
                                     </h2>
-                                    <p className={`text-[14px] font-[600] opacity-40 lowercase ${textColor}`}>[vibe check: passed successfully]</p>
+                                    <p className={`text-[12px] sm:text-[14px] font-[600] opacity-40 lowercase ${textColor}`}>[vibe check: passed successfully]</p>
                                 </div>
                                 <div className="flex gap-4 items-center">
                                     <AnimatePresence>
@@ -307,18 +307,18 @@ export function GuestbookWidget() {
                                     <motion.button 
                                         whileHover={{ rotate: 180, scale: 1.1 }}
                                         onClick={fetchNotes}
-                                        className={`p-6 rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white/40 hover:text-white' : 'bg-black/5 text-black/40 hover:text-black'}`}
+                                        className={`p-4 sm:p-6 rounded-[20px] sm:rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white/40 hover:text-white' : 'bg-black/5 text-black/40 hover:text-black'}`}
                                         title="Refresh wall"
                                     >
-                                        <RotateCw size={24} className={isSubmitting ? "animate-spin" : ""} />
+                                        <RotateCw size={20} className={`sm:w-6 sm:h-6 ${isSubmitting ? "animate-spin" : ""}`} />
                                     </motion.button>
 
                                     <motion.button 
                                         whileHover={{ rotate: 90, scale: 1.1 }}
                                         onClick={() => setShowWall(false)} 
-                                        className={`p-6 rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white' : 'bg-black/5 text-black'} hover:shadow-2xl`}
+                                        className={`p-4 sm:p-6 rounded-[20px] sm:rounded-[28px] transition-all border ${glassyBorder} ${isDark ? 'bg-white/5 text-white' : 'bg-black/5 text-black'} hover:shadow-2xl`}
                                     >
-                                        <X size={28} />
+                                        <X size={22} className="sm:w-7 sm:h-7" />
                                     </motion.button>
                                 </div>
                             </div>
@@ -329,14 +329,14 @@ export function GuestbookWidget() {
                                         <p className={`${nanum.className} text-[32px] ${textColor}`}>no notes yet. be the first?</p>
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                                         {notes.map((note) => (
                                             <motion.div
                                                 key={note.id} 
                                                 initial={{ opacity: 0, scale: 0.9 }} 
                                                 animate={{ opacity: 1, scale: 1, rotate: note.rotation }}
                                                 whileHover={{ y: -15, rotate: 0, scale: 1.05, zIndex: 10, transition: { type: "spring", stiffness: 300 } }}
-                                                className={`group relative p-10 rounded-[44px] border transition-all cursor-default flex flex-col min-h-[260px] ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white/95 border-white/60 text-[#1a1a1a] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]'}`}
+                                                className={`group relative p-6 sm:p-10 rounded-[24px] sm:rounded-[44px] border transition-all cursor-default flex flex-col min-h-[220px] sm:min-h-[260px] ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white/95 border-white/60 text-[#1a1a1a] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]'}`}
                                             >
                                                 <div className="absolute top-8 left-8 w-8 h-8 rounded-full bg-current opacity-[0.03] group-hover:opacity-10 transition-opacity" />
                                                 
