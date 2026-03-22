@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Bowlby_One_SC, Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ImageCards } from "@/components/ImageCards";
 import { Moon } from "lucide-react";
+import { ScribbledNotes } from "@/components/ScribbledNotes";
 import cardLeft from "@/public/assets/photo-left.jpg";
 import cardRight from "@/public/assets/photo-right.jpg";
 import cardCenter from "@/public/assets/photo-center.jpg";
@@ -52,6 +53,9 @@ export default function Home() {
             <div className="absolute inset-0 bg-black/50" />
           </div>
         </div>
+
+        {/* Scribbled Notes from visitors */}
+        <ScribbledNotes />
 
         <div className="relative z-10 w-full flex flex-col items-center -mt-24 sm:-mt-32">
             <div className="w-full flex justify-center">
