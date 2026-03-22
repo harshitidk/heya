@@ -64,8 +64,8 @@ export function GuestbookWallLayer() {
                 const top = Math.random() * (region.t[1] - region.t[0]) + region.t[0];
                 const left = Math.random() * (region.l[1] - region.l[0]) + region.l[0];
                 
-                const fontSize = Math.floor(Math.random() * (16 - 10 + 1)) + 10; // 10px to 16px
-                const baseOpacity = Math.random() * (0.35 - 0.15) + 0.15; // 15% to 35% opacity
+                const fontSize = Math.floor(Math.random() * (20 - 12 + 1)) + 12; // 12px to 20px
+                const baseOpacity = Math.random() * (0.50 - 0.25) + 0.25; // 25% to 50% opacity
                 
                 const delay = Math.random() * 2;
                 const rotation = (Math.random() * 20) - 10; // -10 to +10 rotation for scribbles 
