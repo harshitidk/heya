@@ -3,6 +3,7 @@
 import React from "react";
 import { Poppins } from "next/font/google";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -53,6 +54,29 @@ export function PurposeSection() {
                         >
                             i thrive when i’m building toward a larger vision something meaningful to show up for every day. i tend to work best in two situations: when i fall deeply in love with the work, or when i’m given ownership of a problem and a clear goal to pursue.
                         </p>
+
+                        <motion.a 
+                            href="https://wa.link/60qsvx"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`group flex items-center gap-2 mt-4 sm:mt-8 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border backdrop-blur-md transition-all duration-500 cursor-pointer overflow-hidden relative shadow-[0_5px_15px_-5px_rgba(235,59,20,0.15)] ${isDark ? 'bg-white/5 border-white/10 hover:border-white/30 text-white hover:text-white' : 'bg-black/5 border-orange-500/20 hover:border-orange-500/40 text-orange-600 hover:text-orange-700'}`}
+                            whileHover={{ y: -3, scale: 1.02 }}
+                            whileTap={{ y: 1, scale: 0.98 }}
+                        >
+                            <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-r from-orange-400 to-red-500`} />
+                            <span className="font-extrabold text-[14px] sm:text-[16px] lowercase tracking-[1px] relative z-10">
+                                get in touch
+                            </span>
+                            <motion.div 
+                                className="relative z-10 flex items-center"
+                                initial={{ x: 0 }}
+                                animate={{ x: 0 }}
+                                whileHover={{ x: 6 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                <ArrowRight size={18} strokeWidth={3} className="ml-1" />
+                            </motion.div>
+                        </motion.a>
                     </div>
                 </motion.div>
             </div>
