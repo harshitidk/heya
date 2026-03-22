@@ -64,14 +64,15 @@ export default function NoteWallPage() {
     };
 
     return (
-        <main className={`relative min-h-screen w-full flex flex-col items-center overflow-x-hidden transition-colors duration-700 ${isDark ? 'bg-[#0A0E17]' : 'bg-white'}`}>
+        <main className={`relative min-h-screen w-full flex flex-col items-center overflow-x-hidden transition-colors duration-700 ${isDark ? 'bg-[#0F172A]' : 'bg-white'}`}>
             {/* Background Pattern Layer */}
-            <div className={`fixed inset-0 z-0 opacity-[0.6] pointer-events-none transition-opacity duration-1000`}
+            <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000`}
                 style={{
                     backgroundImage: isDark 
-                        ? `radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.06) 1.5px, transparent 0)` 
-                        : `radial-gradient(circle at 1.5px 1.5px, rgba(0,0,0,0.04) 1.5px, transparent 0)`,
-                    backgroundSize: '32px 32px'
+                        ? `radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.08) 1.5px, transparent 0)` 
+                        : `radial-gradient(circle at 1.5px 1.5px, rgba(0,0,0,0.05) 1.5px, transparent 0)`,
+                    backgroundSize: '28px 28px',
+                    opacity: isDark ? 0.8 : 0.6
                 }}
             />
 
@@ -83,7 +84,7 @@ export default function NoteWallPage() {
                             <div className={`w-10 h-[3px] rounded-full ${accentGradient}`} />
                             <span className={`text-[11px] font-black uppercase tracking-[3px] opacity-30 ${textColor}`}>community</span>
                         </div>
-                        <h1 className={`${poppins.className} text-[44px] sm:text-[84px] font-[800] leading-[0.9] tracking-[-0.04em] ${textColor}`}>
+                        <h1 className={`${poppins.className} text-[44px] sm:text-[80px] font-[800] leading-[0.9] tracking-[-0.04em] ${textColor}`}>
                             the note wall.
                         </h1>
                         <p className={`text-[13px] sm:text-[15px] font-[600] opacity-40 lowercase ${textColor}`}>[total vibes recorded: {notes.length}]</p>
@@ -130,8 +131,8 @@ export default function NoteWallPage() {
                                     className={cn(
                                         "group relative p-8 rounded-[32px] border transition-all cursor-default flex flex-col min-h-[220px]",
                                         isDark 
-                                            ? "bg-[#0A0E17]/60 border-white/5 text-white shadow-xl" 
-                                            : "bg-white/80 border-black/[0.03] text-[#1a1a1a] shadow-sm hover:shadow-md",
+                                            ? "bg-white/[0.06] border-white/10 text-white shadow-2xl" 
+                                            : "bg-white/80 border-black/[0.04] text-[#1a1a1a] shadow-sm hover:shadow-md",
                                         "backdrop-blur-xl"
                                     )}
                                 >
