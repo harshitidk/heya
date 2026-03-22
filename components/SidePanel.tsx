@@ -138,7 +138,7 @@ export function SidePanel() {
                                     </div>
                                     <div className="flex flex-col items-start">
                                         <span className={cn("text-[16px] tracking-tight lowercase", `${poppins.className} font-bold`)}>
-                                            {copied ? "copied!" : "get in touch"}
+                                            {copied ? "copied mail" : "get in touch"}
                                         </span>
                                         <span className="text-[11px] opacity-40 lowercase tracking-wide font-medium">collaborate</span>
                                     </div>

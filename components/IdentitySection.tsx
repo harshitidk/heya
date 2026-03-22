@@ -76,7 +76,7 @@ export function IdentitySection({ isDark }: { isDark?: boolean }) {
 
                         <div className={`flex items-center justify-center sm:justify-start gap-2 ${isDark ? 'text-white/70' : 'text-[#afafaf]'} text-[13px] sm:text-[15px] leading-[1.6] tracking-[-0.48px]`}>
                             <MapPin size={18} />
-                            <span>ROHINI, DELHI</span>
+                            <span className="lowercase">rohini, delhi</span>
                         </div>
                     </div>
                 </motion.div>
