@@ -8,8 +8,8 @@ import { useTheme } from "@/components/ThemeContext";
 import { Poppins, Nanum_Pen_Script } from "next/font/google";
 import { ArrowLeft, Sparkles, RotateCw, Trash2 } from "lucide-react";
 import Link from "next/link";
-import workBg from "@/public/assets/identity-bg-light.jpg";
-import workBgNight from "@/public/assets/identity-bg-night.jpg";
+import wallBg from "@/public/assets/wall_texture.png";
+import wallBgNight from "@/public/assets/wall_texture_night.png";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const nanum = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
@@ -71,30 +71,27 @@ export default function NoteWallPage() {
 
     return (
         <main className="relative min-h-screen w-full flex flex-col items-center overflow-x-hidden transition-colors duration-700">
-            {/* Background Image Layers */}
+            {/* Background Texture Layer */}
             <div className={`fixed inset-0 z-0 overflow-hidden pointer-events-none`}>
                 <div className={`absolute inset-0 transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
-                    <Image src={workBg} alt="Background" fill className="object-cover" priority />
+                    <Image src={wallBg} alt="Wall Texture" fill className="object-cover opacity-80" priority />
                 </div>
                 <div className={`absolute inset-0 transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
-                    <Image src={workBgNight} alt="Background Night" fill className="object-cover" priority />
+                    <Image src={wallBgNight} alt="Wall Texture Night" fill className="object-cover opacity-40" priority />
                 </div>
-                <div className="absolute inset-0 bg-black/10 dark:bg-black/20 backdrop-blur-[2px]" />
+                {/* Subtle Overlays for more "natural" feel */}
+                <div className="absolute inset-0 bg-white/10 dark:bg-black/20" />
             </div>
 
-            <div className="relative z-10 w-full max-w-[1400px] px-6 sm:px-12 pt-10 sm:pt-16 pb-32">
+            <div className="relative z-10 w-full max-w-[1400px] px-6 sm:px-12 pt-16 sm:pt-24 pb-32">
                 {/* Header Section */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8 mb-16 sm:mb-24">
-                    <div className="space-y-4">
-                        <Link href="/" className={cn("group flex items-center gap-2 opacity-50 hover:opacity-100 transition-all mb-4", textColor)}>
-                            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                            <span className="text-[12px] font-black uppercase tracking-[2px]">back home</span>
-                        </Link>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-10 mb-16 sm:mb-24">
+                    <div className="space-y-5">
                         <div className="flex items-center gap-3">
-                            <div className={`w-12 h-[4px] rounded-full ${accentGradient}`} />
+                            <div className={`w-12 h-[3px] rounded-full ${accentGradient}`} />
                             <span className={`text-[12px] font-black uppercase tracking-[4px] opacity-30 ${textColor}`}>community</span>
                         </div>
-                        <h1 className={`${poppins.className} text-[48px] sm:text-[84px] font-[800] leading-[0.85] tracking-[-0.04em] ${textColor}`}>
+                        <h1 className={`${poppins.className} text-[50px] sm:text-[90px] font-[800] leading-[0.8] tracking-[-0.04em] ${textColor}`}>
                             the note <br /><span className="opacity-40">wall.</span>
                         </h1>
                         <p className={`text-[14px] sm:text-[16px] font-[600] opacity-40 lowercase ${textColor}`}>[total vibes recorded: {notes.length}]</p>
@@ -105,17 +102,17 @@ export default function NoteWallPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={fetchNotes}
-                            className={cn("p-5 rounded-[28px] border transition-all flex items-center gap-3", glassBg, glassBorder, textColor)}
+                            className={cn("p-4.5 rounded-[22px] border transition-all flex items-center gap-3", glassBg, glassBorder, textColor)}
                         >
-                            <RotateCw size={20} className={isLoading ? "animate-spin" : ""} />
-                            <span className="text-[12px] font-bold uppercase tracking-[1px] hidden sm:inline">refresh wall</span>
+                            <RotateCw size={18} className={isLoading ? "animate-spin" : "opacity-60"} />
+                            <span className="text-[11px] font-black uppercase tracking-[1px] hidden sm:inline opacity-70">refresh</span>
                         </motion.button>
                         
                         <motion.button 
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => window.dispatchEvent(new Event("open-guestbook"))}
-                            className={cn("px-8 py-5 rounded-[28px] font-black uppercase tracking-[1px] text-[13px] text-white shadow-xl hover:shadow-2xl transition-all", accentGradient)}
+                            className={cn("px-10 py-5 rounded-[26px] font-black uppercase tracking-[1px] text-[12px] text-white shadow-xl hover:shadow-2xl transition-all", accentGradient)}
                         >
                             stick a note
                         </motion.button>
