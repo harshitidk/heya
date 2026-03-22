@@ -52,10 +52,10 @@ export default function Home() {
             <Image src={nightBg2} alt="Night Sky Layer 2" fill className="object-cover absolute max-w-none" priority />
             <div className="absolute inset-0 bg-black/50" />
           </div>
+          
+          {/* Scribbled notes in the background */}
+          <ScribbledNotes />
         </div>
-
-        {/* Scribbled Notes from visitors */}
-        <ScribbledNotes />
 
         <div className="relative z-10 w-full flex flex-col items-center -mt-24 sm:-mt-32">
             <div className="w-full flex justify-center">
