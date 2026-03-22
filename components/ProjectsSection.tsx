@@ -18,7 +18,7 @@ import projSpotifyResume from "@/public/assets/proj-spotify-resume.png";
 import projChatHistory from "@/public/assets/make_my_fit.png";
 import projMicOff from "@/public/assets/chat_history.png";
 import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
-import projVirtualTryOn from "@/public/assets/virtual_try_on.png";
+import projVirtualTryOnV2 from "@/public/assets/virtual_try_on_v2.png";
 
 import { useTheme } from "./ThemeContext";
 
@@ -383,7 +383,7 @@ const makeMyFitImages: FloatingImage[] = [
 
 const virtualTryOnImages: FloatingImage[] = [
     {
-        src: projVirtualTryOn,
+        src: projVirtualTryOnV2,
         width: 270, height: 270,
         hiddenRotate: 3, hiddenTop: -12, hiddenLeft: 55, hiddenScale: 0.5,
         revealedRotate: 5, revealedTop: -60, revealedLeft: 50, revealedScale: 0.9,
@@ -503,7 +503,7 @@ const allProjects: ProjectItem[] = [
         gradientBorderColor: "#fcf1d1",
         subtitleColor: "#fcf1d1",
         floatingImages: virtualTryOnImages,
-        clickAction: { type: "none" },
+        clickAction: { type: "link", url: "https://medium.com/@iamharshit.idk/reducing-the-dropoff-by-13-on-virutal-try-on-a99fa0cff09e" },
         category: "case-studies"
     }
 ];

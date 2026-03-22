@@ -45,17 +45,14 @@ export function GuestbookWallLayer() {
             const shuffled = [...data].sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, numNotes);
 
-            // Regions that generally avoid the center
+            // Regions that strictly avoid the center (hero content area)
             const regions = [
-                { t: [5, 25], l: [5, 25] },
-                { t: [5, 25], l: [70, 90] },
-                { t: [30, 60], l: [5, 15] },
-                { t: [30, 60], l: [80, 92] },
-                { t: [70, 90], l: [5, 25] },
-                { t: [70, 90], l: [70, 90] },
-                // Some mid-top and mid-bottom to fill gaps without blocking center
-                { t: [5, 15], l: [30, 70] },
-                { t: [80, 95], l: [30, 70] },
+                { t: [5, 20], l: [2, 25] },   // Top-Left
+                { t: [5, 20], l: [75, 98] },  // Top-Right
+                { t: [30, 70], l: [2, 12] },  // Left Edge
+                { t: [30, 70], l: [88, 98] }, // Right Edge
+                { t: [80, 95], l: [2, 25] },  // Bottom-Left
+                { t: [80, 95], l: [75, 98] }, // Bottom-Right
             ];
 
             const positioned = selected.map((note) => {
@@ -64,17 +61,17 @@ export function GuestbookWallLayer() {
                 const top = Math.random() * (region.t[1] - region.t[0]) + region.t[0];
                 const left = Math.random() * (region.l[1] - region.l[0]) + region.l[0];
                 
-                const fontSize = Math.floor(Math.random() * (20 - 12 + 1)) + 12; // 12px to 20px
-                const baseOpacity = Math.random() * (0.50 - 0.25) + 0.25; // 25% to 50% opacity
+                const baseFontSize = Math.floor(Math.random() * (18 - 14 + 1)) + 14; // 14px to 18px base
+                const baseOpacity = Math.random() * (0.45 - 0.25) + 0.25; // 25% to 45% opacity
                 
                 const delay = Math.random() * 2;
-                const rotation = (Math.random() * 20) - 10; // -10 to +10 rotation for scribbles 
+                const rotation = (Math.random() * 16) - 8; // -8 to +8 rotation
 
                 return {
                     ...note,
                     top: `${top}%`,
                     left: `${left}%`,
-                    fontSize: `${fontSize}px`,
+                    fontSize: `${baseFontSize}px`,
                     baseOpacity,
                     delay,
                     rotation
@@ -129,12 +126,12 @@ export function GuestbookWallLayer() {
                     style={{
                         top: note.top,
                         left: note.left,
-                        fontSize: note.fontSize,
+                        fontSize: `clamp(10px, 1.2vw, ${note.fontSize})`,
                         textShadow: isDark ? '0 4px 12px rgba(0,0,0,0.4)' : '0 2px 8px rgba(0,0,0,0.05)',
                         transformOrigin: 'center center'
                     }}
                 >
-                    <span className="leading-tight text-center max-w-[160px] sm:max-w-[220px] break-words">
+                    <span className="leading-tight text-center max-w-[140px] sm:max-w-[220px] break-words">
                         "{note.comment}"
                     </span>
                     <span className="text-[0.65em] opacity-70 mt-1 uppercase tracking-widest font-sans font-bold">

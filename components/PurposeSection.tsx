@@ -3,7 +3,7 @@
 import React from "react";
 import { Poppins } from "next/font/google";
 import { motion } from "framer-motion";
-import { ArrowRight, Flower2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -64,23 +64,10 @@ export function PurposeSection() {
                             whileTap={{ y: 2, scale: 0.98 }}
                         >
                             {/* Inner Highlight Reflection */}
-                            <div className="absolute inset-0 rounded-full border border-white/20 pointer-events-none z-20" />
+                            <div className="absolute inset-0 rounded-full border border-white/20 pointer-events-none" />
                             
                             {/* Hover Overlay */}
                             <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${isDark ? 'bg-gradient-to-br from-orange-400/10 to-red-500/10' : 'bg-white/20'}`} />
-                            
-                            {/* Decorative Flowers */}
-                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none flex items-center justify-center -z-0">
-                                <motion.div className="absolute left-2 top-0 text-white/40" whileHover={{ rotate: 90 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
-                                    <Flower2 size={28} />
-                                </motion.div>
-                                <motion.div className="absolute right-8 -bottom-1 text-white/40" whileHover={{ rotate: -90 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
-                                    <Flower2 size={20} />
-                                </motion.div>
-                                <motion.div className="absolute left-1/2 -top-2 text-white/30" whileHover={{ rotate: 180 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
-                                    <Flower2 size={24} />
-                                </motion.div>
-                            </div>
                             
                             <span className="font-bold text-[15px] sm:text-[17px] lowercase tracking-wide relative z-10 transition-colors duration-300">
                                 get in touch
