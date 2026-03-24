@@ -39,9 +39,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
                 className={`fixed inset-0 z-[99998] pointer-events-none ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'}`}
             />
 
-            <main className="w-full flex-1">
+            <div className="w-full flex-1">
                 {children}
-            </main>
+            </div>
         </>
     );
 };
