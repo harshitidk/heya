@@ -24,7 +24,9 @@ export default function NoteWallPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [ownNoteIds, setOwnNoteIds] = useState<string[]>([]);
     
-    const accentGradient = "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
+    const accentGradient = isDark 
+        ? "bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500" 
+        : "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
     const textColor = isDark ? "text-white" : "text-[#1a1a1a]";
 
     useEffect(() => {

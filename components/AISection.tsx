@@ -64,6 +64,64 @@ export const AISection = () => {
           : 'bg-gradient-to-b from-[#ff6655] via-[#ff3a3a] to-[#e71f00]'
       }`}
     >
+      {/* Floating Project Previews (Background Decorative) */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center overflow-visible">
+        <div className="relative w-full max-w-[1280px] h-full overflow-visible">
+          {/* Left: Crescendo Card */}
+          <motion.a 
+            href="https://crescendo-mu.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, x: -50, rotate: -25 }}
+            whileInView={{ opacity: 0.8, x: 0, rotate: -12.06 }}
+            whileHover={{ 
+              opacity: 1, 
+              scale: 1.05, 
+              rotate: -8,
+              transition: { duration: 0.3 } 
+            }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-[-110px] top-[53%] -translate-y-1/2 w-[280px] h-auto aspect-[438/283] rounded-[10px] shadow-[0px_20px_40px_-10px_rgba(0,0,0,0.5)] hidden xl:block z-20 pointer-events-auto cursor-pointer"
+          >
+            <div className="relative w-full h-full rounded-[10px] overflow-hidden border border-white/10 group">
+              <img src="/assets/crescendo.png" alt="Crescendo Project" className="w-full h-full object-cover rounded-[10px] transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-white/5 pointer-events-none" />
+            </div>
+            
+            {/* Soft Glow on hover */}
+            <div className="absolute -inset-4 bg-blue-500/0 group-hover:bg-blue-500/10 blur-2xl rounded-full transition-all duration-500 -z-10" />
+          </motion.a>
+
+          {/* Right: Invoice Card */}
+          <motion.a 
+            href="https://harshitidk.github.io/invoice/"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, x: 50, rotate: 30 }}
+            whileInView={{ opacity: 0.8, x: 0, rotate: 15 }}
+            whileHover={{ 
+              opacity: 1, 
+              scale: 1.05, 
+              rotate: 10,
+              transition: { duration: 0.3 } 
+            }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-[1050px] top-[48%] -translate-y-1/2 w-[290px] h-auto aspect-[443/300] rounded-[10px] shadow-[0px_20px_40px_-10px_rgba(0,0,0,0.5)] hidden xl:block z-20 pointer-events-auto cursor-pointer"
+          >
+            <div className="relative w-full h-full rounded-[10px] overflow-hidden border border-white/10 group">
+              <img src="/assets/invoice.png" alt="Invoice Project" className="w-full h-full object-cover rounded-[10px] transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-bl from-white/10 to-transparent pointer-events-none opacity-50" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-white/5 pointer-events-none" />
+            </div>
+
+            {/* Soft Glow on hover */}
+            <div className="absolute -inset-4 bg-orange-500/0 group-hover:bg-orange-500/10 blur-2xl rounded-full transition-all duration-500 -z-10" />
+          </motion.a>
+        </div>
+      </div>
       {/* 1. Illustration removed as per user request */}
 
       {/* 2. Focused Top Blur (Creating Depth of Field) - Kept for atmospheric transition */}
@@ -129,7 +187,11 @@ export const AISection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-white text-[24px] sm:text-[44px] lg:text-[52px] leading-[1.2] font-normal font-bricolage tracking-tight lowercase"
+            className={`bg-clip-text text-transparent bg-gradient-to-b ${
+              isDark 
+                ? 'from-white via-cyan-100 to-blue-400' 
+                : 'from-white via-white/90 to-yellow-200'
+            } text-[24px] sm:text-[44px] lg:text-[52px] leading-[1.2] font-normal font-bricolage tracking-tight lowercase`}
           >
             everytime a new ai tool drops,
           </motion.h2>
@@ -138,7 +200,11 @@ export const AISection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-white text-[24px] sm:text-[44px] lg:text-[52px] leading-[1.2] font-extrabold font-bricolage tracking-tight lowercase"
+            className={`bg-clip-text text-transparent bg-gradient-to-b ${
+              isDark 
+                ? 'from-white via-cyan-100 to-blue-400' 
+                : 'from-white via-white/90 to-yellow-200'
+            } text-[24px] sm:text-[44px] lg:text-[52px] leading-[1.2] font-extrabold font-bricolage tracking-tight lowercase`}
           >
             i get a little more excited.
           </motion.h2>
@@ -154,13 +220,17 @@ export const AISection = () => {
             transition={{ delay: 0.2 }}
             className="relative w-full group"
           >
-            {/* Diffused "Smoky" Gradient Haze around borders (Orange/Yellow - No Blue) */}
+            {/* Diffused "Smoky" Gradient Haze around borders (Theme-aware glow) */}
             <motion.div 
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
               transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-[3px] rounded-[31px] bg-gradient-to-r from-yellow-400 via-orange-500 to-amber-600 bg-[length:200%_auto] opacity-50 group-hover:opacity-80 blur-[10px] z-0"
+              className={`absolute -inset-[3px] rounded-[31px] bg-gradient-to-r ${
+                isDark 
+                  ? 'from-[#3b82f6] via-[#6366f1] to-[#22d3ee]' 
+                  : 'from-yellow-400 via-orange-500 to-amber-600'
+              } bg-[length:200%_auto] opacity-50 group-hover:opacity-80 blur-[10px] z-0`}
             />
             
             {/* Soft Diffuse Shadow Layer (Secondary Smoke) */}
@@ -185,7 +255,6 @@ export const AISection = () => {
                   <Paperclip className="w-5 h-5 text-[#6b6b56]/40 cursor-pointer hover:text-[#6b6b56] transition-colors" />
                 </div>
                 
-                {/* Original Pill-Style Button */}
                 <button 
                   type="submit"
                   disabled={isLoading}
@@ -193,7 +262,11 @@ export const AISection = () => {
                     ${isLoading ? 'opacity-50 grayscale' : 'opacity-100'}
                   `}
                 >
-                  <div className="bg-[#ff5141] px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full shadow-[0px_4px_16px_rgba(255,81,65,0.4)] hover:shadow-[0px_10px_30px_rgba(255,81,65,0.6)] transition-all flex items-center justify-center">
+                  <div className={`px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full transition-all duration-700 flex items-center justify-center ${
+                    isDark 
+                      ? 'bg-[#1d4ed8] shadow-[0px_4px_16px_rgba(29,78,216,0.4)] hover:shadow-[0px_10px_30px_rgba(29,78,216,0.6)]' 
+                      : 'bg-[#ff5141] shadow-[0px_4px_16px_rgba(255,81,65,0.4)] hover:shadow-[0px_10px_30px_rgba(255,81,65,0.6)]'
+                  }`}>
                     {isLoading ? (
                       <motion.div 
                         animate={{ rotate: 360 }}
@@ -211,39 +284,78 @@ export const AISection = () => {
             </div>
           </motion.form>
 
-          {/* AI Response Box (Smoky Border too) */}
+          {/* AI Response Modal Overlay */}
           <AnimatePresence>
             {response && (
-              <div className="relative w-full">
-                {/* Soft Response Haze (Yellow/Orange - No Blue) */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.4 }}
-                  className="absolute -inset-[5px] rounded-[33px] bg-gradient-to-r from-yellow-400/30 via-orange-500/20 to-amber-600/10 blur-[15px] z-0"
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+              >
+                {/* Backdrop Blur Overlay */}
+                <div 
+                  className="absolute inset-0 bg-black/60 backdrop-blur-[8px]" 
+                  onClick={handleReset}
                 />
+
+                {/* Modal Card */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className="relative z-10 w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-[28px] p-7 text-white text-sm sm:text-base leading-relaxed text-left max-h-[35dvh] overflow-y-auto custom-scrollbar shadow-[0px_20px_60px_rgba(0,0,0,0.5)]"
+                  className={`relative z-10 w-full max-w-[600px] ${
+                    isDark ? 'bg-white/10' : 'bg-[#fffffc]'
+                  } backdrop-blur-2xl border ${
+                    isDark ? 'border-white/20' : 'border-black/5'
+                  } rounded-[32px] p-8 sm:p-10 shadow-[0px_35px_100px_rgba(0,0,0,0.5)] overflow-hidden`}
                 >
-                  <button 
-                    onClick={handleReset}
-                    className="absolute top-5 right-5 text-white/40 hover:text-white/80 transition-colors text-[10px] tracking-widest uppercase font-bold"
-                  >
-                    reset
-                  </button>
-                  <div className="flex gap-4">
-                    <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center shrink-0 shadow-lg">
-                      <span className="text-[10px] font-bold">AI</span>
+                  {/* Smoky Atmosphere Glow behind Modal */}
+                  <div className={`absolute -inset-10 rounded-full opacity-30 blur-[40px] -z-10 ${
+                    isDark 
+                    ? 'bg-gradient-to-tr from-blue-600/40 via-indigo-600/20 to-cyan-500/10' 
+                    : 'bg-gradient-to-tr from-yellow-400/20 via-orange-500/10 to-transparent'
+                  }`} />
+
+                  {/* Close Buttons */}
+                  <div className="flex justify-between items-center mb-8">
+                    <div className={`flex items-center gap-3 ${isDark ? 'text-white' : 'text-black'}`}>
+                      <div className={`w-8 h-8 rounded-full ${isDark ? 'bg-white/20' : 'bg-black/5'} flex items-center justify-center shadow-lg`}>
+                        <span className="text-[10px] font-bold">AI</span>
+                      </div>
+                      <span className="text-[14px] font-black uppercase tracking-[2px] opacity-40">Response</span>
                     </div>
-                    <div className="flex-1 opacity-90 font-medium">
-                      {response}
-                    </div>
+                    <button 
+                      onClick={handleReset}
+                      className={`p-2 rounded-full transition-all group ${
+                        isDark ? 'hover:bg-white/10 text-white/40 hover:text-white' : 'hover:bg-black/5 text-black/40 hover:text-black'
+                      }`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Response Text */}
+                  <div className={`custom-scrollbar-thin max-h-[50dvh] overflow-y-auto pr-2 ${isDark ? 'text-white' : 'text-black/80'} text-[16px] sm:text-[18px] leading-[1.6] font-medium`}>
+                    {response}
+                  </div>
+
+                  {/* Reset/Footer area */}
+                  <div className="mt-8 pt-8 border-t border-white/10 flex justify-end">
+                    <button 
+                      onClick={handleReset}
+                      className={`text-[10px] font-black uppercase tracking-[2px] transition-colors py-2 px-4 rounded-lg
+                        ${isDark ? 'text-white/40 hover:text-white hover:bg-white/10' : 'text-black/40 hover:text-black hover:bg-black/5'}
+                      `}
+                    >
+                      clear and return
+                    </button>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>

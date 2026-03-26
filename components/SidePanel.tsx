@@ -29,7 +29,9 @@ export function SidePanel() {
     const glassBg = isDark ? "bg-[#0A0E17]/40" : "bg-white/40";
     const glassBorder = isDark ? "border-white/10" : "border-white/60";
     const textColor = isDark ? "text-white" : "text-[#1a1a1a]";
-    const accentGradient = "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
+    const accentGradient = isDark 
+        ? "bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 shadow-[0_4px_12px_rgba(6,182,212,0.2)]" 
+        : "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
 
     return (
         <>

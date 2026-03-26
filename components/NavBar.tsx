@@ -42,7 +42,12 @@ export function NavBar() {
     if (!mounted) return null;
 
     const normalizedPathname = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
-    const underlineStyle = "h-[3px] rounded-full bg-gradient-to-r from-[#FFC739] via-[#EB3B14] to-[#FFC310] shadow-[0_2px_8px_rgba(235,59,20,0.4)] -bottom-1 left-3 right-3";
+    const underlineStyle = cn(
+      "h-[3px] rounded-full transition-all duration-700 -bottom-1 left-3 right-3",
+      isDark 
+        ? "bg-gradient-to-r from-blue-400 to-emerald-400 shadow-[0_2px_10px_rgba(52,211,153,0.5)]" 
+        : "bg-gradient-to-r from-[#FFC739] via-[#EB3B14] to-[#FFC310] shadow-[0_2px_8px_rgba(235,59,20,0.4)]"
+    );
 
     return (
         <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-0 right-0 z-50 flex justify-center px-6 sm:px-12 pointer-events-none transition-all duration-700" style={{ bottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom, 0px))" : "2rem" }}>

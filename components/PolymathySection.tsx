@@ -38,14 +38,30 @@ export const PolymathySection = () => {
       <div className="relative w-full max-w-6xl h-full flex items-center justify-center px-4 pointer-events-none">
         
         {/* Central Text */}
-        <motion.p 
+        <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className={`${bricolage.className} ${isDark ? 'text-[#ffcb10]' : 'text-[#ff4040]'} text-[24px] sm:text-[27px] font-medium text-center leading-[1.3] max-w-[500px] z-10 transition-colors duration-700 -translate-y-8 pointer-events-auto`}
         >
-          I’ve always been drawn to the idea of polymathy // not being limited to one way of thinking.
-        </motion.p>
+          I’ve always been drawn to the idea of{' '}
+          <span className="relative inline-block px-1 mx-1">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ originX: 0 }}
+              className={`absolute inset-x-[-6px] bottom-1 h-[75%] -z-10 
+                ${isDark ? 'bg-[#ff4040]/30' : 'bg-[#ffcb10]/50'} 
+                -rotate-1 skew-x-[-10deg]
+                rounded-sm blur-[0.5px]
+              `}
+            />
+            polymathy
+          </span>{' '}
+          // not being limited to one way of thinking.
+        </motion.div>
 
         {/* Floating Cards - Dragging Container */}
         

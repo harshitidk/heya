@@ -29,7 +29,9 @@ export function GuestbookWidget() {
     const [ownNoteIds, setOwnNoteIds] = useState<string[]>([]);
     const [hasOldNotes, setHasOldNotes] = useState(false);
 
-    const accentGradient = "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
+    const accentGradient = isDark 
+        ? "bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 shadow-[0_10px_40px_-10px_rgba(6,182,212,0.3)]" 
+        : "bg-gradient-to-br from-[#FFC739] via-[#EB3B14] to-[#FFC310]";
 
     useEffect(() => {
         const handleOpen = () => setIsExpanded(true);

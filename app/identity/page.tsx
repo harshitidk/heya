@@ -35,6 +35,8 @@ export default function IdentityPage() {
                         className="object-cover"
                         priority
                     />
+                    {/* Dark overlay layer to create more depth and focus */}
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
                 </div>
             </div>
 
