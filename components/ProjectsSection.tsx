@@ -19,6 +19,9 @@ import projChatHistory from "@/public/assets/make_my_fit.png";
 import projMicOff from "@/public/assets/chat_history.png";
 import projMakeMyFit from "@/public/assets/make_my_fit_2.png";
 import projVirtualTryOnFinal from "@/public/assets/virtual_try_on_final.png";
+import projFriendlyInvoice from "@/public/assets/friendly-invoice.png";
+import projFriendlyInvoice2 from "@/public/assets/friendly-invoice-2.png";
+import projFriendlyInvoicePreview from "@/public/assets/friendly-invoice-preview.png";
 
 import { useTheme } from "./ThemeContext";
 
@@ -391,6 +394,16 @@ const virtualTryOnImages: FloatingImage[] = [
     },
 ];
 
+const friendlyInvoiceImages: FloatingImage[] = [
+    {
+        src: projFriendlyInvoicePreview,
+        width: 270, height: 160,
+        hiddenRotate: 2, hiddenTop: -10, hiddenLeft: 35, hiddenScale: 0.5,
+        revealedRotate: 4, revealedTop: -55, revealedLeft: 40, revealedScale: 1,
+        borderRadius: 20, borderColor: "#d4d4d4", zIndex: 1,
+    },
+];
+
 type ProjectItem = Omit<ProjectCardProps, 'onResumeClick' | 'isDark'> & { id: string };
 
 const allProjects: ProjectItem[] = [
@@ -505,6 +518,22 @@ const allProjects: ProjectItem[] = [
         floatingImages: virtualTryOnImages,
         clickAction: { type: "link", url: "https://medium.com/@iamharshit.idk/reducing-the-dropoff-by-13-on-virutal-try-on-a99fa0cff09e" },
         category: "case-studies"
+    },
+    {
+        id: "friendly-invoice",
+        title: "Friendly Invoice",
+        subtitle: "(Invoice Maker)",
+        description: "Built a invoice maker that you can send your friends if they owe you money.",
+        bgColor: "#000000",
+        borderColor: "#ffffff",
+        shadowColor: "rgba(0,0,0,0.5)",
+        gradientFrom: "#404040", // Deep gray for text contrast
+        gradientTo: "#000000",   // True black
+        gradientBorderColor: "#ffffff",
+        subtitleColor: "rgba(255,255,255,0.6)",
+        floatingImages: friendlyInvoiceImages,
+        clickAction: { type: "link", url: "https://harshitidk.github.io/invoice/" },
+        category: "design-projects"
     }
 ];
 
@@ -548,7 +577,7 @@ export function ProjectsSection({ isDark }: { isDark?: boolean }) {
                               }
                     }
                 >
-                    [isn&apos;t this tuffff?]
+                    [isn't this tuffff?]
                 </p>
             </motion.div>
 

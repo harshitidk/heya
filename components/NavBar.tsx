@@ -148,24 +148,40 @@ export function NavBar() {
                         </p>
                     </div>
 
-                    <Link
-                        href="/work"
+                    <Link href="/work">
+                        <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
+                            {normalizedPathname === '/work' && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className={cn("absolute", underlineStyle)}
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                                work
+                            </p>
+                        </div>
+                    </Link>
+
+                    <a
+                        href="https://wa.link/60qsvx"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="relative group ml-1"
                     >
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95, y: 2 }}
                             className={cn(
-                                "flex items-center justify-center h-[38px] px-5 xl:px-7 relative shrink-0 cursor-pointer transition-all duration-700",
-                                isDark ? 'border-[1.5px] border-solid rounded-[12px] md:rounded-[14px] overflow-hidden bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[12px] md:rounded-[14px] overflow-hidden bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
+                                "flex items-center justify-center h-[38px] px-5 xl:px-7 relative shrink-0 cursor-pointer transition-all duration-700 rounded-[12px] md:rounded-[14px]",
+                                isDark ? 'bg-white text-black hover:bg-white/90 shadow-lg shadow-white/5' : 'bg-black text-white hover:bg-black/90 shadow-lg shadow-black/5'
                             )}
                         >
-                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[15px] xl:text-[17px] tracking-[-0.3px] whitespace-nowrap relative z-10 transition-colors duration-700">
-                                work
+                            <p className="font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700">
+                                let's talk
                             </p>
-                            <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
                         </motion.div>
-                    </Link>
+                    </a>
                 </div>
             </motion.div>
             )}
@@ -239,6 +255,10 @@ export function NavBar() {
                                 <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">identity</span>
                             </Link>
 
+                            <Link href="/work" onClick={() => setIsMenuOpen(false)} className={cn("w-full flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", normalizedPathname === '/work' ? (isDark ? 'bg-white/20 text-white' : 'bg-black/10 text-black') : (isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-[#1a1a1a]/60'))}>
+                                <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">work</span>
+                            </Link>
+
                              <div className="flex gap-[6px] w-full">
                                 <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90 rounded-[12px]")}>
                                     <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">projects</span>
@@ -265,21 +285,26 @@ export function NavBar() {
                     )}
                 </AnimatePresence>
 
-                {/* Bottom: Work Section CTA (Primary) */}
-                <Link href="/work" onClick={() => setIsMenuOpen(false)} className="w-full relative z-20 active:scale-95 transition-all px-2 pb-2">
+                {/* Bottom: Let's Talk CTA (Primary) */}
+                <a 
+                    href="https://wa.link/60qsvx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)} 
+                    className="w-full relative z-20 active:scale-95 transition-all px-2 pb-2"
+                >
                     <motion.div
                         whileTap={{ scale: 0.98 }}
                         className={cn(
-                            "flex h-[42px] items-center justify-center px-6 relative shrink-0 w-full cursor-pointer transition-all duration-700",
-                            isDark ? 'border-[1.5px] border-solid rounded-[14px] overflow-hidden bg-[#ffcc00] border-[#ffe680] shadow-[0px_4px_14px_0px_rgba(255,204,0,0.25)] text-[#1a1a1a]' : 'border-[1.5px] border-solid rounded-[14px] overflow-hidden bg-[#6d3ef3] border-[#9c7aff] shadow-[0px_4px_18px_0px_rgba(72,11,196,0.3)] text-[#f8f8fa]'
+                            "flex h-[42px] items-center justify-center px-6 relative shrink-0 w-full cursor-pointer transition-all duration-700 rounded-[14px]",
+                            isDark ? 'bg-white text-black' : 'bg-black text-white'
                         )}
                     >
                         <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[13px] relative z-10 transition-colors duration-700 tracking-[-0.2px]`}>
-                            work
+                            let's talk
                         </p>
-                        <div className={`absolute inset-0 pointer-events-none transition-colors duration-700 ${isDark ? 'shadow-[inset_0px_0px_12px_0px_#e5b800]' : 'shadow-[inset_0px_0px_12px_0px_#3000b5]'}`} />
                     </motion.div>
-                </Link>
+                </a>
             </motion.div>
             )}
 

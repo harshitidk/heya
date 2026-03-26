@@ -19,19 +19,25 @@ import nightPhoto3 from "@/public/assets/night-photo-3.jpg";
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
-import { AISection } from "@/components/AISection";
+import { StructuredSection } from "@/components/StructuredSection";
 import { PolymathySection } from "@/components/PolymathySection";
+import { ServicesSection } from "@/components/ServicesSection";
 
 export default function Home() {
   const { isDark } = useTheme();
 
   return (
     <main 
-      className={`relative w-full h-[100dvh] overflow-y-auto scroll-smooth snap-y snap-mandatory ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'} transition-colors duration-700 scrollbar-none [&::-webkit-scrollbar]:hidden focus:outline-none`}
+      className={`relative w-full h-[100dvh] overflow-y-auto scroll-smooth snap-y snap-proximity ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'} transition-colors duration-700 scrollbar-none [&::-webkit-scrollbar]:hidden focus:outline-none`}
     >
       <div className="w-full flex flex-col">
         {/* 1. Hero Section (Snap) */}
         <section id="hero" className="relative h-[100dvh] w-full shrink-0 flex flex-col items-center justify-center overflow-hidden snap-start">
+          {/* Corner Details aligned with website aesthetics */}
+          <div className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${isDark ? 'text-white' : 'text-black'}`}>
+            Digital Playground // Vol.00
+          </div>
+
           {/* Backgrounds */}
           <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden pointer-events-none transition-opacity duration-1000">
             {/* Light Mode Layer */}
@@ -133,11 +139,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2. AI Section (Snap) */}
-        <AISection />
+
+        {/* 2. Structured & Clear Section (Snap) */}
+        <StructuredSection />
 
         {/* 3. Polymathy Section (Snap) */}
         <PolymathySection />
+
+        {/* 4. Services Section (Snap) */}
+        <ServicesSection />
       </div>
     </main>
   );

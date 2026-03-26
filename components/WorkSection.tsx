@@ -318,7 +318,7 @@ export function WorkSection() {
                             </h3>
                             <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
                                 <p>
-                                    Most users don’t drop off because they don’t like a product—they drop off because they’re unsure.
+                                    Most users don’t drop off because they don’t like a product. They drop off because they’re unsure.
                                 </p>
                                 <p>
                                     At Shoppin, I focused on reducing this uncertainty.

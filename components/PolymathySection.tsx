@@ -35,6 +35,10 @@ export const PolymathySection = () => {
         backgroundSize: '24px 24px',
       }}
     >
+      <div className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${isDark ? 'text-white' : 'text-black'}`}>
+        Cross-Disciplinary Study // Vol.02
+      </div>
+
       <div className="relative w-full max-w-6xl h-full flex items-center justify-center px-4 pointer-events-none">
         
         {/* Central Text */}
@@ -42,9 +46,9 @@ export const PolymathySection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className={`${bricolage.className} ${isDark ? 'text-[#ffcb10]' : 'text-[#ff4040]'} text-[24px] sm:text-[27px] font-medium text-center leading-[1.3] max-w-[500px] z-10 transition-colors duration-700 -translate-y-8 pointer-events-auto`}
+          className={`${bricolage.className} ${isDark ? 'text-white' : 'text-black'} text-[28px] sm:text-[42px] font-medium text-center leading-[1.1] max-w-[700px] z-10 transition-colors duration-700 -translate-y-8 pointer-events-auto`}
         >
-          I’ve always been drawn to the idea of{' '}
+          Drawn to{' '}
           <span className="relative inline-block px-1 mx-1">
             <motion.div
               initial={{ scaleX: 0 }}
@@ -60,7 +64,7 @@ export const PolymathySection = () => {
             />
             polymathy
           </span>{' '}
-          // not being limited to one way of thinking.
+          - not limited to one way of thinking.
         </motion.div>
 
         {/* Floating Cards - Dragging Container */}
@@ -72,7 +76,7 @@ export const PolymathySection = () => {
           whileInView={{ opacity: 1, x: 0, y: 0, rotate: -12 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, type: "spring", stiffness: 50 }}
-          className="absolute left-[5%] top-[25%] sm:left-[10%] sm:top-[25%] z-20 group pointer-events-auto cursor-grab"
+          className="absolute left-[2%] top-[15%] sm:left-[5%] sm:top-[20%] z-20 group pointer-events-auto cursor-grab"
         >
           <motion.div
             animate={{ y: [0, -8, 0], rotate: [-12, -10, -12] }}
@@ -99,7 +103,7 @@ export const PolymathySection = () => {
           whileInView={{ opacity: 1, y: 0, rotate: 6.56 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, type: "spring", stiffness: 50 }}
-          className="absolute right-[20%] top-[10%] sm:right-[30%] sm:top-[8%] z-20 group pointer-events-auto cursor-grab"
+          className="absolute right-[5%] top-[5%] sm:right-[15%] sm:top-[5%] z-20 group pointer-events-auto cursor-grab"
         >
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [6.56, 8, 6.56] }}
@@ -126,7 +130,7 @@ export const PolymathySection = () => {
           whileInView={{ opacity: 1, x: 0, y: 0, rotate: 14.98 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, type: "spring", stiffness: 50 }}
-          className="absolute right-[5%] top-[30%] sm:right-[10%] sm:top-[30%] z-20 group pointer-events-auto cursor-grab"
+          className="absolute right-[2%] top-[25%] sm:right-[5%] sm:top-[25%] z-20 group pointer-events-auto cursor-grab"
         >
           <motion.div
             animate={{ y: [0, -6, 0], rotate: [14.98, 13, 14.98] }}
@@ -153,7 +157,7 @@ export const PolymathySection = () => {
           whileInView={{ opacity: 1, y: 0, rotate: 15.79 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, type: "spring", stiffness: 50 }}
-          className="absolute left-[30%] bottom-[10%] sm:left-[35%] sm:bottom-[15%] z-20 group pointer-events-auto cursor-grab"
+          className="absolute left-[10%] bottom-[5%] sm:left-[20%] sm:bottom-[10%] z-20 group pointer-events-auto cursor-grab"
         >
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [15.79, 17, 15.79] }}
@@ -179,7 +183,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ y: [0, -10, 0], rotate: [-4.89, -3, -4.89] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-[15%] top-[10%] sm:left-[23%] sm:top-[12%] hidden sm:block pointer-events-auto"
+          className="absolute left-[8%] top-[8%] sm:left-[22%] sm:top-[15%] hidden sm:block pointer-events-auto"
         >
           <div className="bg-[#f8f8f8] dark:bg-white/5 border border-black/[0.03] p-[10px] sm:p-[14px] rounded-[17px] max-w-[220px]">
             <p className={`${poppins.className} text-[#737373] dark:text-gray-400 text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -192,7 +196,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ y: [0, 10, 0], rotate: [3.53, 5, 3.53] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-[30%] top-[25%] sm:left-[32%] sm:top-[20%] hidden lg:block pointer-events-auto"
+          className="absolute left-[18%] top-[14%] sm:left-[30%] sm:top-[22%] hidden lg:block pointer-events-auto"
         >
           <div className="bg-[#cbff10] p-[10px] sm:p-[14px] rounded-[17px] max-w-[250px] shadow-lg shadow-[#cbff10]/10">
             <p className={`${poppins.className} text-[#737373] text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -205,7 +209,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ x: [0, 10, 0], rotate: [6.1, 4, 6.1] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-[20%] bottom-[20%] sm:right-[20%] sm:bottom-[30%] hidden sm:block pointer-events-auto"
+          className="absolute right-[12%] bottom-[20%] sm:right-[22%] sm:bottom-[32%] hidden sm:block pointer-events-auto"
         >
           <div className="bg-[#f8f8f8] dark:bg-white/5 border border-black/[0.03] p-[10px] sm:p-[14px] rounded-[17px] max-w-[230px]">
             <p className={`${poppins.className} text-[#737373] dark:text-gray-400 text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -218,7 +222,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ y: [0, -15, 0], rotate: [-4.04, -6, -4.04] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute right-[10%] bottom-[10%] sm:right-[15%] sm:bottom-[15%] z-30 pointer-events-auto hidden sm:block"
+          className="absolute right-[8%] bottom-[8%] sm:right-[15%] sm:bottom-[15%] z-30 pointer-events-auto hidden sm:block"
         >
           <div className="bg-[#ff4040] p-[12px] sm:p-[16px] rounded-[17px] shadow-xl shadow-red-500/20 max-w-[200px] sm:max-w-[260px]">
             <p className={`${poppins.className} text-white font-medium text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -226,9 +230,7 @@ export const PolymathySection = () => {
               where different ways of thinking collide.
             </p>
           </div>
-        </motion.div>
-
-      </div>
+        </motion.div>      </div>
     </section>
   );
 };
