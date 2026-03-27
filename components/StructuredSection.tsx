@@ -27,19 +27,95 @@ export const StructuredSection = () => {
             ref={sectionRef}
             className={`relative h-[100dvh] w-full snap-start shrink-0 overflow-hidden flex flex-col items-center justify-center transition-colors duration-700 ${isDark ? 'bg-[#0f1118]' : 'bg-[#fcfdfd]'}`}
         >
-            {/* 1. Backdrop Pattern - Sophisticated Grid & Noise */}
-            <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4]">
-                {/* SVG Blueprint Grid */}
+            {/* 1. Backdrop Pattern - Sophisticated Grid & Logic System */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                {/* SVG Blueprint Grid - Soft Tinted Ink */}
                 <div 
-                    className={`absolute inset-0 ${isDark ? 'opacity-[0.05]' : 'opacity-[0.03]'}`}
+                    className={`absolute inset-0 ${isDark ? 'opacity-[0.06]' : 'opacity-[0.08]'}`}
                     style={{ 
-                        backgroundImage: `linear-gradient(${isDark ? 'white' : 'black'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? 'white' : 'black'} 1px, transparent 1px)`,
-                        backgroundSize: '60px 60px'
+                        backgroundImage: `linear-gradient(${isDark ? '#818CF8' : '#6366F1'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? '#818CF8' : '#6366F1'} 1px, transparent 1px)`,
+                        backgroundSize: '80px 80px'
                     }}
                 />
-                {/* Subtle Grain Texture Overly */}
+                
+                {/* Dotted Plus Pattern at Intersections */}
                 <div 
-                    className={`absolute inset-0 opacity-[0.06] ${isDark ? 'invert' : ''}`}
+                    className={`absolute inset-0 ${isDark ? 'opacity-[0.1]' : 'opacity-[0.12]'}`}
+                    style={{ 
+                        backgroundImage: `radial-gradient(circle at 1px 1px, ${isDark ? '#818CF8' : '#6366F1'} 1.5px, transparent 0)`,
+                        backgroundSize: '80px 80px',
+                        backgroundPosition: '-0.5px -0.5px'
+                    }}
+                />
+
+                {/* Floating Geometric Elements - Soft Logic Pieces */}
+                <div className="absolute inset-0">
+                    {/* Top Left - Geometric Cluster */}
+                    <motion.div 
+                        animate={{ rotate: 360, y: [0, -20, 0] }}
+                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                        className={`absolute top-[12%] left-[8%] w-40 h-40 border-[0.5px] ${isDark ? 'border-indigo-400/10' : 'border-indigo-500/15'} rounded-full`}
+                    />
+                    <motion.div 
+                        animate={{ rotate: -360, x: [0, 20, 0] }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        className={`absolute top-[16%] left-[10%] w-32 h-32 border-[0.5px] ${isDark ? 'border-indigo-400/10' : 'border-indigo-500/15'} rounded-lg`}
+                    />
+
+                    {/* Bottom Right - Technical Detail */}
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0.05, 0.15, 0.05], y: [0, 40, 0] }}
+                        transition={{ duration: 15, repeat: Infinity }}
+                        className={`absolute bottom-[10%] right-[10%] ${isDark ? 'text-indigo-400/20' : 'text-indigo-600/20'} font-mono text-[10px] uppercase tracking-[4px] hidden md:block`}
+                        style={{ writingMode: 'vertical-rl' }}
+                    >
+                        Precision Core System // Ver 2.0.4
+                    </motion.div>
+
+                    {/* Left Center - Connection Line */}
+                    <div className={`absolute top-1/2 left-[5%] w-[1px] h-[35%] ${isDark ? 'bg-gradient-to-b from-transparent via-indigo-400/10 to-transparent' : 'bg-gradient-to-b from-transparent via-indigo-600/10 to-transparent'}`} />
+                    
+                    {/* Right Center - Floating Crosses */}
+                    {[...Array(4)].map((_, i) => (
+                        <motion.div 
+                            key={i}
+                            animate={{ 
+                                y: [-30, 30, -30],
+                                opacity: [0.08, 0.15, 0.08]
+                            }}
+                            transition={{ 
+                                duration: 10 + i * 2, 
+                                repeat: Infinity,
+                                delay: i * 1.5
+                            }}
+                            className={`absolute text-[22px] font-bold ${isDark ? 'text-indigo-400' : 'text-indigo-500'} opacity-[0.1]`}
+                            style={{ 
+                                top: `${15 + i * 20}%`, 
+                                right: `${6 + (i % 2) * 2}%` 
+                            }}
+                        >
+                            +
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Scanning Line Effect */}
+                <motion.div 
+                    animate={{ x: ['-20%', '150%'] }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                    className={`absolute top-0 bottom-0 w-[1px] ${isDark ? 'bg-gradient-to-b from-transparent via-indigo-400/10 to-transparent' : 'bg-gradient-to-b from-transparent via-indigo-600/10 to-transparent'}`}
+                />
+
+                {/* Corner Brackets - Blueprint Aesthetic */}
+                <div className={`absolute top-20 left-20 w-12 h-12 border-t-[1px] border-l-[1px] ${isDark ? 'border-indigo-400/10' : 'border-indigo-500/15'}`} />
+                <div className={`absolute top-20 right-20 w-12 h-12 border-t-[1px] border-r-[1px] ${isDark ? 'border-indigo-400/10' : 'border-indigo-500/15'}`} />
+                <div className={`absolute bottom-20 left-20 w-12 h-12 border-b-[1px] border-l-[1px] ${isDark ? 'border-white/10' : 'border-indigo-500/15'}`} />
+                <div className={`absolute bottom-20 right-20 w-12 h-12 border-b-[1px] border-r-[1px] ${isDark ? 'border-white/10' : 'border-indigo-500/15'}`} />
+
+                {/* Global Grain Overly */}
+                <div 
+                    className={`absolute inset-0 opacity-[0.04] ${isDark ? 'invert' : ''} pointer-events-none mix-blend-overlay`}
                     style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/natural-paper.png")` }}
                 />
             </div>
@@ -76,7 +152,7 @@ export const StructuredSection = () => {
                     viewport={{ once: true }}
                     className="flex flex-col items-center gap-2 mb-4"
                 >
-                    <span className={`${poppins.className} text-[10px] sm:text-[11px] font-black uppercase ${isDark ? 'text-white/40' : 'text-black/30'}`}>Narrative Sequence</span>
+                    <span className={`${poppins.className} text-[10px] sm:text-[11px] font-black uppercase ${isDark ? 'text-white/40' : 'text-black/30'}`}>making sense of it all</span>
                     <div className={`h-[1px] w-24 bg-gradient-to-r from-transparent ${isDark ? 'via-white/20' : 'via-black/20'} to-transparent`} />
                 </motion.div>
 

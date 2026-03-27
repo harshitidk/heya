@@ -240,8 +240,9 @@ export function WorkSection() {
     }, []);
 
     return (
-        <section id="work" className={`relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-0 pt-20 sm:pt-20 pb-24 sm:pb-40 transition-colors duration-700 [clip-path:inset(0)] bg-transparent`}>
-            {/* Backgrounds removed to allow page background to show through */}
+        <section id="work" className={`relative overflow-hidden w-full flex flex-col items-center gap-12 sm:gap-16 mb-0 pt-20 sm:pt-32 pb-24 sm:pb-40 transition-colors duration-700 [clip-path:inset(0)] bg-transparent`}>
+            {/* Background managed globally in app/work/page.tsx */}
+
 
 
             <div className="relative z-10 w-full max-w-[1200px] flex flex-col gap-16 sm:gap-24 items-center">
@@ -312,11 +313,12 @@ export function WorkSection() {
                     {/* Shoppin' */}
                     <div id="shoppin" className="w-full flex flex-col gap-[38px] items-center">
                         <ShoppinCollage onZoom={setZoomedImage} isDark={isDark} />
-                        <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
-                            <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                Shoppin : Designing for decision-making, not just browsing
-                            </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
+                        <div className="w-full max-w-[884px] flex flex-col lg:flex-row gap-6 sm:gap-8 items-start px-4">
+                            <div className="flex-1 flex flex-col gap-4 sm:gap-[20px]">
+                                <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                    Shoppin : Designing for decision-making, not just browsing
+                                </h3>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     Most users don’t drop off because they don’t like a product. They drop off because they’re unsure.
                                 </p>
@@ -332,8 +334,9 @@ export function WorkSection() {
                                 <p>
                                     The goal wasn’t just better UI. It was to make choosing feel easier, faster, and more confident.
                                 </p>
+                                </div>
                             </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-[13px] items-center mt-2">
+                            <div className="lg:w-[220px] shrink-0 flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-4 lg:pt-14">
                                 <CaseStudyButton text="Virtual try-on case study" primary href="https://medium.com/@iamharshit.idk/reducing-the-dropoff-by-13-on-virutal-try-on-a99fa0cff09e" />
                                 <CaseStudyButton text="Feature case study" href="https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing" />
                             </div>
@@ -344,11 +347,12 @@ export function WorkSection() {
                     {/* Zoffers */}
                     <div id="zoffers" className="w-full flex flex-col gap-[38px] items-center">
                         <ZoffersCollage onZoom={setZoomedImage} isDark={isDark} />
-                        <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
-                            <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                Zoffers : Designing a student discount platform from scratch
-                            </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
+                        <div className="w-full max-w-[884px] flex flex-col lg:flex-row gap-6 sm:gap-8 items-start px-4">
+                            <div className="flex-1 flex flex-col gap-4 sm:gap-[20px]">
+                                <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                    Zoffers : Designing a student discount platform from scratch
+                                </h3>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     Zoffers connects students looking for discounts with brands seeking access to a student audience.
                                 </p>
@@ -358,8 +362,9 @@ export function WorkSection() {
                                 <p>
                                     The focus was to create a system that feels <strong className="font-bold">trustworthy for brands and effortless for students</strong>, balancing two different user needs within a simple, clear experience.
                                 </p>
+                                </div>
                             </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-[13px] items-center mt-2">
+                            <div className="lg:w-[220px] shrink-0 flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-4 lg:pt-14">
                                 <CaseStudyButton text="Visit Zoffers" primary href="https://zoffers.in/" />
                             </div>
                         </div>
@@ -369,11 +374,12 @@ export function WorkSection() {
                     <div id="rabbit-invest" className="w-full flex flex-col gap-[38px] items-center relative z-[20]">
                         <RabbitCollage onZoom={setZoomedImage} isDark={isDark} />
 
-                        <div className="w-full max-w-[884px] flex flex-col gap-4 sm:gap-[24px] items-center sm:items-start text-center sm:text-left px-4">
-                            <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.64] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
-                                Rabbit Invest : Designing for non-tech-savvy financial distributors
-                            </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[20px] font-medium text-[12px] sm:text-[16px] transition-colors duration-700 leading-[1.64] tracking-[0.32px] w-full text-justify sm:text-left ${isDark ? 'text-white/80' : 'text-[#656565]'}`}>
+                        <div className="w-full max-w-[884px] flex flex-col lg:flex-row gap-6 sm:gap-8 items-start px-4">
+                            <div className="flex-1 flex flex-col gap-4 sm:gap-[20px]">
+                                <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                    Rabbit Invest : Designing for non-tech-savvy financial distributors
+                                </h3>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     At Rabbit Invest, I worked on two core products focused on mutual fund distributors, many of whom were <strong className="font-bold whitespace-nowrap">older users (45+) with low digital familiarity</strong>.
                                 </p>
@@ -386,8 +392,9 @@ export function WorkSection() {
                                 <p>
                                     This work required designing for clarity over complexity, ensuring the product remained intuitive for users who are not naturally comfortable with digital tools.
                                 </p>
+                                </div>
                             </div>
-                            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-[13px] w-full mt-2 pb-16">
+                            <div className="lg:w-[220px] shrink-0 flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-4 lg:pt-14 pb-16">
                                 <CaseStudyButton text="View Work" primary href="https://drive.google.com/file/d/1OzrCVp-937ZCp__33DdNR-8JCS55zlRR/view?usp=sharing" />
                                 <CaseStudyButton text="Read documentation" href="https://rabbitinvest.com/how-to-initiate-purchase-with-rabbit-invest/" />
                             </div>

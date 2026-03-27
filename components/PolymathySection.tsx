@@ -39,6 +39,89 @@ export const PolymathySection = () => {
         Cross-Disciplinary Study // Vol.02
       </div>
 
+      {/* Background Moving Elements - Discipline Auras & Shapes */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Blurred Color Auras - Spawning Effect */}
+        <motion.div 
+          animate={{ 
+            x: [0, 150, -50, 0], 
+            y: [0, 80, 150, 0],
+            scale: [1, 1.3, 0.8, 1],
+            opacity: [0, 0.08, 0.05, 0]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute top-[5%] left-[5%] w-[45%] h-[45%] rounded-full blur-[130px] ${isDark ? 'bg-[#ff5f10]' : 'bg-[#ff5f10]'}`}
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 100, 0], 
+            y: [0, -100, -50, 0],
+            scale: [1, 0.9, 1.2, 1],
+            opacity: [0, 0.06, 0.03, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 10 }}
+          className={`absolute bottom-[10%] right-[10%] w-[40%] h-[40%] rounded-full blur-[110px] ${isDark ? 'bg-[#108fff]' : 'bg-[#108fff]'}`}
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 60, -100, 0], 
+            y: [0, -150, 100, 0],
+            scale: [1, 1.1, 0.9, 1],
+            opacity: [0, 0.05, 0.04, 0]
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className={`absolute top-[40%] right-[15%] w-[30%] h-[30%] rounded-full blur-[90px] ${isDark ? 'bg-[#009e05]' : 'bg-[#009e05]'}`}
+        />
+
+        {/* Floating Geometric Outlines - Spawning Effect */}
+        <motion.div 
+          animate={{ 
+            rotate: 360, 
+            y: [0, -60, 40, 0],
+            x: [0, 40, -40, 0],
+            opacity: [0, 0.06, 0.04, 0]
+          }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          className={`absolute top-[15%] right-[20%] w-72 h-72 border-[1.5px] ${isDark ? 'border-white' : 'border-black'} rounded-[50px] rotate-12`}
+        />
+        <motion.div 
+          animate={{ 
+            rotate: -360, 
+            x: [0, 50, -80, 0],
+            y: [0, 100, -50, 0],
+            opacity: [0, 0.05, 0.03, 0]
+          }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear", delay: 15 }}
+          className={`absolute bottom-[15%] left-[25%] w-56 h-56 border-[1.5px] ${isDark ? 'border-white' : 'border-black'} rounded-full`}
+        />
+        
+        {/* Connection Lines (Abstract) - Spawning Effect */}
+        <svg className="absolute inset-0 w-full h-full">
+          <motion.path 
+            d="M 150 150 L 350 450 L 650 250"
+            fill="none"
+            stroke={isDark ? "white" : "black"}
+            strokeWidth="1.5"
+            animate={{ 
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.06, 0]
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.path 
+            d="M 850 250 L 550 550 L 250 350"
+            fill="none"
+            stroke={isDark ? "white" : "black"}
+            strokeWidth="1.5"
+            animate={{ 
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.05, 0]
+            }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 7 }}
+          />
+        </svg>
+      </div>
+
       <div className="relative w-full max-w-6xl h-full flex items-center justify-center px-4 pointer-events-none">
         
         {/* Central Text */}
