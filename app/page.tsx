@@ -23,6 +23,7 @@ import { StructuredSection } from "@/components/StructuredSection";
 import { PolymathySection } from "@/components/PolymathySection";
 import { ServicesSection } from "@/components/ServicesSection";
 import { ProjectsFolderSection } from "@/components/ProjectsFolderSection";
+import { ContactSection } from "@/components/ContactSection";
 
 export default function Home() {
   const { isDark } = useTheme();
@@ -152,6 +153,9 @@ export default function Home() {
 
         {/* 5. Projects Folder Section (Snap) */}
         <ProjectsFolderSection />
+
+        {/* 6. Contact Section (Snap) */}
+        <ContactSection />
       </div>
     </main>
   );

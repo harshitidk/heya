@@ -5,8 +5,6 @@ import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 
-import workBgNight1 from "@/public/assets/work-bg-night-1.png";
-import workBgNight2 from "@/public/assets/work-bg-night-2.png";
 import selectedWorkNight from "@/public/assets/selected-work-pill.png";
 
 import shoppinP1 from "@/public/assets/shoppin-p1.webp";
