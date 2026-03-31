@@ -64,6 +64,8 @@ function MockupImage({
                     alt={alt}
                     fill
                     className={`object-${objectFit} pointer-events-none ${className}`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
                 />
             ) : (
                 <div className={`w-full h-full border border-gray-200/50 ${className}`}>
@@ -123,7 +125,7 @@ function ShoppinCollage({ onZoom, isDark }: { onZoom: (src: string | StaticImage
     return (
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-[12.6px] items-center justify-center w-full px-4 sm:px-0">
             {/* Left Card */}
-            <div className="p-6 sm:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] sm:max-w-none sm:w-auto shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
+            <div className="p-5 sm:p-[35px] rounded-[26.7px] flex justify-center w-full max-w-[300px] sm:max-w-none sm:w-auto shrink-0 transition-all duration-700 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <MockupImage
                     src={shoppinP1}
                     onZoom={onZoom}
@@ -302,7 +304,7 @@ export function WorkSection() {
                             </defs>
                         </svg>
                     )}
-                    <p className={`font-semibold text-[16px] tracking-[0.32px] mt-2 sm:-mt-2 transition-colors duration-700 ${isDark ? 'text-white/90' : 'text-[#6B6B6B]'}`}>
+                    <p className={`font-semibold text-[14px] sm:text-[16px] tracking-[0.32px] mt-2 sm:-mt-2 transition-colors duration-700 ${isDark ? 'text-white/90' : 'text-[#6B6B6B]'}`}>
                         A selection of work from my internships and freelance projects.
                     </p>
                 </div>
@@ -313,10 +315,10 @@ export function WorkSection() {
                         <ShoppinCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col lg:flex-row gap-6 sm:gap-8 items-start px-4">
                             <div className="flex-1 flex flex-col gap-4 sm:gap-[20px]">
-                                <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                <h3 className={`font-semibold text-[22px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                     Shoppin : Designing for decision-making, not just browsing
                                 </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[11px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     Most users don’t drop off because they don’t like a product. They drop off because they’re unsure.
                                 </p>
@@ -347,10 +349,10 @@ export function WorkSection() {
                         <ZoffersCollage onZoom={setZoomedImage} isDark={isDark} />
                         <div className="w-full max-w-[884px] flex flex-col lg:flex-row gap-6 sm:gap-8 items-start px-4">
                             <div className="flex-1 flex flex-col gap-4 sm:gap-[20px]">
-                                <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
+                                <h3 className={`font-semibold text-[22px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                     Zoffers : Designing a student discount platform from scratch
                                 </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[11px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     Zoffers connects students looking for discounts with brands seeking access to a student audience.
                                 </p>
@@ -377,7 +379,7 @@ export function WorkSection() {
                                 <h3 className={`font-semibold text-[26px] sm:text-[30px] leading-[1.3] tracking-[-0.6px] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#2e2e2e]'}`}>
                                     Rabbit Invest : Designing for non-tech-savvy financial distributors
                                 </h3>
-                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[12px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
+                            <div className={`flex flex-col gap-3 sm:gap-[16px] font-medium text-[11px] sm:text-[15px] transition-colors duration-700 leading-[1.7] tracking-[0.2px] w-full ${isDark ? 'text-white/70' : 'text-[#656565]'}`}>
                                 <p>
                                     At Rabbit Invest, I worked on two core products focused on mutual fund distributors, many of whom were <strong className="font-bold whitespace-nowrap">older users (45+) with low digital familiarity</strong>.
                                 </p>

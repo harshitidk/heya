@@ -184,7 +184,7 @@ export const StructuredSection = () => {
                         className="absolute left-[-10%] md:left-[-12%] top-[20%] sm:top-[25%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#shoppin" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[60px] md:w-[90px] lg:w-[110px] p-1 rounded-lg border-[2px] shadow-xl transition-all duration-500 ${isDark ? 'bg-white/10 border-white/20 group-hover:border-cyan-400/50' : 'bg-white border-white/80 group-hover:border-pink-400'}`}>
+                            <div className={`w-[50px] md:w-[90px] lg:w-[110px] p-1 rounded-lg border-[2px] shadow-xl transition-all duration-500 ${isDark ? 'bg-white/10 border-white/20 group-hover:border-cyan-400/50' : 'bg-white border-white/80 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/shoppin-p1.webp" alt="Shoppin" width={110} height={160} className="rounded-md object-cover !w-full !h-auto pointer-events-none" />
                             </div>
                         </Link>
@@ -206,7 +206,7 @@ export const StructuredSection = () => {
                         className="absolute right-[-10%] md:right-[-12%] top-[20%] sm:top-[25%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#rabbit-invest" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[65px] md:w-[100px] lg:w-[120px] p-1 rounded-lg border-[2px] shadow-xl transition-all duration-500 ${isDark ? 'bg-white/10 border-white/20 group-hover:border-cyan-400/50' : 'bg-white border-white/80 group-hover:border-pink-400'}`}>
+                            <div className={`w-[55px] md:w-[100px] lg:w-[120px] p-1 rounded-lg border-[2px] shadow-xl transition-all duration-500 ${isDark ? 'bg-white/10 border-white/20 group-hover:border-cyan-400/50' : 'bg-white border-white/80 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/rabbit-p1.webp" alt="Rabbit" width={120} height={80} className="rounded-md object-cover !w-full !h-auto pointer-events-none" />
                             </div>
                         </Link>
@@ -229,7 +229,7 @@ export const StructuredSection = () => {
                         className="absolute right-[5%] md:right-[8%] top-[-12%] sm:top-[-18%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#zoffers" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[45px] md:w-[65px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
+                            <div className={`w-[35px] md:w-[65px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/zoffers-p1.webp" alt="Zoffers" width={65} height={90} className="rounded-sm object-cover pointer-events-none" />
                             </div>
                         </Link>
@@ -252,7 +252,7 @@ export const StructuredSection = () => {
                         className="absolute left-[5%] md:left-[8%] top-[-12%] sm:top-[-18%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#shoppin" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[40px] md:w-[60px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
+                            <div className={`w-[32px] md:w-[60px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/shoppin-p2.webp" alt="Shoppin Small" width={60} height={85} className="rounded-sm object-cover pointer-events-none" />
                             </div>
                         </Link>
@@ -274,7 +274,7 @@ export const StructuredSection = () => {
                         className="absolute left-[2%] md:left-[5%] bottom-[0%] sm:bottom-[-5%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#rabbit-invest" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[50px] md:w-[75px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
+                            <div className={`w-[45px] md:w-[75px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/rabbit-p3.webp" alt="Rabbit Technical" width={75} height={100} className="rounded-sm object-cover pointer-events-none" />
                             </div>
                         </Link>
@@ -296,7 +296,7 @@ export const StructuredSection = () => {
                         className="absolute right-[2%] md:right-[5%] bottom-[0%] sm:bottom-[-5%] z-10 pointer-events-auto cursor-pointer touch-none group"
                     >
                         <Link href="/work#zoffers" className="block relative focus:outline-none" draggable={false}>
-                            <div className={`w-[50px] md:w-[70px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
+                            <div className={`w-[42px] md:w-[70px] p-0.5 rounded-md border shadow-lg transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10 group-hover:border-cyan-400/50' : 'bg-white/80 border-white/30 group-hover:border-pink-400'}`}>
                                 <NextImage src="/assets/zoffers-p3.webp" alt="Zoffers Alt" width={70} height={95} className="rounded-sm object-cover pointer-events-none" />
                             </div>
                         </Link>
@@ -304,7 +304,7 @@ export const StructuredSection = () => {
 
 
                     <motion.h2 
-                        className={`${bricolage.className} text-[32px] sm:text-[48px] lg:text-[60px] font-[600] leading-[1.02] text-center max-w-[1050px] tracking-tight ${isDark ? 'text-white' : 'text-[#1a1a1a]'} relative z-30 pointer-events-none`}
+                        className={`${bricolage.className} text-[28px] sm:text-[48px] lg:text-[60px] font-[600] leading-[1.02] text-center max-w-[1050px] tracking-tight ${isDark ? 'text-white' : 'text-[#1a1a1a]'} relative z-30 pointer-events-none`}
                     >
                         {"and then i turn those ideas into products with ".split("").map((char, i) => (
                             <motion.span

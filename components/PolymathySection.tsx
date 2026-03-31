@@ -195,12 +195,12 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ x: [0, 150, -50, 0], y: [0, 80, 150, 0], scale: [1, 1.3, 0.8, 1], opacity: [0, 0.08, 0.05, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute top-[5%] left-[5%] w-[45%] h-[45%] rounded-full blur-[130px] ${isDark ? 'bg-[#ff5f10]' : 'bg-[#ff5f10]'}`}
+          className={`absolute top-[5%] left-[5%] w-[45%] h-[45%] rounded-full blur-[30px] sm:blur-[130px] ${isDark ? 'bg-[#ff5f10]' : 'bg-[#ff5f10]'}`}
         />
         <motion.div 
           animate={{ x: [0, -120, 100, 0], y: [0, -100, -50, 0], scale: [1, 0.9, 1.2, 1], opacity: [0, 0.06, 0.03, 0] }}
           transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 10 }}
-          className={`absolute bottom-[10%] right-[10%] w-[40%] h-[40%] rounded-full blur-[110px] ${isDark ? 'bg-[#108fff]' : 'bg-[#108fff]'}`}
+          className={`absolute bottom-[10%] right-[10%] w-[40%] h-[40%] rounded-full blur-[30px] sm:blur-[110px] ${isDark ? 'bg-[#108fff]' : 'bg-[#108fff]'}`}
         />
       </div>
 
@@ -209,53 +209,11 @@ export const PolymathySection = () => {
         {/* Central Dynamic Headline */}
         <div 
           ref={headlineRef}
-          className={`${bricolage.className} ${isDark ? 'text-white' : 'text-black'} text-[28px] sm:text-[42px] font-medium leading-[1.1] w-full max-w-[700px] h-[150px] z-10 transition-colors duration-700 pointer-events-none`}
+          className={`${bricolage.className} ${isDark ? 'text-white' : 'text-black'} text-[28px] sm:text-[42px] font-medium leading-[1.1] w-full max-w-[700px] min-h-[150px] sm:h-[150px] z-10 transition-colors duration-700 pointer-events-none mb-12 sm:mb-0`}
         >
-          {/* Dynamic "Connecting Web" SVG */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1 }}
-            className="absolute inset-0 -z-10 pointer-events-none" 
-            style={{ width: containerWidth }}
-          >
-            <svg className="w-full h-full overflow-visible">
-              {occlusionList.map((o: any, idx: number) => {
-                const cardCx = o.x + o.w / 2;
-                const cardCy = o.y + o.h / 2;
-                const headCx = containerWidth / 2;
-                const headCy = 75; // h-150 / 2
-                
-                return (
-                  <motion.path
-                    key={idx}
-                    d={`M ${cardCx} ${cardCy} L ${headCx} ${headCy}`}
-                    stroke={isDark ? "white" : "black"}
-                    strokeWidth="1.2"
-                    strokeDasharray="4 4"
-                    fill="none"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.12 }}
-                    transition={{ duration: 1.5, delay: idx * 0.2 }}
-                  />
-                );
-              })}
-            </svg>
-          </motion.div>
+          {/* Connecting Web SVG removed per user request */}
 
-          {/* Interaction Instruction - Subtle Nudge (Positioned Behind Text) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 0.25, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 2.5, duration: 1.5, ease: "easeOut" }}
-              className={`${poppins.className} text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-medium transition-colors duration-700 ${isDark ? 'text-white' : 'text-black'} opacity-25 text-center mt-12 sm:mt-16`}
-            >
-              ( try to drag cards on text )
-            </motion.div>
-          </div>
+          {/* Interaction Instruction removed per user request */}
 
           <DynamicHeadline 
             text={text} 
@@ -278,12 +236,12 @@ export const PolymathySection = () => {
           <motion.div
             animate={{ y: [0, -8, 0], rotate: [-12, -10, -12] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#ff5f10]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#ff5f10]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[18px] sm:rounded-[21px] shadow-2xl w-[100px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
-              <Image src={anthroImg} alt="Anthropology" fill className="object-cover pointer-events-none" />
+            <div className="border border-white/50 h-[95px] sm:h-[125px] w-full overflow-hidden rounded-[11px] sm:rounded-[13px] relative bg-white/5">
+              <Image src={anthroImg} alt="Anthropology" fill sizes="(max-width: 768px) 100px, 130px" loading="lazy" className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>anthropology</p>
+            <p className={`${poppins.className} text-white font-semibold text-[11px] sm:text-[14px] drop-shadow-sm`}>anthropology</p>
           </motion.div>
         </motion.div>
 
@@ -298,12 +256,12 @@ export const PolymathySection = () => {
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [6.56, 8, 6.56] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#009e05]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#009e05]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[18px] sm:rounded-[21px] shadow-2xl w-[100px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+            <div className="border border-white/50 h-[95px] sm:h-[125px] w-full overflow-hidden rounded-[11px] sm:rounded-[13px] relative bg-white/5">
               <Image src={cogImg} alt="Cognitive Science" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>cognitive sci.</p>
+            <p className={`${poppins.className} text-white font-semibold text-[11px] sm:text-[14px] drop-shadow-sm`}>cognitive sci.</p>
           </motion.div>
         </motion.div>
 
@@ -318,12 +276,12 @@ export const PolymathySection = () => {
           <motion.div
             animate={{ y: [0, -6, 0], rotate: [14.98, 13, 14.98] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#ffcb10]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#ffcb10]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[18px] sm:rounded-[21px] shadow-2xl w-[100px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+            <div className="border border-white/50 h-[95px] sm:h-[125px] w-full overflow-hidden rounded-[11px] sm:rounded-[13px] relative bg-white/5">
               <Image src={philImg} alt="Philosophy" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-[#715100] font-semibold text-[14px] drop-shadow-sm`}>philosophy</p>
+            <p className={`${poppins.className} text-[#715100] font-semibold text-[11px] sm:text-[14px] drop-shadow-sm`}>philosophy</p>
           </motion.div>
         </motion.div>
 
@@ -338,12 +296,12 @@ export const PolymathySection = () => {
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [15.79, 17, 15.79] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#108fff]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#108fff]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[18px] sm:rounded-[21px] shadow-2xl w-[100px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+            <div className="border border-white/50 h-[95px] sm:h-[125px] w-full overflow-hidden rounded-[11px] sm:rounded-[13px] relative bg-white/5">
               <Image src={techImg} alt="Technology" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>technology</p>
+            <p className={`${poppins.className} text-white font-semibold text-[11px] sm:text-[14px] drop-shadow-sm`}>technology</p>
           </motion.div>
         </motion.div>
 

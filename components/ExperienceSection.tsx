@@ -47,7 +47,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
             <div className="flex items-center gap-2 w-full sm:w-[40%] shrink-0 min-w-0">
 
                 <h3 className={cn(
-                    "text-[20px] sm:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700 whitespace-nowrap overflow-hidden text-ellipsis",
+                    "text-[18px] sm:text-[24px] lg:text-[28px] font-medium tracking-tight transition-colors duration-700 whitespace-nowrap overflow-hidden text-ellipsis",
                     isDark ? 'text-[#f6f6f6]' : 'text-[#eb502d]'
                 )}>
                     {company}
@@ -64,7 +64,7 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
             <div className="w-full sm:w-[25%] flex justify-start sm:justify-center min-w-0">
                 <div className={cn("px-4 py-2 rounded-full", currentStyles.bg)}>
                     <p className={cn(
-                        "font-medium text-[14px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap",
+                        "font-medium text-[13px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap",
                         currentStyles.text
                     )}>
                         {role}
@@ -78,14 +78,14 @@ function ExperienceRow({ company, role, roleType, duration, timeline, isDark, sh
                 isDark ? 'text-[#dcdcdc]' : 'text-[#787878]'
             )}>
 
-                <p className="font-bold text-[14px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
+                <p className="font-bold text-[12px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
                     {duration}
                 </p>
                 <div className={cn(
                     "w-[1px] sm:w-[20px] h-[16px] sm:h-[1px] shrink-0",
                     isDark ? 'bg-[#555]' : 'bg-[#ddd]'
                 )} />
-                <p className="font-medium text-[14px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
+                <p className="font-medium text-[12px] sm:text-[18px] lg:text-[20px] tracking-tight whitespace-nowrap">
                     {timeline}
                 </p>
             </div>
@@ -115,7 +115,7 @@ export function ExperienceSection({ isDark }: { isDark?: boolean }) {
             {/* Section Title */}
             <div className="flex flex-col items-center justify-center text-center mb-16 hover:scale-105 transition-transform duration-500 cursor-default">
                 <h2
-                    className={`${bowlby.className} text-[36px] sm:text-[50px] lg:text-[60px] text-white tracking-wide uppercase transition-all duration-700`}
+                    className={`${bowlby.className} text-[32px] sm:text-[50px] lg:text-[60px] text-white tracking-wide uppercase transition-all duration-700`}
                     style={{
                         textShadow: isDark ? "4px 8px 0px #043edc" : "4px 8px 0px #ab3603",
                         WebkitTextStroke: isDark ? "0px transparent" : "2px #dc4504"
