@@ -89,18 +89,16 @@ export function ContactSection() {
         <section
             ref={sectionRef}
             id="contact-section"
-            className={`relative w-full snap-start shrink-0 flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 pb-40 ${
+            className={`relative w-full shrink-0 flex flex-col items-center justify-center transition-colors duration-700 pb-40 ${
                 isDark ? "bg-[#0A0E17]" : "bg-[#FDFDFD]"
             }`}
             style={{ minHeight: "110dvh" }}
         >
-            {/* Corner Label */}
-            <div
-                className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${
-                    isDark ? "text-white" : "text-black"
-                }`}
-            >
-                Get In Touch // Vol.05
+            {/* Corner Details - Sticky Volume Hub */}
+            <div className="absolute inset-x-0 top-0 pointer-events-none h-full z-[100]">
+                <div className={`sticky top-12 ml-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block ${isDark ? 'text-white' : 'text-black'}`}>
+                    Get In Touch // Vol.05
+                </div>
             </div>
 
             {/* Content wrapper - vertically centered with navbar clearance */}
@@ -128,41 +126,37 @@ export function ContactSection() {
 
                     {/* ─── Floating Items on Orbits ─── */}
                     {/* Cat avatars and characters */}
-                    <OrbitItem angle={-65} radius={36} size={60} delay={0.5}>
+                    <OrbitItem angle={-65} radius={65} size={60} delay={0.5}>
                         <ProfileBubble src={avatar1} size={60} borderColor={isDark ? "#1f2838" : "#ffffff"} />
                     </OrbitItem>
-                    <OrbitItem angle={195} radius={40} size={54} delay={0.7}>
+                    <OrbitItem angle={195} radius={68} size={54} delay={0.7}>
                         <ProfileBubble src={avatar2} size={54} borderColor={isDark ? "#1f2838" : "#ffffff"} />
                     </OrbitItem>
-                    <OrbitItem angle={75} radius={44} size={52} delay={0.8}>
+                    <OrbitItem angle={75} radius={72} size={52} delay={0.8}>
                         <ProfileBubble src={avatar3} size={52} borderColor={isDark ? "#1f2838" : "#ffffff"} />
                     </OrbitItem>
-                    <OrbitItem angle={25} radius={50} size={48} delay={0.9}>
+                    <OrbitItem angle={25} radius={75} size={48} delay={0.9}>
                         <ProfileBubble src={avatar4} size={48} borderColor={isDark ? "#1f2838" : "#ffffff"} />
                     </OrbitItem>
-                    <OrbitItem angle={155} radius={54} size={46} delay={1.1}>
+                    <OrbitItem angle={155} radius={78} size={46} delay={1.1}>
                         <ProfileBubble src={avatar5} size={46} borderColor={isDark ? "#1f2838" : "#ffffff"} />
                     </OrbitItem>
-
-                    {/* More avatars in boxes */}
-                    <OrbitItem angle={-125} radius={44} size={54} delay={0.6} floatY={12}>
+                    <OrbitItem angle={-125} radius={70} size={54} delay={0.6} floatY={12}>
                         <div className="w-full h-full rounded-2xl overflow-hidden drop-shadow-lg border-2 border-white/20">
                             <Image src={avatar6} alt="Character" width={54} height={54} className="object-cover" />
                         </div>
                     </OrbitItem>
-                    <OrbitItem angle={115} radius={46} size={50} delay={0.8} floatY={10}>
+                    <OrbitItem angle={115} radius={74} size={50} delay={0.8} floatY={10}>
                         <div className="w-full h-full rounded-2xl overflow-hidden drop-shadow-lg border-2 border-white/20">
                             <Image src={avatar7} alt="Character" width={50} height={50} className="object-cover" />
                         </div>
                     </OrbitItem>
-
-                    {/* Final avatar in box */}
-                    <OrbitItem angle={260} radius={48} size={48} delay={1.0} floatY={6}>
+                    <OrbitItem angle={260} radius={80} size={48} delay={1.0} floatY={6}>
                         <div className="w-full h-full rounded-2xl overflow-hidden drop-shadow-lg border-2 border-white/20">
                             <Image src={avatar8} alt="Character" width={48} height={48} className="object-cover" />
                         </div>
                     </OrbitItem>
-                    <OrbitItem angle={-30} radius={24} size={32} delay={1.2} floatY={5}>
+                    <OrbitItem angle={-30} radius={55} size={32} delay={1.2} floatY={5}>
                         <span className="text-[24px] drop-shadow-md select-none">✨</span>
                     </OrbitItem>
 

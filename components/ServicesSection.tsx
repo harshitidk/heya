@@ -117,13 +117,15 @@ export const ServicesSection = () => {
     return (
         <section 
             id="services-section" 
-            className={`relative h-auto min-h-[100dvh] w-full snap-start shrink-0 py-24 sm:py-32 flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 ${
+            className={`relative h-auto min-h-[100dvh] w-full shrink-0 py-24 sm:py-32 flex flex-col items-center justify-center transition-colors duration-700 ${
                 isDark ? 'bg-[#0f172a]' : 'bg-[#F9F6F0]'
             }`}
         >
-            {/* Corner Details aligned with website aesthetics */}
-            <div className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${isDark ? 'text-white' : 'text-black'}`}>
-              Specialized Execution // Vol.03
+            {/* Corner Details - Sticky Volume Hub */}
+            <div className="absolute inset-x-0 top-0 pointer-events-none h-full z-[100]">
+                <div className={`sticky top-12 ml-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block ${isDark ? 'text-white' : 'text-black'}`}>
+                    Specialized Execution // Vol.03
+                </div>
             </div>
 
             {/* Background Texture */}

@@ -188,17 +188,15 @@ export function ProjectsFolderSection() {
         <section
             ref={sectionRef}
             id="projects-section"
-            className={`relative h-auto min-h-[100dvh] w-full snap-start shrink-0 py-20 sm:py-28 flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 ${
-                isDark ? "bg-[#1a1914]" : "bg-[#E8DCC8]"
+            className={`relative h-auto min-h-[100dvh] w-full shrink-0 py-20 sm:py-28 flex flex-col items-center justify-center transition-colors duration-700 ${
+                isDark ? "bg-[#0A0F1F]" : "bg-[#E8DCC8]"
             }`}
         >
-            {/* Corner label */}
-            <div
-                className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${
-                    isDark ? "text-white" : "text-black"
-                }`}
-            >
-                Selected Projects // Vol.04
+            {/* Corner Details - Sticky Volume Hub */}
+            <div className="absolute inset-x-0 top-0 pointer-events-none h-full z-[100]">
+                <div className={`sticky top-12 ml-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block ${isDark ? 'text-white' : 'text-black'}`}>
+                    Selected Projects // Vol.04
+                </div>
             </div>
 
             {/* Background texture */}
@@ -228,14 +226,14 @@ export function ProjectsFolderSection() {
                     <div>
                         <h2
                             className={`${bricolage.className} text-[36px] sm:text-[52px] font-[800] leading-none tracking-tight ${
-                                isDark ? "text-[#E8E0CC]" : "text-[#2A2A1E]"
+                                isDark ? "text-[#F1F5F9]" : "text-[#2A2A1E]"
                             }`}
                         >
                             projects
                         </h2>
                         <p
                             className={`${poppins.className} text-[12px] sm:text-[14px] font-medium tracking-wide mt-1 ${
-                                isDark ? "text-[#8B8570]" : "text-[#8B7E5E]"
+                                isDark ? "text-[#94A3B8]" : "text-[#8B7E5E]"
                             }`}
                         >
                             selected case studies & experiments

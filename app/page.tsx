@@ -16,6 +16,8 @@ import nightPhoto1 from "@/public/assets/night-photo-left-new.jpg";
 import nightPhoto2 from "@/public/assets/night-photo-2.jpg";
 import nightPhoto3 from "@/public/assets/night-photo-3.jpg";
 
+
+
 const bowlby = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
@@ -30,14 +32,16 @@ export default function Home() {
 
   return (
     <main 
-      className={`relative w-full h-[100dvh] overflow-y-auto scroll-smooth snap-y snap-proximity ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'} transition-colors duration-700 scrollbar-none [&::-webkit-scrollbar]:hidden focus:outline-none`}
+      className={`relative w-full h-[100dvh] overflow-y-auto overflow-x-hidden scroll-smooth ${isDark ? 'bg-[#0A0E17]' : 'bg-[#FDFDFD]'} transition-colors duration-700 scrollbar-none [&::-webkit-scrollbar]:hidden focus:outline-none`}
     >
       <div className="w-full flex flex-col">
-        {/* 1. Hero Section (Snap) */}
-        <section id="hero" className="relative h-[100dvh] w-full shrink-0 flex flex-col items-center justify-center overflow-hidden snap-start">
-          {/* Corner Details aligned with website aesthetics */}
-          <div className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${isDark ? 'text-white' : 'text-black'}`}>
-            Digital Playground // Vol.00
+        {/* 1. Hero Section */}
+        <section id="hero" className="relative h-[100dvh] w-full shrink-0 flex flex-col items-center justify-center">
+          {/* Corner Details - Sticky Volume Hub */}
+          <div className="absolute inset-x-0 top-0 pointer-events-none h-full z-[100]">
+            <div className={`sticky top-12 ml-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block ${isDark ? 'text-white' : 'text-black'}`}>
+              Digital Playground // Vol.00
+            </div>
           </div>
 
           {/* Backgrounds */}
@@ -88,6 +92,8 @@ export default function Home() {
                 >
                   HEY, I'M HARSHIT SAIDANIYA
                 </h1>
+
+
                 <div className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 mt-1 sm:mt-2 max-w-[300px] sm:max-w-none mx-auto ${poppins.className} transition-colors duration-700`}>
                   <p className={`font-bold leading-[1.02] lowercase text-[15px] sm:text-[20px] text-center tracking-[-0.3px] whitespace-nowrap transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#6b6b6b]'}`}>
                     and i am a
@@ -142,11 +148,11 @@ export default function Home() {
         </section>
 
 
-        {/* 2. Structured & Clear Section (Snap) */}
-        <StructuredSection />
-
-        {/* 3. Polymathy Section (Snap) */}
+        {/* 2. Polymathy Section (Snap) */}
         <PolymathySection />
+
+        {/* 3. Structured & Clear Section (Snap) */}
+        <StructuredSection />
 
         {/* 4. Services Section (Snap) */}
         <ServicesSection />

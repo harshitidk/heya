@@ -1,9 +1,10 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Poppins, Bricolage_Grotesque } from "next/font/google";
 import { useTheme } from "@/components/ThemeContext";
+import { prepareWithSegments, layoutNextLine } from '@chenglou/pretext';
 
 import anthroImg from "@/public/assets/polymathy-anthropology.png";
 import cogImg from "@/public/assets/polymathy-cognitive.png";
@@ -13,256 +14,340 @@ import techImg from "@/public/assets/polymathy-tech.png";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
+// --- Pretext Flow Logic ---
+const DynamicHeadline = ({ text, font, containerWidth, isDark, occlusions }: any) => {
+  const prepared = useMemo(() => {
+    try {
+      return prepareWithSegments(text, font);
+    } catch (e) {
+      console.warn("Pretext prepare failed", e);
+      return null;
+    }
+  }, [text, font]);
+
+  if (!prepared || containerWidth <= 0) return null;
+
+  const lineHeight = 46; // 42px * 1.1 roughly
+  const fragments: any[] = [];
+  let cursor = { segmentIndex: 0, graphemeIndex: 0 };
+  let currentY = 0;
+  
+  // Simple layout loop
+  while (currentY < 300) { // Limit height to avoid infinite loops if any
+    // Map of available horizontal segments for this Y line
+    let availableX = 0;
+    const regions: { x: number, w: number }[] = [];
+    
+    // Find collisions with cards for this specific line band
+    const activeOcclusions = occlusions
+      .filter((o: any) => currentY + lineHeight > o.y && currentY < o.y + o.h)
+      .sort((a: any, b: any) => a.x - b.x);
+
+    let currentX = 0;
+    activeOcclusions.forEach((occ: any) => {
+      if (occ.x > currentX) {
+        regions.push({ x: currentX, w: occ.x - currentX });
+      }
+      currentX = Math.max(currentX, occ.x + occ.w);
+    });
+    
+    if (currentX < containerWidth) {
+      regions.push({ x: currentX, w: containerWidth - currentX });
+    }
+
+    // Attempt to fill regions for this row
+    let rowHasText = false;
+    for (const region of regions) {
+      if (region.w < 20) continue; // Too narrow for anything useful
+      
+      const line = layoutNextLine(prepared, cursor, region.w);
+      if (line) {
+        fragments.push({
+          text: line.text,
+          x: region.x + (region.w - line.width) / 2, // Center within available region
+          y: currentY,
+          width: line.width,
+          cursor: { ...cursor }
+        });
+        cursor = line.end;
+        rowHasText = true;
+      }
+    }
+
+    if (!rowHasText && regions.length > 0) {
+      // If we couldn't fit any text in any region, we might be exhausted 
+      // or the regions are too narrow. If cursor hasn't moved, the paragraph is done.
+      break; 
+    }
+    
+    currentY += lineHeight;
+    if (cursor.segmentIndex >= (prepared as any).segments.length) break;
+  }
+
+  return (
+    <div className="relative w-full h-full text-center">
+      {fragments.map((f, i) => {
+        // Find if highlight word "disciplines" is in this fragment
+        const parts = f.text.split(/(disciplines)/);
+        
+        return (
+          <div 
+            key={i} 
+            className="absolute whitespace-pre leading-none"
+            style={{ 
+              left: `${f.x}px`, 
+              top: `${f.y}px`, 
+              font: font 
+            }}
+          >
+            {parts.map((p: string, j: number) => (
+              p === "disciplines" ? (
+                <span key={j} className="relative inline-block px-1 mx-1">
+                  <span className={`absolute inset-x-[-4px] bottom-1 h-[75%] -z-10 
+                    ${isDark ? 'bg-[#8B5CF6]/40' : 'bg-[#FDE047]/60'} 
+                    -rotate-1 skew-x-[-10deg] rounded-sm blur-[0.5px]
+                  `} />
+                  {p}
+                </span>
+              ) : p
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 export const PolymathySection = () => {
   const { isDark } = useTheme();
-  const constraintsRef = useRef(null);
+  const constraintsRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
+  
+  // Track card states for occlusion calculation
+  const [occlusions, setOcclusions] = useState<Record<string, any>>({});
+  const [containerWidth, setContainerWidth] = useState(0);
 
-  const cardProps = {
+  // Resize listener for headline container
+  useEffect(() => {
+    const updateSize = () => {
+      if (headlineRef.current) setContainerWidth(headlineRef.current.offsetWidth);
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const handleDrag = (id: string, e: any, info: any) => {
+    if (!headlineRef.current) return;
+    const hRect = headlineRef.current.getBoundingClientRect();
+    
+    // Use either the event target or a specific ref if needed, but here target should work
+    const target = e.target as HTMLElement;
+    const cardRect = target?.closest('.draggable-card')?.getBoundingClientRect();
+    
+    if (cardRect) {
+      setOcclusions(prev => ({
+        ...prev,
+        [id]: {
+          x: cardRect.left - hRect.left,
+          y: cardRect.top - hRect.top,
+          w: cardRect.width,
+          h: cardRect.height
+        }
+      }));
+    }
+  };
+
+  const cardProps = (id: string) => ({
     drag: true,
     dragConstraints: constraintsRef,
     dragMomentum: false,
     dragElastic: 0.1,
     whileDrag: { scale: 1.1, rotate: 0, zIndex: 100, cursor: "grabbing" },
-  };
+    onDrag: (e: any, info: any) => handleDrag(id, e, info),
+    className: "draggable-card absolute z-20 group pointer-events-auto cursor-grab"
+  });
+
+  const font = `500 42px ${bricolage.style.fontFamily}`;
+  const text = "I connect disciplines to solve problems";
+
+  const occlusionList = useMemo(() => Object.values(occlusions), [occlusions]);
 
   return (
     <section 
       ref={constraintsRef}
       id="polymathy-section" 
-      className={`relative h-[100dvh] w-full snap-start shrink-0 overflow-hidden flex items-center justify-center transition-colors duration-700 ${isDark ? 'bg-[#0A0E17]' : 'bg-white'}`}
+      className={`relative h-[100dvh] w-full shrink-0 flex items-center justify-center transition-colors duration-700 ${isDark ? 'bg-[#0A0E17]' : 'bg-white'}`}
       style={{
         backgroundImage: `radial-gradient(circle, ${isDark ? '#1e293b' : '#e5e7eb'} 1px, transparent 1px)`,
         backgroundSize: '24px 24px',
       }}
     >
-      <div className={`absolute top-12 left-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block z-50 ${isDark ? 'text-white' : 'text-black'}`}>
-        Cross-Disciplinary Study // Vol.02
+      {/* Corner Details - Sticky Volume Hub */}
+      <div className="absolute inset-x-0 top-0 pointer-events-none h-full z-[100]">
+        <div className={`sticky top-12 ml-32 ${poppins.className} text-[9px] font-bold uppercase tracking-[4px] opacity-20 hidden md:block ${isDark ? 'text-white' : 'text-black'}`}>
+          Cross-Disciplinary Study // Vol.01
+        </div>
       </div>
 
-      {/* Background Moving Elements - Discipline Auras & Shapes */}
+      {/* Background Shapes */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Blurred Color Auras - Spawning Effect */}
         <motion.div 
-          animate={{ 
-            x: [0, 150, -50, 0], 
-            y: [0, 80, 150, 0],
-            scale: [1, 1.3, 0.8, 1],
-            opacity: [0, 0.08, 0.05, 0]
-          }}
+          animate={{ x: [0, 150, -50, 0], y: [0, 80, 150, 0], scale: [1, 1.3, 0.8, 1], opacity: [0, 0.08, 0.05, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
           className={`absolute top-[5%] left-[5%] w-[45%] h-[45%] rounded-full blur-[130px] ${isDark ? 'bg-[#ff5f10]' : 'bg-[#ff5f10]'}`}
         />
         <motion.div 
-          animate={{ 
-            x: [0, -120, 100, 0], 
-            y: [0, -100, -50, 0],
-            scale: [1, 0.9, 1.2, 1],
-            opacity: [0, 0.06, 0.03, 0]
-          }}
+          animate={{ x: [0, -120, 100, 0], y: [0, -100, -50, 0], scale: [1, 0.9, 1.2, 1], opacity: [0, 0.06, 0.03, 0] }}
           transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 10 }}
           className={`absolute bottom-[10%] right-[10%] w-[40%] h-[40%] rounded-full blur-[110px] ${isDark ? 'bg-[#108fff]' : 'bg-[#108fff]'}`}
         />
-        <motion.div 
-          animate={{ 
-            x: [0, 60, -100, 0], 
-            y: [0, -150, 100, 0],
-            scale: [1, 1.1, 0.9, 1],
-            opacity: [0, 0.05, 0.04, 0]
-          }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-          className={`absolute top-[40%] right-[15%] w-[30%] h-[30%] rounded-full blur-[90px] ${isDark ? 'bg-[#009e05]' : 'bg-[#009e05]'}`}
-        />
-
-        {/* Floating Geometric Outlines - Spawning Effect */}
-        <motion.div 
-          animate={{ 
-            rotate: 360, 
-            y: [0, -60, 40, 0],
-            x: [0, 40, -40, 0],
-            opacity: [0, 0.06, 0.04, 0]
-          }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-          className={`absolute top-[15%] right-[20%] w-72 h-72 border-[1.5px] ${isDark ? 'border-white' : 'border-black'} rounded-[50px] rotate-12`}
-        />
-        <motion.div 
-          animate={{ 
-            rotate: -360, 
-            x: [0, 50, -80, 0],
-            y: [0, 100, -50, 0],
-            opacity: [0, 0.05, 0.03, 0]
-          }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear", delay: 15 }}
-          className={`absolute bottom-[15%] left-[25%] w-56 h-56 border-[1.5px] ${isDark ? 'border-white' : 'border-black'} rounded-full`}
-        />
-        
-        {/* Connection Lines (Abstract) - Spawning Effect */}
-        <svg className="absolute inset-0 w-full h-full">
-          <motion.path 
-            d="M 150 150 L 350 450 L 650 250"
-            fill="none"
-            stroke={isDark ? "white" : "black"}
-            strokeWidth="1.5"
-            animate={{ 
-                pathLength: [0, 1, 0],
-                opacity: [0, 0.06, 0]
-            }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.path 
-            d="M 850 250 L 550 550 L 250 350"
-            fill="none"
-            stroke={isDark ? "white" : "black"}
-            strokeWidth="1.5"
-            animate={{ 
-                pathLength: [0, 1, 0],
-                opacity: [0, 0.05, 0]
-            }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 7 }}
-          />
-        </svg>
       </div>
 
       <div className="relative w-full max-w-6xl h-full flex items-center justify-center px-4 pointer-events-none">
         
-        {/* Central Text */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className={`${bricolage.className} ${isDark ? 'text-white' : 'text-black'} text-[28px] sm:text-[42px] font-medium text-center leading-[1.1] max-w-[700px] z-10 transition-colors duration-700 -translate-y-8 pointer-events-auto`}
+        {/* Central Dynamic Headline */}
+        <div 
+          ref={headlineRef}
+          className={`${bricolage.className} ${isDark ? 'text-white' : 'text-black'} text-[28px] sm:text-[42px] font-medium leading-[1.1] w-full max-w-[700px] h-[150px] z-10 transition-colors duration-700 pointer-events-none`}
         >
-          Drawn to{' '}
-          <span className="relative inline-block px-1 mx-1">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              style={{ originX: 0 }}
-              className={`absolute inset-x-[-6px] bottom-1 h-[75%] -z-10 
-                ${isDark ? 'bg-[#ff4040]/30' : 'bg-[#ffcb10]/50'} 
-                -rotate-1 skew-x-[-10deg]
-                rounded-sm blur-[0.5px]
-              `}
-            />
-            polymathy
-          </span>{' '}
-          - not limited to one way of thinking.
-        </motion.div>
+          {/* Dynamic "Connecting Web" SVG */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 1 }}
+            className="absolute inset-0 -z-10 pointer-events-none" 
+            style={{ width: containerWidth }}
+          >
+            <svg className="w-full h-full overflow-visible">
+              {occlusionList.map((o: any, idx: number) => {
+                const cardCx = o.x + o.w / 2;
+                const cardCy = o.y + o.h / 2;
+                const headCx = containerWidth / 2;
+                const headCy = 75; // h-150 / 2
+                
+                return (
+                  <motion.path
+                    key={idx}
+                    d={`M ${cardCx} ${cardCy} L ${headCx} ${headCy}`}
+                    stroke={isDark ? "white" : "black"}
+                    strokeWidth="1.2"
+                    strokeDasharray="4 4"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.12 }}
+                    transition={{ duration: 1.5, delay: idx * 0.2 }}
+                  />
+                );
+              })}
+            </svg>
+          </motion.div>
 
-        {/* Floating Cards - Dragging Container */}
-        
-        {/* Anthropology */}
+          {/* Interaction Instruction - Subtle Nudge (Positioned Behind Text) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 0.25, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 2.5, duration: 1.5, ease: "easeOut" }}
+              className={`${poppins.className} text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-medium transition-colors duration-700 ${isDark ? 'text-white' : 'text-black'} opacity-25 text-center mt-12 sm:mt-16`}
+            >
+              ( try to drag cards on text )
+            </motion.div>
+          </div>
+
+          <DynamicHeadline 
+            text={text} 
+            font={font} 
+            containerWidth={containerWidth} 
+            isDark={isDark} 
+            occlusions={occlusionList} 
+          />
+        </div>
+
+        {/* Floating Cards */}
         <motion.div 
-          {...cardProps as any}
+          {...cardProps('anthro')}
           initial={{ opacity: 0, x: -100, y: -50, rotate: -10 }}
           whileInView={{ opacity: 1, x: 0, y: 0, rotate: -12 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, type: "spring", stiffness: 50 }}
-          className="absolute left-[2%] top-[15%] sm:left-[5%] sm:top-[20%] z-20 group pointer-events-auto cursor-grab"
+          style={{ left: "5%", top: "20%" }}
         >
           <motion.div
             animate={{ y: [0, -8, 0], rotate: [-12, -10, -12] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#ff5f10]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[21px] shadow-[0px_4px_34.8px_0px_rgba(255,95,16,0.25)] w-[110px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#ff5f10]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-            <div className="border border-white/50 h-[100px] sm:h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5 shadow-inner">
-              <Image 
-                src={anthroImg} 
-                alt="Anthropology" 
-                fill 
-                className="object-cover pointer-events-none"
-              />
+            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+              <Image src={anthroImg} alt="Anthropology" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[12px] sm:text-[14px] drop-shadow-sm pointer-events-none`}>anthropology</p>
+            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>anthropology</p>
           </motion.div>
         </motion.div>
 
-        {/* Cognitive Science */}
         <motion.div 
-          {...cardProps as any}
+          {...cardProps('cog')}
           initial={{ opacity: 0, y: -100, rotate: 0 }}
           whileInView={{ opacity: 1, y: 0, rotate: 6.56 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, type: "spring", stiffness: 50 }}
-          className="absolute right-[5%] top-[5%] sm:right-[15%] sm:top-[5%] z-20 group pointer-events-auto cursor-grab"
+          style={{ right: "15%", top: "8%" }}
         >
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [6.56, 8, 6.56] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#009e05]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[21px] shadow-[0px_4px_34.8px_0px_rgba(0,158,5,0.25)] w-[110px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#009e05]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-            <div className="border border-white/50 h-[100px] sm:h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5 shadow-inner">
-              <Image 
-                src={cogImg} 
-                alt="Cognitive Science" 
-                fill 
-                className="object-cover pointer-events-none"
-              />
+            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+              <Image src={cogImg} alt="Cognitive Science" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[12px] sm:text-[14px] drop-shadow-sm pointer-events-none`}>cognitive sci.</p>
+            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>cognitive sci.</p>
           </motion.div>
         </motion.div>
 
-        {/* Philosophy */}
         <motion.div 
-          {...cardProps as any}
+          {...cardProps('phil')}
           initial={{ opacity: 0, x: 100, y: -20, rotate: 10 }}
           whileInView={{ opacity: 1, x: 0, y: 0, rotate: 14.98 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, type: "spring", stiffness: 50 }}
-          className="absolute right-[2%] top-[25%] sm:right-[5%] sm:top-[25%] z-20 group pointer-events-auto cursor-grab"
+          style={{ right: "5%", top: "350px" }}
         >
           <motion.div
             animate={{ y: [0, -6, 0], rotate: [14.98, 13, 14.98] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#ffcb10]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[21px] shadow-[0px_4px_34.8px_0px_rgba(255,203,16,0.25)] w-[110px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#ffcb10]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-            <div className="border border-white/50 h-[100px] sm:h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5 shadow-inner">
-              <Image 
-                src={philImg} 
-                alt="Philosophy" 
-                fill 
-                className="object-cover pointer-events-none"
-              />
+            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+              <Image src={philImg} alt="Philosophy" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-[#715100] font-semibold text-[12px] sm:text-[14px] drop-shadow-sm pointer-events-none`}>philosophy</p>
+            <p className={`${poppins.className} text-[#715100] font-semibold text-[14px] drop-shadow-sm`}>philosophy</p>
           </motion.div>
         </motion.div>
 
-        {/* Technology */}
         <motion.div 
-          {...cardProps as any}
+          {...cardProps('tech')}
           initial={{ opacity: 0, y: 100, rotate: 10 }}
           whileInView={{ opacity: 1, y: 0, rotate: 15.79 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, type: "spring", stiffness: 50 }}
-          className="absolute left-[10%] bottom-[5%] sm:left-[20%] sm:bottom-[10%] z-20 group pointer-events-auto cursor-grab"
+          style={{ left: "20%", bottom: "10%" }}
         >
           <motion.div
             animate={{ y: [0, 8, 0], rotate: [15.79, 17, 15.79] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-[#108fff]/85 backdrop-blur-md border border-white/40 p-[8px] sm:p-[10px] rounded-[21px] shadow-[0px_4px_34.8px_0px_rgba(16,143,255,0.25)] w-[110px] sm:w-[130px] flex flex-col gap-[8px] sm:gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
+            className="bg-[#108fff]/85 backdrop-blur-md border border-white/40 p-[10px] rounded-[21px] shadow-2xl w-[130px] flex flex-col gap-[11px] items-center relative overflow-hidden group-hover:scale-105 transition-transform"
           >
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-            <div className="border border-white/50 h-[100px] sm:h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5 shadow-inner">
-              <Image 
-                src={techImg} 
-                alt="Technology" 
-                fill 
-                className="object-cover pointer-events-none"
-              />
+            <div className="border border-white/50 h-[125px] w-full overflow-hidden rounded-[13px] relative bg-white/5">
+              <Image src={techImg} alt="Technology" fill className="object-cover pointer-events-none" />
             </div>
-            <p className={`${poppins.className} text-white font-semibold text-[12px] sm:text-[14px] drop-shadow-sm pointer-events-none`}>technology</p>
+            <p className={`${poppins.className} text-white font-semibold text-[14px] drop-shadow-sm`}>technology</p>
           </motion.div>
         </motion.div>
 
-        {/* Floating Text Bubbles - Also set to interactive if needed */}
-        
-        {/* connecting ideas that don’t usually meet */}
+        {/* Ambient Bubbles */}
         <motion.div 
           animate={{ y: [0, -10, 0], rotate: [-4.89, -3, -4.89] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -275,7 +360,6 @@ export const PolymathySection = () => {
           </div>
         </motion.div>
 
-        {/* not by going deeper in isolation... */}
         <motion.div 
           animate={{ y: [0, 10, 0], rotate: [3.53, 5, 3.53] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -292,7 +376,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ x: [0, 10, 0], rotate: [6.1, 4, 6.1] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-[12%] bottom-[20%] sm:right-[22%] sm:bottom-[32%] hidden sm:block pointer-events-auto"
+          className="absolute right-[12%] bottom-[20%] sm:right-[22%] bottom-[32%] hidden sm:block pointer-events-auto"
         >
           <div className="bg-[#f8f8f8] dark:bg-white/5 border border-black/[0.03] p-[10px] sm:p-[14px] rounded-[17px] max-w-[230px]">
             <p className={`${poppins.className} text-[#737373] dark:text-gray-400 text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -305,7 +389,7 @@ export const PolymathySection = () => {
         <motion.div 
           animate={{ y: [0, -15, 0], rotate: [-4.04, -6, -4.04] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute right-[8%] bottom-[8%] sm:right-[15%] sm:bottom-[15%] z-30 pointer-events-auto hidden sm:block"
+          className="absolute right-[8%] bottom-[8%] sm:right-[15%] bottom-[15%] z-30 pointer-events-auto hidden sm:block"
         >
           <div className="bg-[#ff4040] p-[12px] sm:p-[16px] rounded-[17px] shadow-xl shadow-red-500/20 max-w-[200px] sm:max-w-[260px]">
             <p className={`${poppins.className} text-white font-medium text-[11px] sm:text-[12px] leading-[1.5]`}>
@@ -313,7 +397,9 @@ export const PolymathySection = () => {
               where different ways of thinking collide.
             </p>
           </div>
-        </motion.div>      </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
+
