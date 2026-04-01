@@ -304,7 +304,7 @@ export const StructuredSection = () => {
 
 
                     <motion.h2 
-                        className={`${bricolage.className} text-[28px] sm:text-[48px] lg:text-[60px] font-[600] leading-[1.02] text-center max-w-[1050px] tracking-tight ${isDark ? 'text-white' : 'text-[#1a1a1a]'} relative z-30 pointer-events-none`}
+                        className={`${bricolage.className} text-[36px] sm:text-[60px] lg:text-[78px] font-[600] leading-[1.02] text-center max-w-[1050px] tracking-tight ${isDark ? 'text-white' : 'text-[#1a1a1a]'} relative z-30 pointer-events-none`}
                     >
                         {"and then i turn those ideas into products with ".split("").map((char, i) => (
                             <motion.span
@@ -371,10 +371,10 @@ export const StructuredSection = () => {
                     >
                         <Link 
                             href="/work" 
-                            className={`group flex items-center gap-3 px-8 py-3.5 rounded-full border shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 ${isDark ? 'bg-white border-white text-[#0f1118] hover:shadow-white/20' : 'bg-[#1a1a1a] border-[#1a1a1a] text-white hover:shadow-black/10'}`}
+                            className={`group flex items-center gap-2 px-6 py-2.5 rounded-full border shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 ${isDark ? 'bg-white border-white text-[#0f1118] hover:shadow-white/20' : 'bg-[#1a1a1a] border-[#1a1a1a] text-white hover:shadow-black/10'}`}
                         >
-                            <span className={`${poppins.className} text-[13px] sm:text-[14px] font-bold uppercase tracking-[2px]`}>see my work</span>
-                            <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
+                            <span className={`${poppins.className} text-[11px] sm:text-[12px] font-bold uppercase tracking-[2px]`}>see my work</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
                         </Link>
                     </motion.div>
 

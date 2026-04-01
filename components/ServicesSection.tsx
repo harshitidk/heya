@@ -37,15 +37,15 @@ const ServiceCard = ({ title, items, color, rotation, delay, icon, stickerColor,
                     zIndex: 20,
                     transition: { duration: 0.3 } 
                 }}
-                className={`relative w-[280px] sm:w-[320px] min-h-[400px] p-8 rounded-[32px] shadow-xl flex flex-col gap-6 cursor-pointer group transition-shadow hover:shadow-2xl active:scale-[0.98]`}
+                className={`relative w-[250px] sm:w-[320px] min-h-[350px] sm:min-h-[400px] p-6 sm:p-8 rounded-[32px] shadow-xl flex flex-col gap-4 sm:gap-6 cursor-pointer group transition-shadow hover:shadow-2xl active:scale-[0.98]`}
                 style={{ backgroundColor: color }}
             >
                 {/* Sticker Icon */}
                 <div 
-                    className={`absolute -top-6 -right-2 w-16 h-16 rounded-full flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-500 z-10`}
+                    className={`absolute -top-6 -right-2 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-500 z-10`}
                     style={{ backgroundColor: stickerColor }}
                 >
-                    <div className="text-white transform group-hover:scale-110 transition-transform">
+                    <div className="text-white transform group-hover:scale-110 transition-transform scale-[0.8] sm:scale-100">
                         {icon}
                     </div>
                     {/* Hand-drawn scribble look around sticker (SVG) */}
@@ -54,11 +54,11 @@ const ServiceCard = ({ title, items, color, rotation, delay, icon, stickerColor,
                     </svg>
                 </div>
 
-                <h3 className={`${bricolage.className} text-[32px] sm:text-[38px] font-black leading-none text-white tracking-tight`}>
+                <h3 className={`${bricolage.className} text-[28px] sm:text-[38px] font-black leading-none text-white tracking-tight`}>
                     {title}
                 </h3>
 
-                <ul className="flex flex-col gap-3 mt-2">
+                <ul className="flex flex-col gap-2 sm:gap-3 mt-2">
                     {items.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-white/90 group-hover:text-white transition-colors">
                             <span className="mt-0.5 text-[12px] opacity-40 group-hover:opacity-100 transition-opacity">◆</span>

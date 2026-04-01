@@ -19,6 +19,8 @@ import projFriendlyInvoicePreview from "@/public/assets/friendly-invoice-preview
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 
+type Category = "design" | "engineering" | "experiments";
+
 interface NoteProject {
     id: string;
     number: number;
@@ -29,6 +31,7 @@ interface NoteProject {
     tapeColor: string;
     image: StaticImageData;
     rotation: number;
+    category: Category;
     href?: string;
     modalType?: "resume";
 }
@@ -44,6 +47,7 @@ const noteProjects: NoteProject[] = [
         tapeColor: "#8B9A3B",
         image: projCrescendoMain,
         rotation: -3,
+        category: "engineering",
         href: "https://crescendo-mu.vercel.app/",
     },
     {
@@ -54,8 +58,9 @@ const noteProjects: NoteProject[] = [
         description: "Conceptualized a prompt history feature to track progress within conversations.",
         noteColor: "#FCE4EC",
         tapeColor: "#E91E63",
-        image: projMicOff,
+        image: projChatHistory,
         rotation: 2.5,
+        category: "design",
         href: "https://drive.google.com/file/d/1BAI_V8u4KkZwq1xTw4kZ7XQgziRfTFOi/view?usp=sharing",
     },
     {
@@ -68,6 +73,7 @@ const noteProjects: NoteProject[] = [
         tapeColor: "#26A69A",
         image: projOlogyMain,
         rotation: -1.5,
+        category: "engineering",
     },
     {
         id: "virtual-try-on",
@@ -79,6 +85,7 @@ const noteProjects: NoteProject[] = [
         tapeColor: "#FFB300",
         image: projVirtualTryOnFinal,
         rotation: 3,
+        category: "design",
         href: "https://medium.com/@iamharshit.idk/reducing-the-dropoff-by-13-on-virutal-try-on-a99fa0cff09e",
     },
     {
@@ -91,6 +98,7 @@ const noteProjects: NoteProject[] = [
         tapeColor: "#4CAF50",
         image: projSpotifyResume,
         rotation: -2,
+        category: "experiments",
         modalType: "resume",
     },
     {
@@ -101,20 +109,22 @@ const noteProjects: NoteProject[] = [
         description: "UX case study on missing consent and unexpected exposure in live sessions.",
         noteColor: "#E3F2FD",
         tapeColor: "#42A5F5",
-        image: projChatHistory,
+        image: projMicOff,
         rotation: 1.5,
+        category: "design",
         href: "https://drive.google.com/file/d/1pzCj94_BhSX7jiOWJhS_8BagbVFPDo54/view?usp=sharing",
     },
     {
         id: "makemyfit",
         number: 7,
         title: "Make My Fit",
-        subtitle: "Shoppin Feature",
+        subtitle: "Shopping Feature",
         description: "Designed a \"Make My Fit\" feature to recommend clothing based on users' existing wardrobe.",
         noteColor: "#FCE4EC",
         tapeColor: "#EC407A",
         image: projMakeMyFit,
         rotation: -2.5,
+        category: "design",
         href: "https://drive.google.com/file/d/1FEvfHVQDax6kwxezrFE1-l5THiQj0goV/view?usp=sharing",
     },
     {
@@ -127,9 +137,17 @@ const noteProjects: NoteProject[] = [
         tapeColor: "#AB47BC",
         image: projFriendlyInvoicePreview,
         rotation: 2,
+        category: "engineering",
         href: "https://harshitidk.github.io/invoice/",
     },
 ];
+
+const categoryTypes = [
+    { id: "all", label: "All Work" },
+    { id: "design", label: "Case Studies" },
+    { id: "engineering", label: "Engineering" },
+    { id: "experiments", label: "Creative Labs" },
+] as const;
 
 // Deterministic tape rotations per note
 const tapeRotations = [8, -5, 6, -8, 4, -6, 7, -4];
@@ -305,10 +323,12 @@ function ThreadConnector({
     containerRef,
     noteRefs,
     isDark,
+    trigger,
 }: {
     containerRef: React.RefObject<HTMLDivElement | null>;
     noteRefs: React.RefObject<(HTMLDivElement | null)[]>;
     isDark: boolean;
+    trigger?: any;
 }) {
     const [paths, setPaths] = useState<string>("");
     const [dims, setDims] = useState({ w: 0, h: 0 });
@@ -333,7 +353,10 @@ function ThreadConnector({
             });
         }
 
-        if (centers.length < 2) return;
+        if (centers.length < 2) {
+            setPaths("");
+            return;
+        }
 
         // Build a smooth cubic bezier path through all note centers
         let d = `M ${centers[0].x} ${centers[0].y}`;
@@ -359,7 +382,7 @@ function ThreadConnector({
             clearTimeout(timer);
             window.removeEventListener("resize", computePaths);
         };
-    }, [computePaths]);
+    }, [computePaths, trigger]);
 
     if (!paths || dims.w === 0) return null;
 
@@ -404,15 +427,26 @@ function ThreadConnector({
 
 export function ProjectNotesBoard({ isDark }: { isDark?: boolean }) {
     const [showResume, setShowResume] = useState(false);
+    const [activeCategory, setActiveCategory] = useState<string>("all");
     const dark = isDark ?? false;
     const containerRef = useRef<HTMLDivElement>(null);
     const noteRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    // Arrange in zigzag pairs
+    // Filter projects based on active category
+    const filteredProjects = noteProjects.filter(
+        (p) => activeCategory === "all" || p.category === activeCategory
+    );
+
+    // Arrange in zigzag pairs based on filtered projects
     const rows: NoteProject[][] = [];
-    for (let i = 0; i < noteProjects.length; i += 2) {
-        rows.push(noteProjects.slice(i, i + 2));
+    for (let i = 0; i < filteredProjects.length; i += 2) {
+        rows.push(filteredProjects.slice(i, i + 2));
     }
+
+    // Reset refs when projects change
+    useEffect(() => {
+        noteRefs.current = [];
+    }, [activeCategory]);
 
     return (
         <section
@@ -445,7 +479,7 @@ export function ProjectNotesBoard({ isDark }: { isDark?: boolean }) {
             >
                 {/* Section Header */}
                 <motion.div
-                    className="flex flex-col items-center text-center mb-16 sm:mb-24"
+                    className="flex flex-col items-center text-center mb-12"
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
@@ -467,46 +501,90 @@ export function ProjectNotesBoard({ isDark }: { isDark?: boolean }) {
                     </p>
                 </motion.div>
 
-                {/* Thread connector SVG */}
-                <ThreadConnector containerRef={containerRef} noteRefs={noteRefs} isDark={dark} />
-
-                {/* Note Rows */}
-                <div className="relative z-10 flex flex-col gap-12 sm:gap-8">
-                    {rows.map((row, rowIdx) => (
-                        <div
-                            key={rowIdx}
-                            className={`flex flex-col sm:flex-row items-center gap-8 sm:gap-0 w-full ${
-                                rowIdx % 2 === 0 ? "sm:justify-between" : "sm:justify-between sm:flex-row-reverse"
+                {/* Category Filter Tabs */}
+                <motion.div 
+                    className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-20 sm:mb-28"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                >
+                    {categoryTypes.map((cat) => (
+                        <button
+                            key={cat.id}
+                            onClick={() => setActiveCategory(cat.id)}
+                            className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-[13px] font-bold tracking-tight transition-all duration-300 ${
+                                activeCategory === cat.id
+                                    ? dark 
+                                        ? "bg-white text-black shadow-[0_4px_12px_rgba(255,255,255,0.2)]" 
+                                        : "bg-black text-white shadow-[0_4px_12px_rgba(0,0,0,0.2)]"
+                                    : dark
+                                        ? "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+                                        : "bg-black/5 text-black/40 hover:bg-black/10 hover:text-black"
                             }`}
                         >
-                            {row.map((project, colIdx) => {
-                                const globalIdx = rowIdx * 2 + colIdx;
-                                const isLeft = (rowIdx % 2 === 0 && colIdx === 0) || (rowIdx % 2 !== 0 && colIdx === 1);
-                                return (
-                                    <div
-                                        key={project.id}
-                                        className={`relative ${
-                                            isLeft ? "sm:ml-4 lg:ml-12" : "sm:mr-4 lg:mr-12"
-                                        }`}
-                                        style={{
-                                            marginTop: colIdx === 1 ? `${rowIdx % 2 === 0 ? 48 : 32}px` : undefined,
-                                        }}
-                                    >
-                                        <StickyNote
-                                            project={project}
-                                            isDark={dark}
-                                            onResumeClick={project.id === "spotify" ? () => setShowResume(true) : undefined}
-                                            index={globalIdx}
-                                            noteRef={{
-                                                get current() { return noteRefs.current[globalIdx]; },
-                                                set current(el) { noteRefs.current[globalIdx] = el; },
-                                            } as React.RefObject<HTMLDivElement | null>}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                            {cat.label}
+                        </button>
                     ))}
+                </motion.div>
+
+                {/* Thread connector SVG */}
+                <ThreadConnector 
+                    containerRef={containerRef} 
+                    noteRefs={noteRefs} 
+                    isDark={dark} 
+                    trigger={activeCategory}
+                />
+
+                {/* Note Rows */}
+                <div className="relative z-10 flex flex-col gap-12 sm:gap-8 min-h-[400px]">
+                    {rows.length > 0 ? (
+                        rows.map((row, rowIdx) => (
+                            <div
+                                key={`${activeCategory}-${rowIdx}`}
+                                className={`flex flex-col sm:flex-row items-center gap-8 sm:gap-0 w-full ${
+                                    rowIdx % 2 === 0 ? "sm:justify-between" : "sm:justify-between sm:flex-row-reverse"
+                                }`}
+                            >
+                                {row.map((project, colIdx) => {
+                                    const globalIdx = rowIdx * 2 + colIdx;
+                                    const isLeft = (rowIdx % 2 === 0 && colIdx === 0) || (rowIdx % 2 !== 0 && colIdx === 1);
+                                    return (
+                                        <div
+                                            key={project.id}
+                                            className={`relative ${
+                                                isLeft ? "sm:ml-4 lg:ml-12" : "sm:mr-4 lg:mr-12"
+                                            }`}
+                                            style={{
+                                                marginTop: colIdx === 1 ? `${rowIdx % 2 === 0 ? 48 : 32}px` : undefined,
+                                            }}
+                                        >
+                                            <StickyNote
+                                                project={project}
+                                                isDark={dark}
+                                                onResumeClick={project.id === "spotify" ? () => setShowResume(true) : undefined}
+                                                index={globalIdx}
+                                                noteRef={{
+                                                    get current() { return noteRefs.current[globalIdx]; },
+                                                    set current(el) { noteRefs.current[globalIdx] = el; },
+                                                } as React.RefObject<HTMLDivElement | null>}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        ))
+                    ) : (
+                        <motion.div 
+                            className="flex flex-col items-center justify-center py-20 text-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                        >
+                            <p className={`${dark ? "text-white/30" : "text-black/30"} text-[14px] font-medium`}>
+                                coming soon...
+                            </p>
+                        </motion.div>
+                    )}
                 </div>
             </div>
 
