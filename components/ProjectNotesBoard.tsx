@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { Poppins, Bricolage_Grotesque } from "next/font/google";
-import { X } from "lucide-react";
+import { X, FileText } from "lucide-react";
 
 import projCrescendoMain from "@/public/assets/proj-crescendo-main.png";
 import projOlogyMain from "@/public/assets/proj-ology-main.png";
@@ -298,20 +298,32 @@ function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 <X className="w-6 h-6 text-white" />
             </button>
             <motion.div
-                className="relative w-full max-w-[700px] h-[85vh] sm:h-[90vh]"
+                className="relative w-full max-w-[700px] h-[85vh] sm:h-[90vh] flex flex-col gap-4"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 onClick={(e) => e.stopPropagation()}
             >
-                <Image
-                    src={projSpotifyResume}
-                    alt="Spotify Style Resume"
-                    fill
-                    className="object-contain rounded-[20px]"
-                    sizes="(max-width: 768px) 100vw, 700px"
-                    priority
-                />
+                <div className="relative flex-1 w-full">
+                    <Image
+                        src={projSpotifyResume}
+                        alt="Spotify Style Resume"
+                        fill
+                        className="object-contain rounded-[20px]"
+                        sizes="(max-width: 768px) 100vw, 700px"
+                        priority
+                    />
+                </div>
+                
+                <a 
+                    href="https://drive.google.com/file/d/1bH31bh2zGYQScjkHK_QEjQ7BlIDO0fBB/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="self-center flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-semibold hover:scale-105 active:scale-95 transition-all shadow-xl mb-4"
+                >
+                    <FileText size={18} />
+                    view pdf
+                </a>
             </motion.div>
         </motion.div>,
         document.body

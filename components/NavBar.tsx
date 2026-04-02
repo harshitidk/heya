@@ -140,13 +140,16 @@ export function NavBar() {
                         </div>
                     </Link>
 
-                    <div
-                        className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] transition-all duration-500 ${isDark ? 'text-white/40' : 'text-[#1a1a1a]/40'}`}
+                    <a
+                        href="https://drive.google.com/file/d/1bH31bh2zGYQScjkHK_QEjQ7BlIDO0fBB/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 rounded-[12px] md:rounded-[14px] transition-all duration-500 active:scale-95 ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}
                     >
                         <p className={`font-medium leading-[1.64] lowercase shrink-0 text-[14px] xl:text-[15px] tracking-[-0.2px] transition-colors duration-700`}>
                             resume
                         </p>
-                    </div>
+                    </a>
 
                     <Link href="/work">
                         <div className={`flex items-center justify-center h-[40px] shrink-0 px-3.5 xl:px-5 active:scale-95 transition-all duration-500 cursor-pointer relative group ${isDark ? 'text-white/80 hover:text-white' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a]'}`}>
@@ -263,9 +266,15 @@ export function NavBar() {
                                 <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 bg-black text-white hover:bg-black/90 rounded-[12px]")}>
                                     <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">projects</span>
                                 </Link>
-                                <div className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors bg-black/20 text-white/50 cursor-default rounded-[12px]")}>
+                                <a 
+                                    href="https://drive.google.com/file/d/1bH31bh2zGYQScjkHK_QEjQ7BlIDO0fBB/view?usp=sharing"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className={cn("w-1/2 flex items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", isDark ? 'bg-white/10 text-white/80' : 'bg-black/5 text-[#1a1a1a]/80')}
+                                >
                                     <span className="font-medium leading-[1.64] lowercase pb-[1px] text-[14px] tracking-[-0.32px]">resume</span>
-                                </div>
+                                </a>
                             </div>
                             <div className="flex gap-[6px] w-full">
                                 <a href="https://x.com/harshitheya" target="_blank" rel="noopener noreferrer" className={cn("w-1/2 flex gap-2 items-center justify-center h-[38px] transition-colors active:scale-95 rounded-[12px]", isDark ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#1a1a1a]/80 hover:text-[#1a1a1a] hover:bg-black/5')}>

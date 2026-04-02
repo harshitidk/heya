@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PenLine, Rocket, Mail, Check } from "lucide-react";
+import { PenLine, Rocket, Mail, Check, FileText } from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
@@ -88,6 +88,12 @@ export function HeroCTAs() {
                 label="current project" 
                 icon={Rocket} 
                 href="https://crescendo-mu.vercel.app/" 
+            />
+
+            <CTAItem 
+                label="resume" 
+                icon={FileText} 
+                href="https://drive.google.com/file/d/1bH31bh2zGYQScjkHK_QEjQ7BlIDO0fBB/view?usp=sharing" 
             />
             
             <CTAItem 
