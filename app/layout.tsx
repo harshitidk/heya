@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/ThemeContext";
 import { PageTransition } from "@/components/PageTransition";
 import { SidePanel } from "@/components/SidePanel";
 import { GuestbookWidget } from "@/components/GuestbookWidget";
+import Script from "next/script";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -65,6 +66,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bricolage.variable} ${bowlby.variable} ${poppins.variable} ${nanum.variable} bg-[#FDFDFD]`}>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-G0ZDVZZPP3"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-G0ZDVZZPP3');
+          `}
+        </Script>
+      </head>
       <body
         className={cn(
           "antialiased bg-[#FDFDFD] text-foreground font-sans relative"
