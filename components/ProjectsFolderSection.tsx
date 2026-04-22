@@ -5,6 +5,8 @@ import { Poppins, Bricolage_Grotesque } from "next/font/google";
 import { useTheme } from "@/components/ThemeContext";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { ResumeModal } from "./ResumeModal";
+import { useState } from "react";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
@@ -184,6 +186,7 @@ export function ProjectsFolderSection() {
     const { isDark } = useTheme();
     const sectionRef = useRef<HTMLElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const [showSpotifyResume, setShowSpotifyResume] = useState(false);
 
     return (
         <section
@@ -263,9 +266,12 @@ export function ProjectsFolderSection() {
                             index={index}
                             totalCount={folderProjects.length}
                             isDark={isDark}
+                            onClick={project.id === "spotify-resume" ? () => setShowSpotifyResume(true) : undefined}
                         />
                     ))}
                 </div>
+
+                <ResumeModal isOpen={showSpotifyResume} onClose={() => setShowSpotifyResume(false)} />
 
                 {/* Bottom hint */}
                 <motion.p
